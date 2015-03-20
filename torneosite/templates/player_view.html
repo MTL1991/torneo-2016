@@ -1,0 +1,14 @@
+{% extends "_base.html" %}
+
+{% block title %}{{ player.name }}{% endblock %}
+
+{% block content %}
+<h2>Datos de jugadora del equipo <a href="{% url 'view_team' pk=player.team.id  %}">{{player.team.name}}</a>:</h2>
+<p>Nombre: {{ player.name }}</p>
+<p>Apellidos:{{ player.surname1 }} {{ player.surname2 }}</p>
+<p>Fecha de nacimiento: {{ player.birthday }}</p>
+<p>Email: {{ player.email }}</p>
+<p>Movil: {{ player.movil }}</p>
+
+
+{% endblock %}

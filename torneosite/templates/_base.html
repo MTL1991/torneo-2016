@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <link href="/static/bootstrap/css/bootstrap.min.css"
+          rel="stylesheet" media="screen">
+    <title>
+        {% block title %}{% endblock %} | Torneo InterColegios
+    </title>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    {% block head %}{% endblock %}
+</head>
+<body style="padding-top: 80px;">
+    
+    {% block header %}
+        {% include "_navbar.html" %}
+    {% endblock header %}
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <p class="text-center">
+        {% block footer %}
+            <hr></hr>
+            <p class="text-center"> LeganesFs.com © 2015</p>
+        {% endblock %}
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+<div class="form-group">
+    <form class="navbar-form navbar-right" role="search" action="{% url 'search_results' %}" method="get">
+        <div class="input-group">
+            <input type="text" name="query" class="form-control" placeholder="Buscar...">
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div>
+        <div class="text-right"><a class="navbar-link btn btn-sm" href="{% url 'advanced_search' %}"><small>Búsqueda avanzada</small></a></div>
+    </form>
+</div>

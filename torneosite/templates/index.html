@@ -1,0 +1,43 @@
+{% extends "_base.html" %}
+{% load staticfiles %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h2>Equipos Inscritos</h2>
+<div class="row">
+<div class="col-md-6">
+	<h3>Equipos de 1º a 3º</h3>
+<ol>
+{% for object in school_list_p %}
+    {% if forloop.first %}
+        <li class="first">
+    {% else %}
+        <li>
+    {% endif %}
+    <a href="{% url 'view_team' pk=object.id%}"> {{ object.name }}</a>
+    </li>
+{% endfor %}
+<a href="{% url 'index_all' %}"> ver todos</a>
+</ol>
+</div>
+<div class="col-md-6">
+	<h3>Equipos de 4º a 6º</h3>
+<ol>
+{% for object in school_list_m %}
+    {% if forloop.first %}
+        <li class="first">
+    {% else %}
+        <li>
+    {% endif %}
+    <a href="{% url 'view_team' pk=object.id%}"> {{ object.name }}</a>
+    </li>
+{% endfor %}
+<a href="{% url 'index_all' %}"> ver todos</a>
+</ol>
+</div>
+</div>
+<div class="col-md-6">
+<p>¿Quieres apuntar un nuevo equipo? <a id="create_video_btn" class="btn btn-primary" href="{% url 'add_team' %}">Agregar un equipo</a></p>
+</div>
+{% endblock %}

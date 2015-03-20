@@ -1,0 +1,20 @@
+{% extends "_base.html" %}
+
+{% block title %}Resultados{% endblock %}
+
+{% block content %}
+<h2>Resultados:</h2>
+
+<ol>
+{% for object in school_list %}
+    {% if forloop.first %}
+        <li class="first">
+    {% else %}
+        <li>
+    {% endif %}
+    <a href="{% url 'view_team' pk=object.id%}"> {{ object }}</a>
+    </li>
+{% endfor %}
+</ol>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "_base.html" %}
+
+{% load bootstrap %}
+
+{% block content %}
+    <h3>{%block title%}{%endblock%}</h3>
+
+    {% block question %}{% endblock %}
+
+    <div class={% block grid %}"col-md-6"{% endblock %}>
+        <form action="" method="post" role="form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% block form %}
+                {{ form|bootstrap }}
+            {% endblock %}
+            {% block buttons%}
+                {% include "_form_buttons.html" %}
+            {% endblock %}
+        </form>
+    </div>
+
+    {% block scripts %}{% endblock %}
+{% endblock %}
