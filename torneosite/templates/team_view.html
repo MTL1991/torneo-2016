@@ -9,8 +9,10 @@
         {{ team.school }}
     </a>
 </p>
-
 {% if team.school.user == user %}
+    {% if player_list %}
+        <a id="create_pdf_btn" class="btn btn-primary" href="{% url 'pdf' pk=team.id %}">PDF</a>
+    {% endif %}
     <h2>Jugadoras:</h2>
     {% for object in player_list %}
         {% if forloop.first %}

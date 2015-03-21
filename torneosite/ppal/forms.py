@@ -7,6 +7,10 @@ class TeamForm(ModelForm):
     class Meta:
         model = Team
         exclude = ['school','name']
+    def __init__(self, *args, **kwargs):
+        super(TeamForm, self).__init__(*args, **kwargs)
+        self.fields['years'].label = "Categoria"
+
 
 class SchoolForm(ModelForm):
     password = CharField(widget=PasswordInput())
@@ -54,6 +58,8 @@ class UserForm(ModelForm):
         if commit:
             user.save()
         return user
+    
+
 
 # class FavEditForm(ModelForm):
 #     class Meta:
@@ -63,6 +69,15 @@ class PlayerEditForm(ModelForm):
     class Meta:
         model = Player
         exclude = ['school','team']
+
+    def __init__(self, *args, **kwargs):
+        super(PlayerEditForm, self).__init__(*args, **kwargs)
+        self.fields['member'].label = "Rol"
+        self.fields['name'].label = "Nombre"
+        self.fields['surname1'].label = "Primer apellido"
+        self.fields['surname2'].label = "Segundo apellido"
+        self.fields['birthday'].label = "Fecha de Nacimiento (dd/mm/aaaa) "
+        self.fields['email'].label = "Correo electronico"
 
 # class AdvancedSearchForm(forms.Form):
 

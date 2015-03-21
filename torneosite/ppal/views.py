@@ -13,8 +13,6 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 
-
-
 from braces.views import LoginRequiredMixin # sudo pip install django-braces
 from django.db.models.signals import pre_delete, pre_save
 from django.dispatch import receiver
@@ -25,11 +23,66 @@ from ppal.forms import *
 
 import simplejson as json
 
-
 import urllib
 
 from django.utils.http import *
 from django.db.models import Q
+
+from reportlab.lib.pagesizes import letter, A4
+
+def some_view(request, pk):
+    # Create the HttpResponse object with the appropriate PDF headers.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="somefilename.pdf"'
+    ulargo = 841.89/10
+    uancho = 595.27/10
+    nameOffsetY = 0.07*ulargo
+    team = Team.objects.get(id=pk)
+    player_list = Player.objects.filter(team= team,)
+    # Create the PDF object, using the response object as its "file."
+    p = canvas.Canvas(response, pagesize=A4)
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    # See the ReportLab documentation for the full list of functionality.
+
+    #players headboards
+    p.setFillColorRGB(0,0,0.77)
+    p.grid([uancho,9*uancho],[8.5*ulargo,8.25*ulargo])
+    p.drawString(4.5*uancho ,8.25*ulargo+nameOffsetY,"JUGADORAS")
+    p.drawString(1.1*uancho ,8*ulargo+nameOffsetY,"Apellidos, Nombre")
+    p.drawString(5.1*uancho ,8*ulargo+nameOffsetY,"Fecha de nacimiento")
+    #players' names
+    xlist = [uancho,5*uancho,9*uancho]
+    ylist = [8.25*ulargo,8*ulargo]
+    tablerow = 8*ulargo  
+    for object in player_list:
+        if object.member == 1:
+            tablerow = tablerow-0.25*ulargo
+            ylist.append(tablerow)
+            p.drawString(1.1*uancho ,tablerow+nameOffsetY, str(object.surname1)+" "+str(object.surname2)+", "+str(object.name))
+            p.drawString(5.1*uancho ,tablerow+nameOffsetY, str(object.birthday))
+    p.grid(xlist,ylist)
+
+    #delegado headboards
+    p.grid([uancho,9*uancho],[tablerow-0.5*ulargo,tablerow-0.75*ulargo])
+    p.drawString(4.5*uancho ,tablerow-0.75*ulargo+nameOffsetY,"DELEGADO")
+    p.drawString(1.1*uancho ,tablerow-1*ulargo+nameOffsetY,"Apellidos, Nombre")
+    p.drawString(5.1*uancho ,tablerow-1*ulargo+nameOffsetY,"Fecha de nacimiento")
+    #delegado's name
+    xlist = [uancho,5*uancho,9*uancho]
+    ylist = [tablerow-0.75*ulargo,tablerow-1*ulargo]
+    tablerow = tablerow-1*ulargo
+    for object in player_list:
+        if object.member == 2:
+            tablerow = tablerow-0.25*ulargo
+            ylist.append(tablerow)
+            p.drawString(1.1*uancho ,tablerow+nameOffsetY, str(object.surname1)+" "+str(object.surname2)+", "+str(object.name))
+            p.drawString(5.1*uancho ,tablerow+nameOffsetY, str(object.birthday))
+
+    p.grid(xlist,ylist)
+    # Close the PDF object cleanly, and we're done.
+    p.showPage()
+    p.save()
+    return response
 
 def index(request):
     school_list1 = Team.objects.filter(years=1).order_by('-last_editing_date')[:5]
@@ -102,7 +155,8 @@ def create_school(request):
             user = form.save()
             school = School(user=user)
             school.name = user.username
-            school.number = 1
+            school.numberp = 1
+            school.numberm = 1
             school.save()
             u = authenticate(username=request.POST['username'],
                              password=request.POST['password'])
@@ -158,10 +212,15 @@ def create_team(request):
         if form.is_valid():
            team = form.save(commit = False)
            team.school = request.user.school
-           team.name = request.user.school.name +" '"+str(request.user.school.number)+"'"
+           if team.years == 1:
+                team.name = request.user.school.name +" '"+str(request.user.school.numberp)+"'"
+                number = request.user.school.numberp +1 
+                school = School.objects.filter(name=request.user.school.name).update(numberp=number)
+           else:
+                team.name = request.user.school.name +" '"+str(request.user.school.numberm)+"'"
+                number = request.user.school.numberm +1 
+                school = School.objects.filter(name=request.user.school.name).update(numberm=number)
            team.save()
-           number = request.user.school.number +1 
-           school = School.objects.filter(name=request.user.school.name).update(number=number)
            return HttpResponseRedirect(reverse(index))
     else:
         form = TeamForm()

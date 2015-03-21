@@ -4,11 +4,13 @@ from django.contrib.auth.models import User
 from datetime import datetime
 
 
+from reportlab.pdfgen import canvas
 
 class School(models.Model):
     user = models.OneToOneField(User, editable=False)
     name = models.CharField(max_length=30)
-    number = models.IntegerField()
+    numberp = models.IntegerField()
+    numberm = models.IntegerField()
 
     def __unicode__(self):
         return u'%s' % (self.name)

@@ -10,44 +10,4 @@
 
 {% endblock %}
 
-{% block title %}Editar Trab{% endblock %}
-
-{% block scripts %}
-
-<script type="text/javascript">
-    $(function () {
-
-        //On load: min_start_date = actual_date and min_end_date = start_date
-        $("#id_birthday").data("DateTimePicker").setMinDate(moment().subtract(1, "d"));
-        
-
-        console.log("START " + $("#id_birthday").data("DateTimePicker").getDate()._i)
-        // console.log("END " + $("#end_date").data("DateTimePicker").getDate()._i)
-        // console.log("end min" + $("#end_date").data("DateTimePicker").options.minDate._d)
-        // console.log("start min" + $("#start_date").data("DateTimePicker").options.minDate._d)
-
-        // click on text input shows datetimepickers
-        $( "#id_birthday" ).click(function() {
-          $( "#id_birthday_btn" ).click();
-        });
-
-
-
-        // Sets min_end_date = start_date
-        $("#start_date").on("dp.hide",function (e) {
-            $('#end_date').data("DateTimePicker").setMinDate(e.date.subtract(1, "d"));
-            if( $("#start_date").data("DateTimePicker").getDate().isAfter(
-                  $("#end_date").data("DateTimePicker").getDate()) ){
-                $('#end_date').data("DateTimePicker").setDate($("#start_date").data("DateTimePicker").getDate());
-            }
-        });
-        $('#start_date').on('dp.change', function (ev) {
-            $(this).data("DateTimePicker").hide();
-        });
-        $('#end_date').on('dp.change', function (ev) {
-            $(this).data("DateTimePicker").hide();
-        });
-    });
-</script>
-
-{% endblock %}
+{% block title %}Editar Jugadora/Delegado{% endblock %}
