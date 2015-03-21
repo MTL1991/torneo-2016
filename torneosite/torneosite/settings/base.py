@@ -39,7 +39,6 @@ THIRD_PARTY_APPS = (
     'bootstrapform',# sudo pip install django-bootstrap-form
     'gmapi',
     'bootstrap3_datetime',
-    'simple_email_confirmation',
     'captcha',
     'taggit',
     'django_messages',
@@ -113,12 +112,6 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates/django_messages'),
 )
 
-# Template proccessors override:
-
-
-
-
-AUTH_USER_MODEL = 'ppal.User'
 
 CAPTCHA_OUTPUT_FORMAT = u'%(image)s <button title="Cambiar Captcha" class="btn captcha-refresh"><span class="glyphicon glyphicon-refresh"></span></button> %(hidden_field)s %(text_field)s'
 

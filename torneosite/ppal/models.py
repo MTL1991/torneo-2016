@@ -3,13 +3,7 @@ from django.contrib.auth.models import User
 
 from datetime import datetime
 
-from django.contrib.auth.models import AbstractUser
-from django.core.validators import MinValueValidator
-from simple_email_confirmation import SimpleEmailConfirmationUserMixin
 
-
-class User(AbstractUser):
-    pass
 
 class School(models.Model):
     user = models.OneToOneField(User, editable=False)
@@ -28,8 +22,8 @@ class Team(models.Model):
     TERCERO_SEXTO = 2
 
     TYPES = (
-        (PRIMERO_TERCERO, '1 a 3'),
-        (TERCERO_SEXTO, '3 a 6'),
+        (PRIMERO_TERCERO, 'sub-9'),
+        (TERCERO_SEXTO, 'sub-12'),
     )
 
     years = models.IntegerField(choices=TYPES)

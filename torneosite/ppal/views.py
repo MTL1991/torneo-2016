@@ -82,6 +82,8 @@ def school_view(request, num):
         user = User.objects.get(id=num)
     except User.DoesNotExist:
         raise Http404()
+    if request.user.is_anonymous():
+        return HttpResponseRedirect(reverse(index))
     else:
         team_list = Team.objects.filter(school=user.school)
         player_list = Player.objects.filter(school=user.school,)
@@ -117,6 +119,8 @@ def team_view(request, pk):
         user = request.user
     except User.DoesNotExist:
         raise Http404()
+    if request.user.is_anonymous():
+        return HttpResponseRedirect(reverse(index))
     else:
         team_list = Team.objects.filter(school=user.school)
         team = Team.objects.get(id=pk)
@@ -145,8 +149,12 @@ class TeamView(LoginRequiredMixin, TeamDefinitiveView):
 
 @login_required(login_url='/login')
 def create_team(request):
+    if request.user.is_anonymous():
+        return HttpResponseRedirect(reverse(index))
     if request.method == 'POST':
         form = TeamForm(request.POST)
+        if "cancel" in request.POST:
+                return HttpResponseRedirect(reverse(index))
         if form.is_valid():
            team = form.save(commit = False)
            team.school = request.user.school
@@ -201,24 +209,56 @@ class TeamDelete(TeamDefinitiveDelete):
 
 @login_required(login_url='/login')
 def create_player(request, pk):
-    if request.method == 'POST':
-        form = PlayerEditForm(request.POST)
-        if form.is_valid():
-            player = form.save(commit = False)
-            player.school = request.user.school
-            player.team = Team.objects.get(id=pk)
-            player.save()
-            return HttpResponseRedirect(reverse(index))
+    if request.user.is_anonymous():
+        return HttpResponseRedirect(reverse(index))
+    if request.user.school == Team.objects.get(id=pk).school:
+        if request.method == 'POST':
+            form = PlayerEditForm(request.POST)
+            if "cancel" in request.POST:
+                    return HttpResponseRedirect(reverse(index))
+            if form.is_valid():
+                player = form.save(commit = False)
+                player.school = request.user.school
+                player.team = Team.objects.get(id=pk)
+                player.save()
+                return HttpResponseRedirect(reverse(index))
+        else:
+            form = PlayerEditForm()
+        return render(request, 'player_form.html', {'form': form})
     else:
-        form = PlayerEditForm()
+        raise Http404
 
-    return render(request, 'fav_form.html', {'form': form})
 
 def player_view(request, pk):
-        player = Player.objects.get(id=pk)
-        return render(request, 'player_view.html', {
-            'player': player,
-            })
+    if request.user.is_anonymous():
+        return HttpResponseRedirect(reverse(index))
+    player = Player.objects.get(id=pk)
+    return render(request, 'player_view.html', {
+        'player': player,
+        })
+
+
+class PlayerDefinitiveDelete(LoginRequiredMixin, DeleteView):
+    success_url = reverse_lazy('index') # in the future, this will redirect to the user profile
+    template_name = 'confirm_delete.html'
+
+    def get_object(self, queryset=None):
+        obj = super(PlayerDefinitiveDelete, self).get_object()
+        if not obj.school == self.request.user.school:
+            raise Http404
+        return obj
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            url = self.success_url
+            return HttpResponseRedirect(url)
+        else:
+            return super(PlayerDefinitiveDelete, self).post(request, *args, **kwargs)
+
+
+
+class PlayerDelete(PlayerDefinitiveDelete):
+    model = Player
 
 # class FavView(DetailView):
 #     template_name = 'fav_form.html'
@@ -244,77 +284,3 @@ def player_view(request, pk):
 #     def get_success_url(self):
 #         return reverse_lazy(index)
 
-
-def advanced_search(request):
-    if request.method == 'POST':
-        form = AdvancedSearchForm(request.POST)
-        if form.is_valid():
-            post = {}
-
-            for key in request.POST:
-                if request.POST[key]!='':
-                    post[key]=request.POST[key]
-
-            del post['csrfmiddlewaretoken']
-            del post['submit']
-
-            params = urlencode(post)
-            url = reverse('search_results') + '?' + params
-            return HttpResponseRedirect(url)
-
-    else:
-        form = AdvancedSearchForm()
-    return render(request, 'advanced_search_form.html', {'form': form})
-
-def search_results(request):
-        q = Tubo.objects.all()
-
-        # searches in title, traber, description, address or city
-        if 'query' in request.GET:
-            query = request.GET['query']
-            title = Q(title__icontains=query)
-            school = Q(school__user__username__icontains=query)
-            description = Q(description__icontains=query)
-            q = q.filter(title | school | description )
-
-        # specific query:
-        else:
-
-            if 'school' in request.GET:
-                q = q.filter(school__user__username__icontains=request.GET['school'])
-
-            if 'title' in request.GET:
-                q = q.filter(title__icontains=request.GET['title'])
-
-            if 'description' in request.GET:
-                q = q.filter(description__icontains=request.GET['description'])
-
-
-        queryset = request.GET.copy()
-
-        fields = [('school','Tuber')]
-
-
-
-        query_url = queryset.urlencode()
-
-    
-        return render(request, 'search_results.html', {
-            'school_list': q,
-            'query_url' : query_url,
-        })
-
-# def get_school_list(request, query, max, pagename):
-#     paginator = Paginator(query, max) # Show max trabs per page
-
-#     page = request.GET.get(pagename)
-#     try:
-#         school_list = paginator.page(page)
-#     except PageNotAnInteger:
-#         # If page is not an integer, deliver first page.
-#         school_list = paginator.page(1)
-#     except EmptyPage:
-#         # If page is out of range (e.g. 9999), deliver last page of results.
-#         school_list = paginator.page(paginator.num_pages)
-
-#     return school_list

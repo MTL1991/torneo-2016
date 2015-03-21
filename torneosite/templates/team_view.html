@@ -10,18 +10,20 @@
     </a>
 </p>
 
-<h2>Jugadoras:</h2>
-{% for object in player_list %}
-    {% if forloop.first %}
-        <li class="first">
-    {% else %}
-        <li>
-    {% endif %}
-    <p><p>{{object.name}} {{object.surname1}} {{object.surname2}} </p> <p>{{object.member}}</p> </p>
-    </li>
-{% endfor %}
-
-<a id="create_player_btn" class="btn btn-primary" href="{% url 'add_player' pk=team.id %}">Agregar jugadora</a>
+{% if team.school.user == user %}
+    <h2>Jugadoras:</h2>
+    {% for object in player_list %}
+        {% if forloop.first %}
+            <li class="first">
+        {% else %}
+            <li>
+        {% endif %}
+        <a href="{% url 'view_player' pk=object.id  %}">{{object.name}} {{object.surname1}} {{object.surname2}}</a>
+        <a href="{% url 'delete_player' pk=object.id  %}"> Borrar</a>
+        </li>
+    {% endfor %}
+        <a id="create_player_btn" class="btn btn-primary" href="{% url 'add_player' pk=team.id %}">Agregar jugadora</a>
+{% endif %}
 <p>Editado por última vez:
     {{ team.last_editing_date }}</p>
 {% endblock %}

@@ -26,10 +26,6 @@ urlpatterns += patterns('',
     url(r'^team/(?P<pk>\d+)/$', team_view, name='view_team'),
     url(r'^team/(?P<pk>\d+)/delete/$', TeamDelete.as_view(), name='delete_team'),
     url(r'^team/(?P<pk>\d+)/add/$', create_player, name='add_player'),
-    url(r'^player/(?P<pk>\d+)', player_view, name='view_player'),
-)    
-
-urlpatterns += patterns('',
-    url(r'^search/advanced/$', advanced_search, name='advanced_search'),
-    url(r'^search/results/$', search_results, name='search_results'),
+    url(r'^player/(?P<pk>\d+)/delete$', PlayerDelete.as_view(), name='delete_player'),     
+    url(r'^player/(?P<pk>\d+)', player_view, name='view_player'),  
 )

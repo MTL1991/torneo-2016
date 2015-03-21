@@ -64,24 +64,24 @@ class PlayerEditForm(ModelForm):
         model = Player
         exclude = ['school','team']
 
-class AdvancedSearchForm(forms.Form):
+# class AdvancedSearchForm(forms.Form):
 
 
-    school = CharField(max_length=60, required=False)
+#     school = CharField(max_length=60, required=False)
 
-    title = CharField(max_length=60, required=False)
+#     title = CharField(max_length=60, required=False)
 
-    description = CharField(max_length=100, required=False)
+#     description = CharField(max_length=100, required=False)
 
     
-    def clean(self):
-        cleaned_data = super(AdvancedSearchForm, self).clean()
+#     def clean(self):
+#         cleaned_data = super(AdvancedSearchForm, self).clean()
 
-    def __init__(self, *args, **kwargs):
-        super(AdvancedSearchForm, self).__init__(*args, **kwargs)
-        self.fields['title'].label = "Titulo"
-        self.fields['description'].label = "Descripcion"
+#     def __init__(self, *args, **kwargs):
+#         super(AdvancedSearchForm, self).__init__(*args, **kwargs)
+#         self.fields['title'].label = "Titulo"
+#         self.fields['description'].label = "Descripcion"
 
-        self.fields['title'].help_text = 'Nombre de un equipo'
-        self.fields['description'].help_text = 'Texto contenido en la descripcion de un Tubo'
-       # self.fields['school'].help_text = 'Nombre completo o parcial de un Tuber'
+#         self.fields['title'].help_text = 'Nombre de un equipo'
+#         self.fields['description'].help_text = 'Texto contenido en la descripcion de un Tubo'
+#        # self.fields['school'].help_text = 'Nombre completo o parcial de un Tuber'
