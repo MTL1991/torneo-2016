@@ -7,24 +7,40 @@
 <p>e-mail: {{ school.user.email }}</p>
 
 {% if school_list%}
-<p>Equipos:<p>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Equipos  {% if player_list %}
+    {% endif %}</div>
 
-<ol>
+  <!-- Table -->
+  <table class="table">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Categoria</th>
+        <th>Numero de jugadoras</th>
+        <th>Editar/Borrar</th>
+    </tr>
+    </thead>
 {% for object in school_list %}
     {% if forloop.first %}
-        <li class="first">
+        <tbody><tr>
     {% else %}
-        <li>
+        <tr>
     {% endif %}
-    <a href="{% url 'view_team' pk=object.id  %}">{{object.name}}</a>
-    {% if  school.user == user %}
-        <a href="{% url 'delete_team' pk=object.id  %}"> Borrar</a>
-    {% endif %}
-    </li>
-{% endfor %}
-</ol>
+        <th>{{object.name}}</th>
+        <th>{{object.years}}</th>
+        <th>{{object.playersnumber}}</th>
+        <th><a href="{% url 'view_team' pk=object.id  %}"><i class="glyphicon glyphicon-eye-open"></i></a>/    {% if  school.user == user %}<a href="{% url 'delete_player' pk=object.id  %}"><i class="glyphicon glyphicon-trash"  style="color:red"> </i></a>{% endif %}</th>
+            </tr>
+    {% endfor %}
+        </tbody>
+  </table>
+</div>
+
 
 {% endif %}
 <p>Registro: {{ school.user.date_joined }}</p>
+
 
 {% endblock %}

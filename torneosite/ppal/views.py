@@ -216,6 +216,7 @@ def create_team(request):
         if form.is_valid():
            team = form.save(commit = False)
            team.school = request.user.school
+           team.playersnumber = 0
            if team.years == 1:
                 team.name = request.user.school.name +" '"+str(request.user.school.numberp)+"'"
                 number = request.user.school.numberp +1 
@@ -225,10 +226,10 @@ def create_team(request):
                 number = request.user.school.numberm +1 
                 school = School.objects.filter(name=request.user.school.name).update(numberm=number)
            team.save()
-
-        return render(request, 'team_success.html', {
-        'team': team,
-        })
+           return render(request, 'team_success.html', {
+                'team': team,
+            })
+        
     else:
         form = TeamForm()
     return render(request, 'team_form.html', {'form': form})
@@ -287,6 +288,8 @@ def create_player(request, pk):
                 player.school = request.user.school
                 player.team = Team.objects.get(id=pk)
                 player.save()
+                numero = Team.objects.get(id=pk).playersnumber+1
+                team = Team.objects.filter(name=Team.objects.get(id=pk).name).update(playersnumber=numero)
                 return HttpResponseRedirect(reverse(index))
         else:
             form = PlayerEditForm()

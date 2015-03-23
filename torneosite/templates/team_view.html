@@ -33,7 +33,6 @@
         <th>{{object.surname1}} {{object.surname2}}</th>
         <th>{{object.birthday}}</th>
         <th><a href="{% url 'view_player' pk=object.id  %}"><i class="glyphicon glyphicon-eye-open"></i></a>/<a href="{% url 'delete_player' pk=object.id  %}"><i class="glyphicon glyphicon-trash"  style="color:red" </i></a></th>
-            <a href="https://twitter.com/LEGAFUTBOLSALA" target="_blank"></a>
             </tr>
     {% endfor %}
         </tbody>

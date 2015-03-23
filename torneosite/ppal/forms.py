@@ -6,7 +6,7 @@ from ppal.models import *
 class TeamForm(ModelForm):
     class Meta:
         model = Team
-        exclude = ['school','name']
+        exclude = ['school','name','playersnumber']
     def __init__(self, *args, **kwargs):
         super(TeamForm, self).__init__(*args, **kwargs)
         self.fields['years'].label = "Categoria"

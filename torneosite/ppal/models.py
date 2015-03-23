@@ -27,7 +27,7 @@ class Team(models.Model):
     )
 
     years = models.IntegerField(choices=TYPES)
-
+    playersnumber = models.IntegerField();
     last_editing_date = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
