@@ -3,27 +3,42 @@
 {% block title %}{{ team.title }}{% endblock %}
 
 {% block content %}
-<h2>Equipo:{{ team.name }}</h2>
-<p>Colegio:
-    <a href="{% url 'profile_school' team.school.user.id%}">
-        {{ team.school }}
-    </a>
-</p>
+
+
 {% if team.school.user == user %}
-    {% if player_list %}
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Equipo:  {{ team.name }}   {% if player_list %}
         <a id="create_pdf_btn" class="btn btn-primary" href="{% url 'pdf' pk=team.id %}">PDF</a>
-    {% endif %}
-    <h2>Jugadoras:</h2>
+    {% endif %}</div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Fecha de nacimiento</th>
+        <th>Editar/Borrar</th>
+    </tr>
+    </thead>
+
     {% for object in player_list %}
         {% if forloop.first %}
-            <li class="first">
+            <tbody><tr>
         {% else %}
-            <li>
+           <tr>
         {% endif %}
-        <a href="{% url 'view_player' pk=object.id  %}">{{object.name}} {{object.surname1}} {{object.surname2}}</a>
-        <a href="{% url 'delete_player' pk=object.id  %}"> Borrar</a>
-        </li>
+        <th>{{object.name}}</th>
+        <th>{{object.surname1}} {{object.surname2}}</th>
+        <th>{{object.birthday}}</th>
+        <th><a href="{% url 'view_player' pk=object.id  %}"><i class="glyphicon glyphicon-eye-open"></i></a>/<a href="{% url 'delete_player' pk=object.id  %}"><i class="glyphicon glyphicon-trash"  style="color:red" </i></a></th>
+            <a href="https://twitter.com/LEGAFUTBOLSALA" target="_blank"></a>
+            </tr>
     {% endfor %}
+        </tbody>
+  </table>
+</div>
         <a id="create_player_btn" class="btn btn-primary" href="{% url 'add_player' pk=team.id %}">Agregar jugadora</a>
 {% endif %}
 <p>Editado por última vez:

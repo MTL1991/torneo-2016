@@ -32,8 +32,12 @@
           <a class="navbar-link" href="{% url 'login_school' %}?next={{request.get_full_path|urlencode}}">Entrar</a>
         </p>
       {% endif %}
+      <p class="navbar-text navbar-right">
+            <a href="https://twitter.com/LEGAFUTBOLSALA" target="_blank"><i class="fa fa-twitter"></i></a>
+            <a href="https://instagram.com/legafutbolsala/" target="_blank"><i class="fa fa-instagram"></i></a>
+            <a href="https://www.youtube.com/channel/UCQ1kQXlVErjPHIDHWycbYSw" target="_blank"><i class="fa fa-youtube"></i></a>
+      </p>
 
-      
       <p class="navbar-text navbar-right">
         <a class="navbar-link" href="{% url 'us' %}">Quienes Somos</a>
       </p>

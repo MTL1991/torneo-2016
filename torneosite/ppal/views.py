@@ -33,13 +33,16 @@ from reportlab.pdfgen import canvas
 
 def some_view(request, pk):
     # Create the HttpResponse object with the appropriate PDF headers.
+    team = Team.objects.get(id=pk)
+    player_list = Player.objects.filter(team= team,)
+
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="somefilename.pdf"'
+    equipo = "Hoja_de_inscripcion"
+    response['Content-Disposition'] = 'attachment; filename="Hoja_de_inscripcion.pdf"'
     ulargo = 841.89/10
     uancho = 595.27/10
     nameOffsetY = 0.07*ulargo
-    team = Team.objects.get(id=pk)
-    player_list = Player.objects.filter(team= team,)
+
     # Create the PDF object, using the response object as its "file."
     p = canvas.Canvas(response, pagesize=A4)
     # Draw things on the PDF. Here's where the PDF generation happens.
@@ -222,7 +225,10 @@ def create_team(request):
                 number = request.user.school.numberm +1 
                 school = School.objects.filter(name=request.user.school.name).update(numberm=number)
            team.save()
-           return HttpResponseRedirect(reverse(index))
+
+        return render(request, 'team_success.html', {
+        'team': team,
+        })
     else:
         form = TeamForm()
     return render(request, 'team_form.html', {'form': form})
