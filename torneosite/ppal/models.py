@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 from datetime import datetime
 
 
-from reportlab.pdfgen import canvas
-
 class School(models.Model):
     user = models.OneToOneField(User, editable=False)
     name = models.CharField(max_length=30)

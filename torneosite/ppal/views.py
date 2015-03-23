@@ -29,6 +29,7 @@ from django.utils.http import *
 from django.db.models import Q
 
 from reportlab.lib.pagesizes import letter, A4
+from reportlab.pdfgen import canvas
 
 def some_view(request, pk):
     # Create the HttpResponse object with the appropriate PDF headers.
