@@ -31,7 +31,7 @@ from django.db.models import Q
 from reportlab.lib.pagesizes import letter, A4
 from reportlab.pdfgen import canvas
 
-ABC = ['A','B','C','D','E','F','G']
+ABC = ['A','B','C','D','E','F','G','H','I','J','K']
 
 def some_view(request, pk):
     # Create the HttpResponse object with the appropriate PDF headers.
@@ -221,11 +221,11 @@ def create_team(request):
            team.school = request.user.school
            team.playersnumber = 0
            if team.years == 1:
-                team.name = request.user.school.name +" '"+ABC[team.playersnumber]+"'"
+                team.name = request.user.school.name +" '"+ABC[request.user.school.numberp]+"'"
                 number = request.user.school.numberp +1 
                 school = School.objects.filter(name=request.user.school.name).update(numberp=number)
            else:
-                team.name = request.user.school.name +" '"+ABC[team.playersnumber]+"'"
+                team.name = request.user.school.name +" '"+ABC[request.user.school.numberm]+"'"
                 number = request.user.school.numberm +1 
                 school = School.objects.filter(name=request.user.school.name).update(numberm=number)
            team.save()
