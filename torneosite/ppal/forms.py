@@ -72,11 +72,11 @@ class PlayerEditForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(PlayerEditForm, self).__init__(*args, **kwargs)
-        self.fields['member'].label = "Rol"
-        self.fields['name'].label = "Nombre"
-        self.fields['surname1'].label = "Primer apellido"
-        self.fields['surname2'].label = "Segundo apellido"
-        self.fields['birthday'].label = "Fecha de Nacimiento (dd/mm/aaaa) "
+        self.fields['member'].label = "Rol *"
+        self.fields['name'].label = "Nombre *"
+        self.fields['surname1'].label = "Primer apellido *"
+        self.fields['surname2'].label = "Segundo apellido "
+        self.fields['birthday'].label = "Fecha de Nacimiento (dd/mm/aaaa) *"
         self.fields['email'].label = "Correo electronico"
 
 # class AdvancedSearchForm(forms.Form):

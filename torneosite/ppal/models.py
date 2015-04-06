@@ -50,7 +50,7 @@ class Player(models.Model):
     member = models.IntegerField(choices=TYPES)
     name = models.CharField(max_length=30)
     surname1 = models.CharField(max_length=30)
-    surname2 = models.CharField(max_length=30)
+    surname2 = models.CharField(max_length=30, blank=True, null=True)
     birthday = models.DateField()
     email = models.CharField(max_length=30, blank=True, null=True)
     movil = models.CharField(max_length=30, blank=True, null=True)
