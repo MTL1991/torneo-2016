@@ -36,7 +36,7 @@ class SchoolForm(ModelForm):
         return user
 
 class UserForm(ModelForm):
-    name = CharField(max_length=60, label="Nombre del Colegio")
+    name = CharField(max_length=60, label="Nombre del Colegio",help_text='Tenga en cuenta que debera ser real o todos sus equipos se eliminaran')
     password = CharField(widget=PasswordInput())
     password2 = CharField(widget=PasswordInput(), label="Password confirmation")
 
