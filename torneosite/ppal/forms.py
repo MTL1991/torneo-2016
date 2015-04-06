@@ -36,12 +36,15 @@ class SchoolForm(ModelForm):
         return user
 
 class UserForm(ModelForm):
+    name = CharField(max_length=60, label="Nombre del Colegio")
     password = CharField(widget=PasswordInput())
     password2 = CharField(widget=PasswordInput(), label="Password confirmation")
+
 
     class Meta:
         model = User
         fields = ('username', 'email')
+
 
     def clean_password2(self):
         password = self.cleaned_data.get('password')

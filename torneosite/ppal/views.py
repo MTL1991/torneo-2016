@@ -157,10 +157,11 @@ def school_view(request, num):
 def create_school(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
+        print  request.POST["name"]
         if form.is_valid():
             user = form.save()
             school = School(user=user)
-            school.name = user.username
+            school.name = request.POST["name"]
             school.numberp = 1
             school.numberm = 1
             school.save()
@@ -258,23 +259,6 @@ class TeamDefinitiveDelete(LoginRequiredMixin, DeleteView):
 class TeamDelete(TeamDefinitiveDelete):
     model = Team
 
-# @login_required(login_url='/login')
-# def create_fav(request, pk):
-#     if request.method == 'POST':
-#         form = FavEditForm(request.POST)
-#         if "cancel" in request.POST:
-#             return HttpResponseRedirect(reverse('view_team', kwargs={'pk':pk}))
-#         if form.is_valid():
-#             fav = Fav(creator=request.user.school,
-#                                       status = Fav.STATUS_FAV,
-#                                       video = Tubo.objects.get(id=pk),
-#                                       )
-#             fav.save()
-#             return HttpResponseRedirect(reverse('view_team', kwargs={'pk':pk}))
-#     else:
-#         form = FavEditForm()
-
-#     return render(request, 'fav_form.html', {'form': form})
 
 @login_required(login_url='/login')
 def create_player(request, pk):
@@ -331,27 +315,5 @@ class PlayerDefinitiveDelete(LoginRequiredMixin, DeleteView):
 class PlayerDelete(PlayerDefinitiveDelete):
     model = Player
 
-# class FavView(DetailView):
-#     template_name = 'fav_form.html'
-#     model = Fav
 
-# class FavDelete(LoginRequiredMixin, DeleteView):
-#     template_name = 'fav_confirm_delete.html'
-#     model = Fav
-
-#     def get_object(self, queryset=None):
-#         obj = super(FavDelete, self).get_object()
-#         if not obj.creator == self.request.user.school:
-#             raise Http404
-#         return obj
-
-#     def post(self, request, *args, **kwargs):
-#         if "cancel" in request.POST:
-#             url = self.get_success_url()
-#             return HttpResponseRedirect(url)
-#         else:
-#             return super(FavDelete, self).post(request, *args, **kwargs)
-
-#     def get_success_url(self):
-#         return reverse_lazy(index)
 
