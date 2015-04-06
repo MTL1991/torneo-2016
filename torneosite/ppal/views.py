@@ -220,11 +220,11 @@ def create_team(request):
            team.school = request.user.school
            team.playersnumber = 0
            if team.years == 1:
-                team.name = request.user.school.name +" '"+ABC[request.user.school.numberp]+"'"
+                team.name = request.user.school.name +" '"+ABC[team.playersnumber]+"'"
                 number = request.user.school.numberp +1 
                 school = School.objects.filter(name=request.user.school.name).update(numberp=number)
            else:
-                team.name = request.user.school.name +" '"+ABC[request.user.school.numberm]+"'"
+                team.name = request.user.school.name +" '"+ABC[team.playersnumber]+"'"
                 number = request.user.school.numberm +1 
                 school = School.objects.filter(name=request.user.school.name).update(numberm=number)
            team.save()
