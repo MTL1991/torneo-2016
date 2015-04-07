@@ -153,6 +153,12 @@ def school_view(request, num):
             'player_list': player_list,
             })
 
+def to_unicode_or_bust(
+    obj, encoding='utf-8'):
+    if isinstance(obj, basestring):
+        if not isinstance(obj, unicode):
+            obj = unicode(obj, encoding)
+        return obj
 
 def create_school(request):
     if request.method == 'POST':
@@ -161,7 +167,7 @@ def create_school(request):
         if form.is_valid():
             user = form.save()
             school = School(user=user)
-            school.name = request.POST["name"]
+            school.name = to_unicode_or_bust(request.POST["name"])
             school.numberp = 1
             school.numberm = 1
             school.save()
@@ -221,11 +227,11 @@ def create_team(request):
            team.school = request.user.school
            team.playersnumber = 0
            if team.years == 1:
-                team.name = request.user.school.name +" '"+ABC[request.user.school.numberp]+"'"
+                team.name = request.user.school.name +" '"+ABC[request.user.school.numberp-1]+"'"
                 number = request.user.school.numberp +1 
                 school = School.objects.filter(name=request.user.school.name).update(numberp=number)
            else:
-                team.name = request.user.school.name +" '"+ABC[request.user.school.numberm]+"'"
+                team.name = request.user.school.name +" '"+ABC[request.user.school.numberm-1]+"'"
                 number = request.user.school.numberm +1 
                 school = School.objects.filter(name=request.user.school.name).update(numberm=number)
            team.save()
