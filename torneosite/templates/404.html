@@ -1,0 +1,10 @@
+{% extends "__base.html" %}
+
+{% block title %}Página no encontrada (Error 404){% endblock %}
+
+{% block content %}
+<h3>Página no encontrada</h3>
+<p>La página {{ request_path }} no ha sido encontrada.¿Estás seguro que el camino era este?<p>
+<p>Volver al <a href="/">inicio.</a>
+
+{% endblock %}
