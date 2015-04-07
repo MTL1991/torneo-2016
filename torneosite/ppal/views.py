@@ -64,8 +64,8 @@ def some_view(request, pk):
         if object.member == 1:
             tablerow = tablerow-0.25*ulargo
             ylist.append(tablerow)
-            p.drawString(1.1*uancho ,tablerow+nameOffsetY, str(object.surname1)+" "+str(object.surname2)+", "+str(object.name))
-            p.drawString(5.1*uancho ,tablerow+nameOffsetY, str(object.birthday))
+            p.drawString(1.1*uancho ,tablerow+nameOffsetY, to_unicode_or_bust(object.surname1)+" "+to_unicode_or_bust(object.surname2)+", "+to_unicode_or_bust(object.name))
+            p.drawString(5.1*uancho ,tablerow+nameOffsetY, to_unicode_or_bust(object.birthday))
     p.grid(xlist,ylist)
 
     #delegado headboards
@@ -81,8 +81,8 @@ def some_view(request, pk):
         if object.member == 2:
             tablerow = tablerow-0.25*ulargo
             ylist.append(tablerow)
-            p.drawString(1.1*uancho ,tablerow+nameOffsetY, str(object.surname1)+" "+str(object.surname2)+", "+str(object.name))
-            p.drawString(5.1*uancho ,tablerow+nameOffsetY, str(object.birthday))
+            p.drawString(1.1*uancho ,tablerow+nameOffsetY, to_unicode_or_bust(object.surname1)+" "+to_unicode_or_bust(object.surname2)+", "+to_unicode_or_bust(object.name))
+            p.drawString(5.1*uancho ,tablerow+nameOffsetY, to_unicode_or_bust(object.birthday))
 
     p.grid(xlist,ylist)
     # Close the PDF object cleanly, and we're done.
