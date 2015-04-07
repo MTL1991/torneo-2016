@@ -33,6 +33,7 @@ from reportlab.pdfgen import canvas
 
 ABC = ['A','B','C','D','E','F','G','H','I','J','K']
 
+
 def some_view(request, pk):
     # Create the HttpResponse object with the appropriate PDF headers.
     team = Team.objects.get(id=pk)
