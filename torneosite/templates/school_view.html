@@ -31,7 +31,7 @@
         <th>{{object.name}}</th>
         <th>{{object.years}}</th>
         <th>{{object.playersnumber}}</th>
-        <th><a href="{% url 'view_team' pk=object.id  %}"><i class="glyphicon glyphicon-eye-open"></i></a>/    {% if  school.user == user %}<a href="{% url 'delete_player' pk=object.id  %}"><i class="glyphicon glyphicon-trash"  style="color:red"> </i></a>{% endif %}</th>
+        <th><a href="{% url 'view_team' pk=object.id  %}"><i class="glyphicon glyphicon-eye-open"></i></a>/    {% if  school.user == user %}<a href="{% url 'delete_team' pk=object.id  %}"><i class="glyphicon glyphicon-trash"  style="color:red"> </i></a>{% endif %}</th>
             </tr>
     {% endfor %}
         </tbody>
