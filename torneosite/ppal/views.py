@@ -163,7 +163,6 @@ def to_unicode_or_bust(
 def create_school(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
-        print  request.POST["name"]
         if form.is_valid():
             user = form.save()
             school = School(user=user)
