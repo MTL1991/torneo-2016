@@ -50,6 +50,32 @@ def some_view(request, pk):
     # Draw things on the PDF. Here's where the PDF generation happens.
     # See the ReportLab documentation for the full list of functionality.
 
+    #team headboards
+    p.setFillColorRGB(0,0,0.77)
+    p.grid([uancho,9*uancho],[9.5*ulargo,9.25*ulargo])
+    p.drawString(2.5*uancho ,9.25*ulargo+nameOffsetY,"II TORNEO INTERCOLEGIOS CIUDAD DE LEGANES")
+    p.drawString(3.5*uancho ,9*ulargo+nameOffsetY,"Nombre del equipo")
+    p.drawString(7.6*uancho ,9*ulargo+nameOffsetY,"Categoria")
+    #teams' name
+    xlist = [uancho,7.5*uancho,9*uancho]
+    ylist = [9.25*ulargo,9*ulargo, 8.75*ulargo]
+    p.drawString(1.1*uancho ,8.75*ulargo+nameOffsetY, to_unicode_or_bust(player_list[0].team.name))
+    if player_list[0].team.years == 1:
+        categoria = "sub-9"
+    else:
+        categoria = "sub-12"
+
+    p.drawString(7.6*uancho ,8.75*ulargo+nameOffsetY, categoria)
+    # tablerow = tablerow-1*ulargo
+    # for object in player_list:
+    #     if object.member == 2:
+    #         tablerow = tablerow-0.25*ulargo
+    #         ylist.append(tablerow)
+    #         p.drawString(1.1*uancho ,tablerow+nameOffsetY, to_unicode_or_bust(object.surname1)+" "+to_unicode_or_bust(object.surname2)+", "+to_unicode_or_bust(object.name))
+    #         p.drawString(5.1*uancho ,tablerow+nameOffsetY, to_unicode_or_bust(object.birthday))
+
+    p.grid(xlist,ylist)
+
     #players headboards
     p.setFillColorRGB(0,0,0.77)
     p.grid([uancho,9*uancho],[8.5*ulargo,8.25*ulargo])
@@ -65,7 +91,7 @@ def some_view(request, pk):
             tablerow = tablerow-0.25*ulargo
             ylist.append(tablerow)
             p.drawString(1.1*uancho ,tablerow+nameOffsetY, to_unicode_or_bust(object.surname1)+" "+to_unicode_or_bust(object.surname2)+", "+to_unicode_or_bust(object.name))
-            p.drawString(5.1*uancho ,tablerow+nameOffsetY, to_unicode_or_bust(object.birthday))
+            p.drawString(5.1*uancho ,tablerow+nameOffsetY, str(object.birthday))
     p.grid(xlist,ylist)
 
     #delegado headboards
@@ -82,7 +108,7 @@ def some_view(request, pk):
             tablerow = tablerow-0.25*ulargo
             ylist.append(tablerow)
             p.drawString(1.1*uancho ,tablerow+nameOffsetY, to_unicode_or_bust(object.surname1)+" "+to_unicode_or_bust(object.surname2)+", "+to_unicode_or_bust(object.name))
-            p.drawString(5.1*uancho ,tablerow+nameOffsetY, to_unicode_or_bust(object.birthday))
+            p.drawString(5.1*uancho ,tablerow+nameOffsetY, str(object.birthday))
 
     p.grid(xlist,ylist)
     # Close the PDF object cleanly, and we're done.
