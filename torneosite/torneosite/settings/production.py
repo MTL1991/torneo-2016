@@ -12,5 +12,3 @@ DATABASES['default'] =  dj_database_url.config()
 
 # TEMPLATE_DEBUG = False
 
-# This does nothing with emails. Just for testing in Heroku
-EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'

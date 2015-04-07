@@ -37,10 +37,7 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
     'bootstrapform',# sudo pip install django-bootstrap-form
-    'gmapi',
     'bootstrap3_datetime',
-    'captcha',
-    'taggit',
     'django_messages',
 )
 
@@ -111,8 +108,5 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
     os.path.join(BASE_DIR, 'templates/django_messages'),
 )
-
-
-CAPTCHA_OUTPUT_FORMAT = u'%(image)s <button title="Cambiar Captcha" class="btn captcha-refresh"><span class="glyphicon glyphicon-refresh"></span></button> %(hidden_field)s %(text_field)s'
 
 DEFAULT_CHARSET='utf-8'
