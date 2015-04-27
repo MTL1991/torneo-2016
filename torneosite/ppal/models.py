@@ -9,7 +9,7 @@ class School(models.Model):
     name = models.CharField(max_length=30)
     numberp = models.IntegerField()
     numberm = models.IntegerField()
-    superuser = models.BooleanField()
+    superuser = models.BooleanField(default=False)
 
     def __unicode__(self):
         return u'%s' % (self.name)
