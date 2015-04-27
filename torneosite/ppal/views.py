@@ -196,6 +196,7 @@ def create_school(request):
             school.name = to_unicode_or_bust(request.POST["name"])
             school.numberp = 1
             school.numberm = 1
+            school.superuser = False
             school.save()
             u = authenticate(username=request.POST['username'],
                              password=request.POST['password'])
@@ -218,6 +219,7 @@ def team_view(request, pk):
         team_list = Team.objects.filter(school=user.school)
         team = Team.objects.get(id=pk)
         player_list = Player.objects.filter(team= team,)
+
         return render(request, 'team_view.html', {
             'school': user.school,
             'user': request.user, # footer

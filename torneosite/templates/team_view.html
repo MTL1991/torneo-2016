@@ -5,7 +5,7 @@
 {% block content %}
 
 
-{% if team.school.user == user %}
+{% if team.school.user == user or school.superuser %}
 <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading">Equipo:  {{ team.name }}   {% if player_list %}
