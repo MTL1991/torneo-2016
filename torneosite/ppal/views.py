@@ -310,7 +310,7 @@ def create_player(request, pk):
                 player.save()
                 numero = Team.objects.get(id=pk).playersnumber+1
                 team = Team.objects.filter(name=Team.objects.get(id=pk).name, years=Team.objects.get(id=pk).years).update(playersnumber=numero)
-                return HttpResponseRedirect(reverse('view_team', kwargs={'pk':pk}))
+                return HttpResponseRedirect(reverse('add_player', kwargs={'pk':pk}))
         else:
             form = PlayerEditForm()
         return render(request, 'player_form.html', {'form': form})

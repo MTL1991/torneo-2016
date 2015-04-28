@@ -37,8 +37,8 @@ class SchoolForm(ModelForm):
 
 class UserForm(ModelForm):
     name = CharField(max_length=60, label="Nombre del Colegio",help_text='Tenga en cuenta que debera ser real o todos sus equipos se eliminaran')
-    password = CharField(widget=PasswordInput())
-    password2 = CharField(widget=PasswordInput(), label="Password confirmation")
+    password = CharField(label ="Contrasena" ,widget=PasswordInput())
+    password2 = CharField(label ="Repita Contrasena",widget=PasswordInput())
 
 
     class Meta:
@@ -61,12 +61,6 @@ class UserForm(ModelForm):
         if commit:
             user.save()
         return user
-    
-
-
-# class FavEditForm(ModelForm):
-#     class Meta:
-#         model = Fav
 
 class PlayerEditForm(ModelForm):
     class Meta:
