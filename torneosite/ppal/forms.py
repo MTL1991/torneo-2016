@@ -76,6 +76,20 @@ class PlayerEditForm(ModelForm):
         self.fields['birthday'].label = "Fecha de Nacimiento (dd/mm/aaaa) *"
         self.fields['email'].label = "Correo electronico"
 
+class MatchForm(ModelForm):
+    class Meta:
+        model = Match
+
+
+class MatchResultForm(ModelForm):
+    class Meta:
+        model = Match
+        exclude = ['years','place','fase','hora','minutes',]
+
+# class GroupForm(ModelForm):
+#     class Meta:
+#         model = Group
+
 # class AdvancedSearchForm(forms.Form):
 
 

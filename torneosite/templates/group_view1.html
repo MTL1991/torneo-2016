@@ -1,0 +1,64 @@
+{% extends "_base.html" %}
+
+{% block title %}{{ group.id }}{% endblock %}
+
+{% block content %}
+
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">CATEGORIA SUB 9</div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+    <tr>
+        <th>Equipo</th>
+        <th>Jugados</th>
+        <th>Ganados</th>
+        <th>Empatados</th>
+        <th>Perdidos</th>
+        <th>GF</th>
+        <th>GC</th>
+        <th>Puntos</th>
+        
+    </tr>
+    <!-- team1 -->
+    </thead>
+        <tbody><tr>
+        <th>{{ group.team1}}</th>
+        <th>{{ group.team1.matchs}}</th>
+        <th>{{ group.team1.wins}}</th>
+        <th>{{ group.team1.draw}}</th>
+        <th>{{ group.team1.lose}}</th>
+        <th>{{ group.team1.goalf}}</th>
+        <th>{{ group.team1.goalc}}</th>
+        <th>{{ group.team1.point}}</th>
+        </tr>
+        <tr>
+        <th>{{ group.team2}}</th>
+        <th>{{ group.team2.matchs}}</th>
+        <th>{{ group.team2.wins}}</th>
+        <th>{{ group.team2.draw}}</th>
+        <th>{{ group.team2.lose}}</th>
+        <th>{{ group.team2.goalf}}</th>
+        <th>{{ group.team2.goalc}}</th>
+        <th>{{ group.team2.point}}</th>
+        </tr>
+        <tr>
+        <th>{{ group.team3}}</th>
+        <th>{{ group.team3.matchs}}</th>
+        <th>{{ group.team3.wins}}</th>
+        <th>{{ group.team3.draw}}</th>
+        <th>{{ group.team3.lose}}</th>
+        <th>{{ group.team3.goalf}}</th>
+        <th>{{ group.team3.goalc}}</th>
+        <th>{{ group.team3.point}}</th>
+        </tr>
+        </tbody>
+  </table>
+</div>
+        
+
+
+{% endblock %}

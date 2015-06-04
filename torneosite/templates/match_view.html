@@ -1,0 +1,17 @@
+{% extends "_base.html" %}
+
+{% block title %}{{ match }}{% endblock %}
+
+{% block content %}
+<p>{{ match.home }} vs {{ match.away }} </p>
+<p>Lugar:{{ match.place }}</p>
+<p>Hora: {{ match.hora }}  : {{ match.minutes }}</p>
+{% if match.team1Score %}
+        <p>Resultado </p>
+        <p>{{ match.team1Score }}  - {{ match.team1Score }}</p>
+
+{% endif %}
+
+
+
+{% endblock %}

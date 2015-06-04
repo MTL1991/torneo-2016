@@ -351,3 +351,130 @@ class PlayerDelete(PlayerDefinitiveDelete):
 
 
 
+def create_match(request):
+    if request.method == 'POST':
+        form = MatchForm(request.POST)
+        if form.is_valid():
+            match = form.save()
+            return HttpResponseRedirect(reverse(index))
+        else:
+            return HttpResponse('user not valid')
+    else:
+        form = MatchForm()
+    return render(request, 'match_form.html', {'form': form})
+
+
+def view_all_match(request):
+    match_list1 = Match.objects.filter(years=1).order_by('hora')
+    match_list2 = Match.objects.filter(years=2).order_by('hora')
+    return render(request, 'match_all_view.html', {
+        'match_list1': match_list1,
+        'match_list2': match_list2,
+
+    })
+
+def match_view(request, pk):
+    match = Match.objects.get(id=pk)
+    return render(request, 'match_view.html', {
+        'match': match,
+        })
+
+class MatchUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'match_form.html'
+    login_url = '/login'
+    model = Match
+    form_class = MatchForm
+    success_url = reverse_lazy('index')
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            
+            return HttpResponseRedirect(reverse(index))
+        else:
+            #return HttpResponseRedirect(reverse(index))
+            return super(MatchUpdate, self).post(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        obj = super(MatchUpdate, self).get_object()
+        # only the creator can delete his own application
+        return obj
+
+
+class ResultUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'match_form.html'
+    login_url = '/login'
+    model = Match
+    form_class = MatchResultForm
+    success_url = reverse_lazy('index')
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            return HttpResponseRedirect(reverse(index))
+        else:
+            post_mutable = request.POST.copy()
+        # Now you can change values:
+            if(post_mutable['team2Score'] > post_mutable['team1Score']):
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(matchs=Team.objects.get(id=post_mutable['local']).matchs+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(lose=Team.objects.get(id=post_mutable['local']).lose+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(goalc=Team.objects.get(id=post_mutable['local']).goalc+int(post_mutable['team2Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(goalf=Team.objects.get(id=post_mutable['local']).goalf+int(post_mutable['team1Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(matchs=Team.objects.get(id=post_mutable['away']).matchs+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(wins=Team.objects.get(id=post_mutable['away']).wins+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(point=Team.objects.get(id=post_mutable['away']).point+3)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(goalc=Team.objects.get(id=post_mutable['away']).goalc+int(post_mutable['team1Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(goalf=Team.objects.get(id=post_mutable['away']).goalf+int(post_mutable['team2Score']))
+            elif(post_mutable['team1Score'] > post_mutable['team2Score']):
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(matchs=Team.objects.get(id=post_mutable['away']).matchs+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(lose=Team.objects.get(id=post_mutable['away']).lose+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(goalc=Team.objects.get(id=post_mutable['away']).goalc+int(post_mutable['team2Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(goalf=Team.objects.get(id=post_mutable['away']).goalf+int(post_mutable['team1Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(matchs=Team.objects.get(id=post_mutable['local']).matchs+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(wins=Team.objects.get(id=post_mutable['local']).wins+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(point=Team.objects.get(id=post_mutable['local']).point+3)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(goalc=Team.objects.get(id=post_mutable['local']).goalc+int(post_mutable['team1Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(goalf=Team.objects.get(id=post_mutable['local']).goalf+int(post_mutable['team2Score']))
+            else:
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(matchs=Team.objects.get(id=post_mutable['away']).matchs+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(draw=Team.objects.get(id=post_mutable['away']).draw+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(point=Team.objects.get(id=post_mutable['away']).point+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(goalc=Team.objects.get(id=post_mutable['away']).goalc+int(post_mutable['team2Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(goalf=Team.objects.get(id=post_mutable['away']).goalf+int(post_mutable['team1Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(matchs=Team.objects.get(id=post_mutable['local']).matchs+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(draw=Team.objects.get(id=post_mutable['local']).draw+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(point=Team.objects.get(id=post_mutable['local']).point+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(goalc=Team.objects.get(id=post_mutable['local']).goalc+int(post_mutable['team1Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(goalf=Team.objects.get(id=post_mutable['local']).goalf+int(post_mutable['team2Score']))
+            #return HttpResponseRedirect(reverse(index))
+            return super(ResultUpdate, self).post(post_mutable, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        obj = super(ResultUpdate, self).get_object()
+        # only the creator can delete his own application
+        return obj
+
+# def create_group(request):
+#     if request.method == 'POST':
+#         form = GroupForm(request.POST)
+#         if form.is_valid():
+#             match = form.save()
+#             return HttpResponseRedirect(reverse(index))
+#         else:
+#             return HttpResponse('user not valid')
+#     else:
+#         form = GroupForm()
+#     return render(request, 'group_form.html', {'form': form})
+
+def group_view1(request, pk):
+    team_group = Team.objects.filter(group=pk,years=1).order_by('-point')
+    return render(request, 'group_view.html', {
+        'group': team_group,
+        'group_name': ABC[int(pk)-1],
+
+        })
+
+def group_view2(request, pk):
+    team_group = Team.objects.filter(group=pk,years=2).order_by('-point')
+    return render(request, 'group_view.html', {
+        'group': team_group,
+        'group_name': ABC[int(pk)-1],
+        })

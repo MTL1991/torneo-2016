@@ -1,0 +1,51 @@
+{% extends "_base.html" %}
+
+{% block title %}{{ group_name }}{% endblock %}
+
+{% block content %}
+
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">CATEGORIA SUB 9 - GRUPO {{group_name}}</div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+    <tr>
+        <th></th>
+        <th>PJ</th>
+        <th>G</th>
+        <th>E</th>
+        <th>P</th>
+        <th>GF</th>
+        <th>GC</th>
+        <th>Pt</th>
+        
+    </tr>
+    <!-- team1 -->
+    </thead>
+    {% for object in group %}
+        {% if forloop.first %}
+            <tbody><tr>
+        {% else %}
+           <tr>
+        {% endif %}
+        <th>{{ object.name}}</th>
+        <th>{{ object.matchs}}</th>
+        <th>{{ object.wins}}</th>
+        <th>{{ object.draw}}</th>
+        <th>{{ object.lose}}</th>
+        <th>{{ object.goalf}}</th>
+        <th>{{ object.goalc}}</th>
+        <th>{{ object.point}}</th>
+            </tr>
+    {% endfor %}
+        </tr>
+        </tbody>
+  </table>
+</div>
+        
+
+
+{% endblock %}

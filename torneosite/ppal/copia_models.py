@@ -26,13 +26,7 @@ class Team(models.Model):
         (PRIMERO_TERCERO, 'sub-9'),
         (TERCERO_SEXTO, 'sub-12'),
     )
-    #segunda forma sin group
 
-    group = models.IntegerField(default=0,blank=True, null=True);
-    octavos = models.IntegerField(default=0,blank=True, null=True);
-    cuartos = models.IntegerField(default=0,blank=True, null=True);
-    semis = models.IntegerField(default=0,blank=True, null=True);
-    final = models.IntegerField(default=0,blank=True, null=True);
 
     years = models.IntegerField(choices=TYPES)
     matchs = models.IntegerField(default=0,blank=True, null=True);
@@ -47,21 +41,22 @@ class Team(models.Model):
     def __unicode__(self):
         return u'%s | Categoria: %s' % (self.name, self.years)
 
-# class Group(models.Model):
+class Group(models.Model):
 
-#     team1 = models.ForeignKey('Team',related_name='team1')
-#     team2 = models.ForeignKey('Team',related_name='team2')
-#     team3 = models.ForeignKey('Team',related_name='team3')
+    team1 = models.ForeignKey('Team',related_name='team1')
+    team2 = models.ForeignKey('Team',related_name='team2')
+    team3 = models.ForeignKey('Team',related_name='team3')
 
-#     PRIMERO_TERCERO = 1
-#     TERCERO_SEXTO = 2
+    PRIMERO_TERCERO = 1
+    TERCERO_SEXTO = 2
 
-#     TYPES = (
-#         (PRIMERO_TERCERO, 'sub-9'),
-#         (TERCERO_SEXTO, 'sub-12'),
-#     )
+    TYPES = (
+        (PRIMERO_TERCERO, 'sub-9'),
+        (TERCERO_SEXTO, 'sub-12'),
+    )
 
-#     years = models.IntegerField(choices=TYPES)
+    years = models.IntegerField(choices=TYPES)
+
 
 class Match(models.Model):
 
