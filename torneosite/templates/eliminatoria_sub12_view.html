@@ -1,0 +1,408 @@
+{% extends "_base.html" %}
+
+{% block title %}{{ group_name }}{% endblock %}
+
+{% block content %}
+
+<div class="container">
+ <table class="table-condensed" style="width:100%">
+  <tr>
+  	<td align="center" class="col-md-2">OCTAVOS</td>
+    <td class="col-md-1"></td>
+    <td align="center" class="col-md-2">CUARTOS</td>
+    <td class="col-md-1"></td>
+    <td align="center" class="col-md-2">SEMIS</td>
+    <td class="col-md-1"></td>
+    <td align="center" class="col-md-2">FINAL</td>
+  </tr>
+  <tr>
+    <td><div class="input-group"><div class="form-control">{{octavos.0.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_octavos.0.team1Score}}</span></span></div>
+   	<td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+  	<td></td>
+    <td style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
+    <td><div class="input-group"><div class="form-control">{{cuartos.0.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_cuartos.0.team1Score}}</span></span></div>
+   	<td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><div class="input-group"><div class="form-control">{{octavos.1.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_octavos.0.team2Score}}</span></div>
+    <td></td>
+    <td></td>
+    <td rowspan="3" style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+   <td><div class="input-group"><div class="form-control">{{semis.0.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_semis.0.team1Score}}</span></span></div></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><div class="input-group"><div class="form-control">{{octavos.2.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_octavos.1.team1Score}}</span></div>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td rowspan="7" style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
+        <td></td>
+    <td></td>
+  </tr>
+  <tr>
+  	<td></td>
+    <td style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
+    <td><div class="input-group"><div class="form-control">{{cuartos.1.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_cuartos.0.team2Score}}</span></span></div></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><div class="input-group"><div class="form-control">{{octavos.3.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_octavos.1.team2Score}}</span></div>
+   	<td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+  	<td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><div class="input-group"><div class="form-control">{{final.0.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_final.0.team1Score}}</span></div>
+  </tr>
+<tr>
+    <td><div class="input-group"><div class="form-control">{{octavos.4.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_octavos.2.team1Score}}</span></div>
+   	<td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+  	<td></td>
+    <td style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
+    <td><div class="input-group"><div class="form-control">{{cuartos.2.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_cuartos.1.team1Score}}</span></div>
+   	<td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><div class="input-group"><div class="form-control">{{octavos.5.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_octavos.2.team2Score}}</span></div>
+    <td></td>
+    <td></td>
+    <td rowspan="3" style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+   <td><div class="input-group"><div class="form-control">{{semis.1.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_semis.0.team2Score}}</span></div></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><div class="input-group"><div class="form-control">{{octavos.6.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_octavos.3.team1Score}}</span></div>
+       <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+  	<td></td>
+    <td style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
+    <td><div class="input-group"><div class="form-control">{{cuartos.3.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_cuartos..team2Score}}</span></div></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><div class="input-group"><div class="form-control">{{octavos.7.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_octavos.3.team2Score}}</span></div>
+    	    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><div class="input-group"><div class="form-control">{{octavos.8.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_octavos.4.team1Score}}</span></div>
+   	<td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+  	<td></td>
+    <td style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
+    <td><div class="input-group"><div class="form-control">{{cuartos.4.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_cuartos.2.team1Score}}</span></div>
+   	<td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><div class="input-group"><div class="form-control">{{octavos.9.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_octavos.4.team2Score}}</span></div>
+    <td></td>
+    <td></td>
+    <td rowspan="3" style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+   <td><div class="input-group"><div class="form-control">{{semis.2.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_semis.1.team1Score}}</span></div></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><div class="input-group"><div class="form-control">{{octavos.10.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_octavos.5.team1Score}}</span></div>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td rowspan="7" style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
+        <td></td>
+    <td></td>
+  </tr>
+  <tr>
+  	<td></td>
+    <td style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
+    <td><div class="input-group"><div class="form-control">{{cuartos.5.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_cuartos.2.team2Score}}</span></div></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><div class="input-group"><div class="form-control">{{octavos.11.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_octavos.5.team2Score}}</span></div>
+   	<td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+  	<td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><div class="input-group"><div class="form-control">{{final.1.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_final.0.team2Score}}</span></div>
+  </tr>
+<tr>
+    <td><div class="input-group"><div class="form-control">{{octavos.12.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_octavos.6.team1Score}}</span></div>
+   	<td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+  	<td></td>
+    <td style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
+    <td><div class="input-group"><div class="form-control">{{cuartos.6.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_cuartos.3.team1Score}}</span></div>
+   	<td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><div class="input-group"><div class="form-control">{{octavos.13.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_octavos.6.team2Score}}</span></div>
+    <td></td>
+    <td></td>
+    <td rowspan="3" style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+   <td><div class="input-group"><div class="form-control">{{semis.3.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_semis.1.team2Score}}</span></div></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><div class="input-group"><div class="form-control">{{octavos.14.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_octavos.7.team1Score}}</span></div>
+       <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+  	<td></td>
+    <td style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
+    <td><div class="input-group"><div class="form-control">{{cuartos.7.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_cuartos.3.team2Score}}</span></div></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><div class="input-group"><div class="form-control">{{octavos.15.name}}</div><span class="input-group-addon"><span class="badge pull-right">{{match_octavos.7.team2Score}}</span></div>
+    	    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">PARTIDOS DE OCTAVOS {% if  school.superuser %}<a id="create_match_btn" class="btn btn-primary" href="{% url 'add_match' %}">Agregar partido</a>{% endif %}</div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+    <tr>
+        <th>Partido</th>
+        <th>Campo</th>
+        <th>Hora</th>
+        <th>Resultado</th>
+    </tr>
+    </thead>
+
+    {% for object in match_octavos %}
+        {% if forloop.first %}
+            <tbody><tr>
+        {% else %}
+           <tr>
+        {% endif %}
+        <th>{% if  school.superuser %}<a href="{% url 'update_result' pk=object.id%}">{% endif %}{% if  not school.superuser %}<a href="{% url 'match_view' pk=object.id%}">{% endif %}{{ object}}</th>
+        <th>{{ object.place}}</th>
+        <th>{{ object.hora}} : {% if  object.minutes < 10%} 0{{ object.minutes}}{% endif %}{% if  not object.minutes < 10 %} {{ object.minutes}}{% endif %}</a></th>
+        <th>{{ object.team1Score}} - {{ object.team2Score}}</th>
+            </tr>
+    {% endfor %}
+        </tbody>
+  </table>
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">PARTIDOS DE CUARTOS {% if  school.superuser %}<a id="create_match_btn" class="btn btn-primary" href="{% url 'add_match' %}">Agregar partido</a>{% endif %}</div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+    <tr>
+        <th>Partido</th>
+        <th>Campo</th>
+        <th>Hora</th>
+        <th>Resultado</th>
+    </tr>
+    </thead>
+
+    {% for object in match_cuartos %}
+        {% if forloop.first %}
+            <tbody><tr>
+        {% else %}
+           <tr>
+        {% endif %}
+        <th>{% if  school.superuser %}<a href="{% url 'update_result' pk=object.id%}">{% endif %}{% if  not school.superuser %}<a href="{% url 'match_view' pk=object.id%}">{% endif %}{{ object}}</th>
+        <th>{{ object.place}}</th>
+        <th>{{ object.hora}} : {% if  object.minutes < 10%} 0{{ object.minutes}}{% endif %}{% if  not object.minutes < 10 %} {{ object.minutes}}{% endif %}</a></th>
+        <th>{{ object.team1Score}} - {{ object.team2Score}}</th>
+            </tr>
+    {% endfor %}
+        </tbody>
+  </table>
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">PARTIDOS DE SEMIFINALES {% if  school.superuser %}<a id="create_match_btn" class="btn btn-primary" href="{% url 'add_match' %}">Agregar partido</a>{% endif %}</div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+    <tr>
+        <th>Partido</th>
+        <th>Campo</th>
+        <th>Hora</th>
+        <th>Resultado</th>
+    </tr>
+    </thead>
+
+    {% for object in match_semis %}
+        {% if forloop.first %}
+            <tbody><tr>
+        {% else %}
+           <tr>
+        {% endif %}
+        <th>{% if  school.superuser %}<a href="{% url 'update_result' pk=object.id%}">{% endif %}{% if  not school.superuser %}<a href="{% url 'match_view' pk=object.id%}">{% endif %}{{ object}}</th>
+        <th>{{ object.place}}</th>
+        <th>{{ object.hora}} : {% if  object.minutes < 10%} 0{{ object.minutes}}{% endif %}{% if  not object.minutes < 10 %} {{ object.minutes}}{% endif %}</a></th>
+        <th>{{ object.team1Score}} - {{ object.team2Score}}</th>
+            </tr>
+    {% endfor %}
+        </tbody>
+  </table>
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">FINAL {% if  school.superuser %}<a id="create_match_btn" class="btn btn-primary" href="{% url 'add_match' %}">Agregar partido</a>{% endif %}</div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+    <tr>
+        <th>Partido</th>
+        <th>Campo</th>
+        <th>Hora</th>
+        <th>Resultado</th>
+    </tr>
+    </thead>
+
+    {% for object in match_final %}
+        {% if forloop.first %}
+            <tbody><tr>
+        {% else %}
+           <tr>
+        {% endif %}
+        <th>{% if  school.superuser %}<a href="{% url 'update_result' pk=object.id%}">{% endif %}{% if  not school.superuser %}<a href="{% url 'match_view' pk=object.id%}">{% endif %}{{ object}}</th>
+        <th>{{ object.place}}</th>
+        <th>{{ object.hora}} : {% if  object.minutes < 10%} 0{{ object.minutes}}{% endif %}{% if  not object.minutes < 10 %} {{ object.minutes}}{% endif %}</a></th>
+        <th>{{ object.team1Score}} - {{ object.team2Score}}</th>
+            </tr>
+    {% endfor %}
+        </tbody>
+  </table>
+</div>
+{% endblock %}

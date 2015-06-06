@@ -6,7 +6,7 @@ from ppal.models import *
 class TeamForm(ModelForm):
     class Meta:
         model = Team
-        exclude = ['school','name','playersnumber']
+        exclude = ['school','name','playersnumber', 'octavos','cuartos','semis','final','matchs','wins','draw','lose','goalf','goalc','point'] 
     def __init__(self, *args, **kwargs):
         super(TeamForm, self).__init__(*args, **kwargs)
         self.fields['years'].label = "Categoria"
@@ -79,12 +79,12 @@ class PlayerEditForm(ModelForm):
 class MatchForm(ModelForm):
     class Meta:
         model = Match
-
+        exclude = ['octavos','cuartos','semis','final','group','team1Score','team2Score',]
 
 class MatchResultForm(ModelForm):
     class Meta:
         model = Match
-        exclude = ['years','place','fase','hora','minutes',]
+        exclude = ['years','place','fase','hora','minutes','octavos','cuartos','semis','final','group',]
 
 # class GroupForm(ModelForm):
 #     class Meta:
