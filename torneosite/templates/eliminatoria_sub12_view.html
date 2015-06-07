@@ -303,7 +303,7 @@
         {% else %}
            <tr>
         {% endif %}
-        <th>{% if  school.superuser %}<a href="{% url 'update_result' pk=object.id%}">{% endif %}{% if  not school.superuser %}<a href="{% url 'match_view' pk=object.id%}">{% endif %}{{ object}}</th>
+        <th>{% if  school.superuser %}<a href="{% url 'update_octavos' pk=object.id%}">{% endif %}{% if  not school.superuser %}<a href="{% url 'match_view' pk=object.id%}">{% endif %}{{ object}}</th>
         <th>{{ object.place}}</th>
         <th>{{ object.hora}} : {% if  object.minutes < 10%} 0{{ object.minutes}}{% endif %}{% if  not object.minutes < 10 %} {{ object.minutes}}{% endif %}</a></th>
         <th>{{ object.team1Score}} - {{ object.team2Score}}</th>
@@ -334,7 +334,7 @@
         {% else %}
            <tr>
         {% endif %}
-        <th>{% if  school.superuser %}<a href="{% url 'update_result' pk=object.id%}">{% endif %}{% if  not school.superuser %}<a href="{% url 'match_view' pk=object.id%}">{% endif %}{{ object}}</th>
+        <th>{% if  school.superuser %}<a href="{% url 'update_cuartos' pk=object.id%}">{% endif %}{% if  not school.superuser %}<a href="{% url 'match_view' pk=object.id%}">{% endif %}{{ object}}</th>
         <th>{{ object.place}}</th>
         <th>{{ object.hora}} : {% if  object.minutes < 10%} 0{{ object.minutes}}{% endif %}{% if  not object.minutes < 10 %} {{ object.minutes}}{% endif %}</a></th>
         <th>{{ object.team1Score}} - {{ object.team2Score}}</th>
@@ -365,7 +365,7 @@
         {% else %}
            <tr>
         {% endif %}
-        <th>{% if  school.superuser %}<a href="{% url 'update_result' pk=object.id%}">{% endif %}{% if  not school.superuser %}<a href="{% url 'match_view' pk=object.id%}">{% endif %}{{ object}}</th>
+        <th>{% if  school.superuser %}<a href="{% url 'update_semis' pk=object.id%}">{% endif %}{% if  not school.superuser %}<a href="{% url 'match_view' pk=object.id%}">{% endif %}{{ object}}</th>
         <th>{{ object.place}}</th>
         <th>{{ object.hora}} : {% if  object.minutes < 10%} 0{{ object.minutes}}{% endif %}{% if  not object.minutes < 10 %} {{ object.minutes}}{% endif %}</a></th>
         <th>{{ object.team1Score}} - {{ object.team2Score}}</th>

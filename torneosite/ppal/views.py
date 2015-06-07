@@ -483,6 +483,116 @@ class ResultUpdate(LoginRequiredMixin, UpdateView):
         # only the creator can delete his own application
         return obj
 
+class OctavosUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'match_form.html'
+    login_url = '/login'
+    model = Match
+    form_class = MatchCuartosForm
+    success_url = reverse_lazy('index')
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            return HttpResponseRedirect(reverse(index))
+        else:
+            post_mutable = request.POST.copy()
+        # Now you can change values:
+            if(post_mutable['team2Score'] > post_mutable['team1Score']):
+                if post_mutable['octavos']>6:
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(cuartos=4)
+                elif post_mutable['octavos']>4:
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(cuartos=3)
+                elif post_mutable['octavos']>2:
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(cuartos=2)
+                else:
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(cuartos=1)                    
+            elif(post_mutable['team1Score'] > post_mutable['team2Score']):
+                if post_mutable['octavos']>6:
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(cuartos=4)
+                elif post_mutable['octavos']>4:
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(cuartos=3)
+                elif post_mutable['octavos']>2:
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(cuartos=2)
+                else:
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(cuartos=1)
+
+            #return HttpResponseRedirect(reverse(index))
+            return super(OctavosUpdate, self).post(post_mutable, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        obj = super(OctavosUpdate, self).get_object()
+        # only the creator can delete his own application
+        return obj
+
+class CuartosUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'match_form.html'
+    login_url = '/login'
+    model = Match
+    form_class = MatchSemisForm
+    success_url = reverse_lazy('index')
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            return HttpResponseRedirect(reverse(index))
+        else:
+            post_mutable = request.POST.copy()
+        # Now you can change values:
+            if(post_mutable['team2Score'] > post_mutable['team1Score']):
+                if post_mutable['cuartos']>2:
+                    print("S1  ")
+                    print(post_mutable['cuartos'])
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(semis=1)
+                else:
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(semis=2)
+                    print("S2  ")
+                    print(post_mutable['cuartos'])
+
+            elif(post_mutable['team1Score'] > post_mutable['team2Score']):
+                if(post_mutable['cuartos']>2):
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(semis=1)
+                else:
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(semis=2)
+
+            #return HttpResponseRedirect(reverse(index))
+            return super(CuartosUpdate, self).post(post_mutable, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        obj = super(CuartosUpdate, self).get_object()
+        # only the creator can delete his own application
+        return obj
+
+class FinalUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'match_form.html'
+    login_url = '/login'
+    model = Match
+    form_class = MatchFinalForm
+    success_url = reverse_lazy('index')
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            return HttpResponseRedirect(reverse(index))
+        else:
+            post_mutable = request.POST.copy()
+        # Now you can change values:
+            if(post_mutable['team2Score'] > post_mutable['team1Score']):
+                if post_mutable['semis']>2:
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(final=1)
+                else:
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(final=2)
+
+            elif(post_mutable['team1Score'] > post_mutable['team2Score']):
+                if(post_mutable['semis']>2):
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(final=1)
+                else:
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(final=2)
+
+            #return HttpResponseRedirect(reverse(index))
+            return super(FinalUpdate, self).post(post_mutable, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        obj = super(FinalUpdate, self).get_object()
+        # only the creator can delete his own application
+        return obj
+
 # def create_group(request):
 #     if request.method == 'POST':
 #         form = GroupForm(request.POST)

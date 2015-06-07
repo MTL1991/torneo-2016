@@ -92,3 +92,18 @@ class MatchResultForm(ModelForm):
     class Meta:
         model = Match
         exclude = ['years','place','fase','hora','minutes','octavos','cuartos','semis','final','group',]
+
+class MatchCuartosForm(ModelForm):
+    class Meta:
+        model = Match
+        exclude = ['years','place','fase','hora','minutes','cuartos','semis','final','group',]
+
+class MatchSemisForm(ModelForm):
+    class Meta:
+        model = Match
+        exclude = ['years','place','fase','hora','minutes','octavos','semis','final','group',]
+
+class MatchFinalForm(ModelForm):
+    class Meta:
+        model = Match
+        exclude = ['years','place','fase','hora','minutes','octavos','cuartos','final','group',]
