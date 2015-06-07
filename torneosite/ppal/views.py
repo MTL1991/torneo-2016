@@ -293,6 +293,26 @@ class TeamDefinitiveDelete(LoginRequiredMixin, DeleteView):
 class TeamDelete(TeamDefinitiveDelete):
     model = Team
 
+class TeamUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'team_form.html'
+    login_url = '/login'
+    model = Team
+    form_class = TeamForm
+    success_url = reverse_lazy('index')
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            
+            return HttpResponseRedirect(reverse(index))
+        else:
+            #return HttpResponseRedirect(reverse(index))
+            return super(TeamUpdate, self).post(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        obj = super(TeamUpdate, self).get_object()
+        # only the creator can delete his own application
+        return obj
+
 
 @login_required(login_url='/login')
 def create_player(request, pk):
@@ -369,8 +389,8 @@ def view_all_match(request):
         user = request.user
     except User.DoesNotExist:
         raise Http404()
-    match_list1 = Match.objects.filter(years=1).order_by('hora')
-    match_list2 = Match.objects.filter(years=2).order_by('hora')
+    match_list1 = Match.objects.filter(years=1).order_by('id')
+    match_list2 = Match.objects.filter(years=2).order_by('id')
     if request.user.is_anonymous():
         return render(request, 'match_all_view.html', {
         'match_list1': match_list1,
@@ -502,7 +522,7 @@ class EliminatoriaUpdate(LoginRequiredMixin, UpdateView):
 
 def group_view1(request, pk):
     team_group = Team.objects.filter(group=pk,years=1).order_by('-point')
-    group_matchs = Match.objects.filter(group=pk,years=1).order_by('hora')
+    group_matchs = Match.objects.filter(group=pk,years=1).order_by('id')
     try:
         user = request.user
     except User.DoesNotExist:
@@ -522,9 +542,23 @@ def group_view1(request, pk):
 
         })
 
+def group_view1_all(request):
+    return render(request, 'choose_group_sub9.html', {
+
+    })
+
+def group_view2_all(request):
+    return render(request, 'choose_group_sub12.html', {
+
+    })
+
+def select_years(request):
+    return render(request, 'choose_years.html', )
+
+
 def group_view2(request, pk):
     team_group = Team.objects.filter(group=pk,years=2).order_by('-point')
-    group_matchs = Match.objects.filter(group=pk,years=2).order_by('hora')
+    group_matchs = Match.objects.filter(group=pk,years=2).order_by('id')
     try:
         user = request.user
     except User.DoesNotExist:
@@ -551,11 +585,11 @@ def eliminatoria_view1(request):
     team_final = Team.objects.filter(years=1).order_by('semis')
     team_final_filter = filter(lambda x: x.final > 0, team_final)
 
-    match_cuartos = Match.objects.filter(years=1).order_by('cuartos')
+    match_cuartos = Match.objects.filter(years=1).order_by('id')
     match_cuartos_filter = filter(lambda x: x.cuartos > 0, match_cuartos)
-    match_semis = Match.objects.filter(years=1).order_by('hora')
+    match_semis = Match.objects.filter(years=1).order_by('id')
     match_semis_filter = filter(lambda x: x.semis > 0, match_semis)
-    match_final = Match.objects.filter(years=1).order_by('hora')
+    match_final = Match.objects.filter(years=1).order_by('id')
     match_final_filter = filter(lambda x: x.final > 0, match_final)    
     try:
         user = request.user
@@ -592,13 +626,13 @@ def eliminatoria_view2(request):
     team_final = Team.objects.filter(years=2).order_by('semis')
     team_final_filter = filter(lambda x: x.final > 0, team_final)
 
-    match_octavos = Match.objects.filter(years=2).order_by('hora')
+    match_octavos = Match.objects.filter(years=2).order_by('id')
     match_octavos_filter = filter(lambda x: x.octavos > 0, team_octavos)
-    match_cuartos = Match.objects.filter(years=2).order_by('hora')
+    match_cuartos = Match.objects.filter(years=2).order_by('id')
     match_cuartos_filter = filter(lambda x: x.cuartos > 0, match_cuartos)
-    match_semis = Match.objects.filter(years=2).order_by('hora')
+    match_semis = Match.objects.filter(years=2).order_by('id')
     match_semis_filter = filter(lambda x: x.semis > 0, match_semis)
-    match_final = Match.objects.filter(years=2).order_by('hora')
+    match_final = Match.objects.filter(years=2).order_by('id')
     match_final_filter = filter(lambda x: x.final > 0, match_final)    
     try:
         user = request.user
@@ -606,7 +640,6 @@ def eliminatoria_view2(request):
         raise Http404()
     if request.user.is_anonymous():
         return render(request, 'eliminatoria_sub12_view.html', {
-        'school': user.school,
         'octavos': team_octavos_filter,
         'cuartos': team_cuartos_filter,
         'semis': team_semis_filter,

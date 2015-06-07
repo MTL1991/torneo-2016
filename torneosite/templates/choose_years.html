@@ -1,0 +1,20 @@
+{% extends "_base.html" %}
+{% load staticfiles %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="row">
+<h2 style="position:relative; left: 30%;">¿CUAL ES TU CATEGORIA?</h2>
+</div>
+<div class="row">
+<div class="col-md-6">
+	<a id="select_sub9" class="btn btn-primary" style="width: 526px" href="{% url 'group_view1_all' %}">SUB 9</a>
+
+</div>
+<div class="col-md-6">
+	<a id="select_sub12" class="btn btn-primary" style="width: 526px" href="{% url 'group_view2_all' %}">SUB 12</a>
+
+</div>
+</div>
+</div>
+{% endblock %}

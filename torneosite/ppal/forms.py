@@ -11,6 +11,13 @@ class TeamForm(ModelForm):
         super(TeamForm, self).__init__(*args, **kwargs)
         self.fields['years'].label = "Categoria"
 
+class TeamForm(ModelForm):
+    class Meta:
+        model = Team
+        exclude = ['school','name','playersnumber', 'matchs','wins','draw','lose','goalf','goalc','point'] 
+    def __init__(self, *args, **kwargs):
+        super(TeamForm, self).__init__(*args, **kwargs)
+        self.fields['years'].label = "Categoria"
 
 class SchoolForm(ModelForm):
     password = CharField(widget=PasswordInput())
@@ -34,6 +41,7 @@ class SchoolForm(ModelForm):
         if commit:
             user.save()
         return user
+
 
 class UserForm(ModelForm):
     name = CharField(max_length=60, label="Nombre del Colegio",help_text='Tenga en cuenta que debera ser real o todos sus equipos se eliminaran')
@@ -79,35 +87,8 @@ class PlayerEditForm(ModelForm):
 class MatchForm(ModelForm):
     class Meta:
         model = Match
-        exclude = ['octavos','cuartos','semis','final','group','team1Score','team2Score',]
 
 class MatchResultForm(ModelForm):
     class Meta:
         model = Match
         exclude = ['years','place','fase','hora','minutes','octavos','cuartos','semis','final','group',]
-
-# class GroupForm(ModelForm):
-#     class Meta:
-#         model = Group
-
-# class AdvancedSearchForm(forms.Form):
-
-
-#     school = CharField(max_length=60, required=False)
-
-#     title = CharField(max_length=60, required=False)
-
-#     description = CharField(max_length=100, required=False)
-
-    
-#     def clean(self):
-#         cleaned_data = super(AdvancedSearchForm, self).clean()
-
-#     def __init__(self, *args, **kwargs):
-#         super(AdvancedSearchForm, self).__init__(*args, **kwargs)
-#         self.fields['title'].label = "Titulo"
-#         self.fields['description'].label = "Descripcion"
-
-#         self.fields['title'].help_text = 'Nombre de un equipo'
-#         self.fields['description'].help_text = 'Texto contenido en la descripcion de un Tubo'
-#        # self.fields['school'].help_text = 'Nombre completo o parcial de un Tuber'

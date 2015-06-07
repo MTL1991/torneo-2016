@@ -31,7 +31,7 @@
         {% else %}
            <tr>
         {% endif %}
-        <th>{{ object.name}}</th>
+        <th><a href="{% url 'update_team' pk=object.id%}">{{ object.name}}</th>
         <th>{{ object.matchs}}</th>
         <th>{{ object.wins}}</th>
         <th>{{ object.draw}}</th>

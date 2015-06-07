@@ -3,8 +3,8 @@
 {% block title %}{{ match }}{% endblock %}
 
 {% block content %}
-<p>{{ match.home }} vs {{ match.away }} </p>
-<p>Lugar:{{ match.place }}</p>
+<p>{{ match.local.name }} vs {{ match.away.name }} </p>
+<p>Pista:{{ match.place }}</p>
 <p>Hora: {{ match.hora }}  : {{ match.minutes }}</p>
 {% if match.team1Score %}
         <p>Resultado </p>
