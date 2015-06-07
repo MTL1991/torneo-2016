@@ -4,17 +4,18 @@
 
 {% block content %}
 <div class="row">
-<h2 style="position:relative; left: 30%;">¿CUAL ES TU CATEGORIA?</h2>
+<h2 style="position:relative; left: 15%;">¿CUAL ES TU CATEGORIA?</h2>
 </div>
+<table width="100%" >
+    <tr> <td> <a id="select_sub9" class="btn btn-primary" style="width: 200px" href="{% url 'group_view1_all' %}">SUB 9</a> </td> <td> <a id="select_sub12" class="btn btn-primary" style="width: 200px" href="{% url 'group_view2_all' %}">SUB 12</a></td> </tr>                            
+                          
+  </table>
 <div class="row">
-<div class="col-md-6">
-	<a id="select_sub9" class="btn btn-primary" style="width: 526px" href="{% url 'group_view1_all' %}">SUB 9</a>
+<div class="col-xs-12">
+	
 
 </div>
-<div class="col-md-6">
-	<a id="select_sub12" class="btn btn-primary" style="width: 526px" href="{% url 'group_view2_all' %}">SUB 12</a>
 
-</div>
 </div>
 </div>
 {% endblock %}
