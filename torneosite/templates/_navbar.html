@@ -29,7 +29,7 @@
         </ul>
       {% else %}
         <p class="navbar-text navbar-right">
-          <a class="navbar-link" href="{% url 'add_school' %}" id="register">Registrarse</a> /
+<!--           <a class="navbar-link" href="{% url 'add_school' %}" id="register">Registrarse</a> / -->
           <a class="navbar-link" href="{% url 'login_school' %}?next={{request.get_full_path|urlencode}}">Entrar</a>
         </p>
       {% endif %}
