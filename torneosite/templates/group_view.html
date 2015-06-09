@@ -68,9 +68,9 @@
            <tr>
         {% endif %}
         <th>{% if  school.superuser %}<a href="{% url 'update_result' pk=object.id%}">{% endif %}{% if  not school.superuser %}<a href="{% url 'match_view' pk=object.id%}">{% endif %}{{ object}}</th>
-        <th>{{ object.place}}</th>
+        <th><a href="{% url 'plano_view' %}">{{ object.place}}</th>
         <th>{{ object.hora}} : {% if  object.minutes < 10%} 0{{ object.minutes}}{% endif %}{% if  not object.minutes < 10 %} {{ object.minutes}}{% endif %}</a></th>
-        <th>{{ object.team1Score}} - {{ object.team2Score}}</th>
+        <th>{% if  object.team1Score > 0 %}{{ object.team1Score}} - {{ object.team2Score}}{% endif %}</th>
             </tr>
     {% endfor %}
         </tbody>

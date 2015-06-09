@@ -126,6 +126,10 @@ def index(request):
 
     })
 
+def plano_view(request):
+    return render(request, 'plano_view.html', {
+    })
+
 def index_all(request):
     school_list1 = Team.objects.filter(years=1).order_by('-last_editing_date')
     school_list2 = Team.objects.filter(years=2).order_by('-last_editing_date')
@@ -736,8 +740,8 @@ def eliminatoria_view2(request):
     team_final = Team.objects.filter(years=2).order_by('semis')
     team_final_filter = filter(lambda x: x.final > 0, team_final)
 
-    match_octavos = Match.objects.filter(years=2).order_by('id')
-    match_octavos_filter = filter(lambda x: x.octavos > 0, team_octavos)
+    match_octavos = Match.objects.filter(years=2).order_by('octavos')
+    match_octavos_filter = filter(lambda x: x.octavos > 0, match_octavos)
     match_cuartos = Match.objects.filter(years=2).order_by('id')
     match_cuartos_filter = filter(lambda x: x.cuartos > 0, match_cuartos)
     match_semis = Match.objects.filter(years=2).order_by('id')

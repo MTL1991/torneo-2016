@@ -10,6 +10,7 @@ from ppal.views import *
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^pdf/', some_view, name='pdf'),
+    url(r'^plano/',plano_view, name='plano_view'),
 )
 
 urlpatterns += patterns('',
