@@ -29,21 +29,24 @@
         {% include "_navbar.html" %}
     {% endblock header %}
 
-    <div class="container">
+    <div class="container" style="
+    margin-bottom: 100px;">
+      <img src='{{STATIC_URL}}images/Encabezado.jpg' width="100%">
         {% block content %}{% endblock %}
     </div>
 
     <p class="text-center">
         {% block footer %}
-            <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-  <div class="container">
+  <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+  <div class="container" >
     <!-- Brand and toggle get grouped for better mobile display -->
-    <a href="{% url 'us' %}" target="_blank"><img src='{{STATIC_URL}}images/Encabezado.jpg' width="100%" height="90"></a>
+    <div class="navbar-header">
+    <a href="{% url 'us' %}" target="_blank"><img src='{{STATIC_URL}}images/captacion.jpg' width="100%"></a>
+    </div><!-- /.navbar-collapse -->
   </div><!-- /.container -->
 </nav>
         {% endblock %}
     </div>
-
 
 </body>
 </html>
