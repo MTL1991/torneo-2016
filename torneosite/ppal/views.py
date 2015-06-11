@@ -393,8 +393,8 @@ def view_all_match(request):
         user = request.user
     except User.DoesNotExist:
         raise Http404()
-    match_list1 = Match.objects.filter(years=1,group__gt=0).order_by('id')
-    match_list2 = Match.objects.filter(years=2,group__gt=0).order_by('id')
+    match_list1 = Match.objects.filter(years=1,).order_by('hora','minutes','place')
+    match_list2 = Match.objects.filter(years=2,).order_by('hora','minutes','place')
     if request.user.is_anonymous():
         return render(request, 'match_all_view.html', {
         'match_list1': match_list1,
@@ -635,8 +635,8 @@ class EliminatoriaUpdate(LoginRequiredMixin, UpdateView):
         return obj
 
 def group_view1(request, pk):
-    team_group = Team.objects.filter(group=pk,years=1).order_by('-point')
-    group_matchs = Match.objects.filter(group=pk,years=1).order_by('id')
+    team_group = Team.objects.filter(group=pk,years=1).order_by('-point','-goalf','goalc')
+    group_matchs = Match.objects.filter(group=pk,years=1).order_by('hora','minutes','place')
     try:
         user = request.user
     except User.DoesNotExist:
@@ -671,8 +671,8 @@ def select_years(request):
 
 
 def group_view2(request, pk):
-    team_group = Team.objects.filter(group=pk,years=2).order_by('-point')
-    group_matchs = Match.objects.filter(group=pk,years=2).order_by('id')
+    team_group = Team.objects.filter(group=pk,years=2).order_by('-point','-goalf','goalc')
+    group_matchs = Match.objects.filter(group=pk,years=2).order_by('hora','minutes','place')
     try:
         user = request.user
     except User.DoesNotExist:
@@ -692,18 +692,18 @@ def group_view2(request, pk):
         })
 
 def eliminatoria_view1(request):
-    team_cuartos = Team.objects.filter(years=1).order_by('cuartos')
+    team_cuartos = Team.objects.filter(years=1).order_by('cuartos','group')
     team_cuartos_filter = filter(lambda x: x.cuartos > 0, team_cuartos)
-    team_semis = Team.objects.filter(years=1).order_by('semis')
+    team_semis = Team.objects.filter(years=1).order_by('semis','cuartos')
     team_semis_filter = filter(lambda x: x.semis > 0, team_semis)
     team_final = Team.objects.filter(years=1).order_by('semis')
     team_final_filter = filter(lambda x: x.final > 0, team_final)
 
-    match_cuartos = Match.objects.filter(years=1).order_by('id')
+    match_cuartos = Match.objects.filter(years=1).order_by('hora','minutes','place')
     match_cuartos_filter = filter(lambda x: x.cuartos > 0, match_cuartos)
-    match_semis = Match.objects.filter(years=1).order_by('id')
+    match_semis = Match.objects.filter(years=1).order_by('hora','minutes','place')
     match_semis_filter = filter(lambda x: x.semis > 0, match_semis)
-    match_final = Match.objects.filter(years=1).order_by('id')
+    match_final = Match.objects.filter(years=1).order_by('hora','minutes','place')
     match_final_filter = filter(lambda x: x.final > 0, match_final)    
     try:
         user = request.user
@@ -731,11 +731,11 @@ def eliminatoria_view1(request):
             })
 
 def eliminatoria_view2(request):
-    team_octavos = Team.objects.filter(years=2).order_by('octavos')
+    team_octavos = Team.objects.filter(years=2).order_by('octavos','point','group')
     team_octavos_filter = filter(lambda x: x.octavos > 0, team_octavos)
-    team_cuartos = Team.objects.filter(years=2).order_by('cuartos')
+    team_cuartos = Team.objects.filter(years=2).order_by('cuartos','octavos')
     team_cuartos_filter = filter(lambda x: x.cuartos > 0, team_cuartos)
-    team_semis = Team.objects.filter(years=2).order_by('semis')
+    team_semis = Team.objects.filter(years=2).order_by('semis','cuartos')
     team_semis_filter = filter(lambda x: x.semis > 0, team_semis)
     team_final = Team.objects.filter(years=2).order_by('semis')
     team_final_filter = filter(lambda x: x.final > 0, team_final)
