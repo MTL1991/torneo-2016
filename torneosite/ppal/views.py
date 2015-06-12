@@ -393,8 +393,8 @@ def view_all_match(request):
         user = request.user
     except User.DoesNotExist:
         raise Http404()
-    match_list1 = Match.objects.filter(years=1,).order_by('hora','minutes','place')
-    match_list2 = Match.objects.filter(years=2,).order_by('hora','minutes','place')
+    match_list1 = Match.objects.filter(years=1,group__gt=0).order_by('hora','minutes','place')
+    match_list2 = Match.objects.filter(years=2,group__gt=0).order_by('hora','minutes','place')
     if request.user.is_anonymous():
         return render(request, 'match_all_view.html', {
         'match_list1': match_list1,
@@ -699,11 +699,11 @@ def eliminatoria_view1(request):
     team_final = Team.objects.filter(years=1).order_by('semis')
     team_final_filter = filter(lambda x: x.final > 0, team_final)
 
-    match_cuartos = Match.objects.filter(years=1).order_by('hora','minutes','place')
+    match_cuartos = Match.objects.filter(years=1).order_by('hora','minutes','cuartos')
     match_cuartos_filter = filter(lambda x: x.cuartos > 0, match_cuartos)
-    match_semis = Match.objects.filter(years=1).order_by('hora','minutes','place')
+    match_semis = Match.objects.filter(years=1).order_by('hora','minutes','semis')
     match_semis_filter = filter(lambda x: x.semis > 0, match_semis)
-    match_final = Match.objects.filter(years=1).order_by('hora','minutes','place')
+    match_final = Match.objects.filter(years=1).order_by('hora','minutes')
     match_final_filter = filter(lambda x: x.final > 0, match_final)    
     try:
         user = request.user
@@ -740,13 +740,13 @@ def eliminatoria_view2(request):
     team_final = Team.objects.filter(years=2).order_by('semis')
     team_final_filter = filter(lambda x: x.final > 0, team_final)
 
-    match_octavos = Match.objects.filter(years=2).order_by('octavos')
+    match_octavos = Match.objects.filter(years=2).order_by('hora','minutes','octavos')
     match_octavos_filter = filter(lambda x: x.octavos > 0, match_octavos)
-    match_cuartos = Match.objects.filter(years=2).order_by('id')
+    match_cuartos = Match.objects.filter(years=2).order_by('hora','minutes','cuartos')
     match_cuartos_filter = filter(lambda x: x.cuartos > 0, match_cuartos)
-    match_semis = Match.objects.filter(years=2).order_by('id')
+    match_semis = Match.objects.filter(years=2).order_by('hora','minutes','semis')
     match_semis_filter = filter(lambda x: x.semis > 0, match_semis)
-    match_final = Match.objects.filter(years=2).order_by('id')
+    match_final = Match.objects.filter(years=2).order_by('hora','minutes',)
     match_final_filter = filter(lambda x: x.final > 0, match_final)    
     try:
         user = request.user
