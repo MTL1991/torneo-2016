@@ -15,7 +15,7 @@
     <td align="center" class="col-md-3">FINAL</td>
   </tr>
   <tr>
-    <td><div class="input-group" style="width: 265px;"><div class="form-control">{{cuartos.0.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_cuartos.0.team1Score > 0 %}{{match_cuartos.0.team1Score}}{% endif %}</span></span></div>
+    <td><div class="input-group" style="width: 265px;"><div class="form-control">{{cuartos.0.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_cuartos.0.team1Score > -1 %}{{match_cuartos.0.team1Score}}{% endif %}</span></span></div>
       <td></td>
       <td></td>
       <td></td>
@@ -24,12 +24,12 @@
   <tr>
     <td></td>
     <td style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
-   <td><div class="input-group" style="width: 265px;"><div class="form-control">{{semis.0.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_semis.0.team1Score > 0 %}{{match_semis.0.team1Score}}{% endif %}</span></span></div></td>
+   <td><div class="input-group" style="width: 265px;"><div class="form-control">{{semis.0.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_semis.0.team1Score > -1 %}{{match_semis.0.team1Score}}{% endif %}</span></span></div></td>
    <td></td>
    <td></td>
   </tr>
   <tr>
-    <td><div class="input-group" style="width: 265px;"><div class="form-control">{{cuartos.1.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_cuartos.0.team2Score > 0 %}{{match_cuartos.0.team2Score}}{% endif %}</span></span></div></td>
+    <td><div class="input-group" style="width: 265px;"><div class="form-control">{{cuartos.1.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_cuartos.0.team2Score > -1 %}{{match_cuartos.0.team2Score}}{% endif %}</span></span></div></td>
     <td></td>
     <td></td>
         <td rowspan="3" style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
@@ -39,10 +39,10 @@
   <td></td>
   <td></td>
   <td></td>
-  <td><div class="input-group" style="width: 265px;"><div class="form-control">{{final.0.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_final.0.team1Score > 0 %}{{match_final.0.team1Score}}{% endif %}</span></span></div></td>
+  <td><div class="input-group" style="width: 265px;"><div class="form-control">{{final.0.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_final.0.team1Score > -1 %}{{match_final.0.team1Score}}{% endif %}</span></span></div></td>
   </tr>
 <tr>
-    <td><div class="input-group" style="width: 265px;"><div class="form-control">{{cuartos.2.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_cuartos.1.team1Score > 0 %}{{match_cuartos.1.team1Score}}{% endif %}</span></span></div>
+    <td><div class="input-group" style="width: 265px;"><div class="form-control">{{cuartos.2.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_cuartos.1.team1Score > -1 %}{{match_cuartos.1.team1Score}}{% endif %}</span></span></div>
           </td>
   <td></td>
   <td></td>
@@ -52,12 +52,12 @@
   <tr>
     <td></td>
     <td style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
-   <td><div class="input-group" style="width: 265px;"><div class="form-control">{{semis.1.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_semis.0.team2Score > 0 %}{{match_semis.0.team2Score}}{% endif %}</span></span></div></td>
+   <td><div class="input-group" style="width: 265px;"><div class="form-control">{{semis.1.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_semis.0.team2Score > -1 %}{{match_semis.0.team2Score}}{% endif %}</span></span></div></td>
    <td></td>
    <td></td>
   </tr>
   <tr>
-    <td><div class="input-group" style="width: 265px;"><div class="form-control">{{cuartos.3.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_cuartos.1.team2Score > 0 %}{{match_cuartos.1.team2Score}}{% endif %}</span></span></div></td>
+    <td><div class="input-group" style="width: 265px;"><div class="form-control">{{cuartos.3.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_cuartos.1.team2Score > -1 %}{{match_cuartos.1.team2Score}}{% endif %}</span></span></div></td>
     <td></td>
     <td></td>
     <td></td>
@@ -65,7 +65,7 @@
   </tr>
 
   <tr>
-    <td><div class="input-group" style="width: 265px;"><div class="form-control">{{cuartos.4.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_cuartos.2.team1Score > 0 %}{{match_cuartos.2.team1Score}}{% endif %}</span></span></div>
+    <td><div class="input-group" style="width: 265px;"><div class="form-control">{{cuartos.4.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_cuartos.2.team1Score > -1 %}{{match_cuartos.2.team1Score}}{% endif %}</span></span></div>
       <td></td>
       <td></td>
       <td></td>
@@ -74,12 +74,12 @@
   <tr>
     <td></td>
     <td style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
-   <td><div class="input-group" style="width: 265px;"><div class="form-control">{{semis.2.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_semis.1.team1Score > 0 %}{{match_semis.1.team1Score}}{% endif %}</span></span></div></td>
+   <td><div class="input-group" style="width: 265px;"><div class="form-control">{{semis.2.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_semis.1.team1Score > -1 %}{{match_semis.1.team1Score}}{% endif %}</span></span></div></td>
    <td></td>
    <td></td>
   </tr>
   <tr>
-    <td><div class="input-group" style="width: 265px;"><div class="form-control">{{cuartos.5.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_cuartos.2.team2Score > 0 %}{{match_cuartos.2.team2Score}}{% endif %}</span></span></div></td>
+    <td><div class="input-group" style="width: 265px;"><div class="form-control">{{cuartos.5.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_cuartos.2.team2Score > -1 %}{{match_cuartos.2.team2Score}}{% endif %}</span></span></div></td>
     <td></td>
     <td></td>
         <td rowspan="3" style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
@@ -90,10 +90,10 @@
   <td></td>
   <td></td>
 
-  <td><div class="input-group" style="width: 265px;"><div class="form-control">{{final.1.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  omatch_final.1.team2Score > 0 %}{{match_final.1.team2Score}}{% endif %}</span></span></div></td>
+  <td><div class="input-group" style="width: 265px;"><div class="form-control">{{final.1.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  omatch_final.1.team2Score > -1 %}{{match_final.1.team2Score}}{% endif %}</span></span></div></td>
   </tr>
 <tr>
-    <td><div class="input-group" style="width: 265px;"><div class="form-control">{{cuartos.6.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_cuartos.3.team1Score > 0 %}{{match_cuartos.3.team1Score}}{% endif %}</span></span></div>
+    <td><div class="input-group" style="width: 265px;"><div class="form-control">{{cuartos.6.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_cuartos.3.team1Score > -1 %}{{match_cuartos.3.team1Score}}{% endif %}</span></span></div>
           </td>
   <td></td>
   <td></td>
@@ -103,12 +103,12 @@
   <tr>
     <td></td>
     <td style="border-width: 2px 2px 2px 0px; border-style:solid;border-color:#777;"></td>
-   <td><div class="input-group" style="width: 265px;"><div class="form-control">{{semis.3.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_semis.1.team2Score > 0 %}{{match_semis.1.team2Score}}{% endif %}</span></span></div></td>
+   <td><div class="input-group" style="width: 265px;"><div class="form-control">{{semis.3.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_semis.1.team2Score > -1 %}{{match_semis.1.team2Score}}{% endif %}</span></span></div></td>
    <td></td>
    <td></td>
   </tr>
   <tr>
-    <td><div class="input-group" style="width: 265px;"><div class="form-control">{{cuartos.7.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_cuartos.3.team2Score > 0 %}{{match_cuartos.3.team2Score}}{% endif %}</span></span></div></td>
+    <td><div class="input-group" style="width: 265px;"><div class="form-control">{{cuartos.7.name}}</div><span class="input-group-addon"><span class="badge pull-right">{% if  match_cuartos.3.team2Score > -1 %}{{match_cuartos.3.team2Score}}{% endif %}</span></span></div></td>
     <td></td>
     <td></td>
     <td></td>
@@ -141,7 +141,7 @@
         <th>{% if  school.superuser %}<a href="{% url 'update_cuartos' pk=object.id%}">{% endif %}{% if  not school.superuser %}<a href="{% url 'match_view' pk=object.id%}">{% endif %}{%if object.local %} {{ object}}{% endif %}</th>
         <th><a href="{% url 'plano_view' %}">{{ object.place}}</th>
         <th>{{ object.hora}} : {% if  object.minutes < 10%} 0{{ object.minutes}}{% endif %}{% if  not object.minutes < 10 %} {{ object.minutes}}{% endif %}</a></th>
-        <th>{% if  object.team1Score > 0 %}{{ object.team1Score}} - {{ object.team2Score}}{% endif %}</th>
+        <th>{% if  object.team1Score > -1 %}{{ object.team1Score}} - {{ object.team2Score}}{% endif %}</th>
     {% endfor %}
         </tbody>
   </table>
@@ -171,7 +171,7 @@
         <th>{% if  school.superuser %}<a href="{% url 'update_semis' pk=object.id%}">{% endif %}{% if  not school.superuser %}<a href="{% url 'match_view' pk=object.id%}">{% endif %}{%if object.local %} {{ object}}{% endif %}</th>
         <th><a href="{% url 'plano_view' %}">{{ object.place}}</th>
         <th>{{ object.hora}} : {% if  object.minutes < 10%} 0{{ object.minutes}}{% endif %}{% if  not object.minutes < 10 %} {{ object.minutes}}{% endif %}</a></th>
-        <th>{% if  object.team1Score > 0 %}{{ object.team1Score}} - {{ object.team2Score}}{% endif %}</th>
+        <th>{% if  object.team1Score > -1 %}{{ object.team1Score}} - {{ object.team2Score}}{% endif %}</th>
     {% endfor %}
         </tbody>
   </table>
@@ -201,7 +201,7 @@
         <th>{% if  school.superuser %}<a href="{% url 'update_result' pk=object.id%}">{% endif %}{% if  not school.superuser %}<a href="{% url 'match_view' pk=object.id%}">{% endif %}{%if object.local %} {{ object}}{% endif %}</th>
         <th><a href="{% url 'plano_view' %}">{{ object.place}}</th>
         <th>{{ object.hora}} : {% if  object.minutes < 10%} 0{{ object.minutes}}{% endif %}{% if  not object.minutes < 10 %} {{ object.minutes}}{% endif %}</a></th>
-        <th>{% if  object.team1Score > 0 %}{{ object.team1Score}} - {{ object.team2Score}}{% endif %}</th>
+        <th>{% if  object.team1Score > -1 %}{{ object.team1Score}} - {{ object.team2Score}}{% endif %}</th>
     {% endfor %}
         </tbody>
   </table>

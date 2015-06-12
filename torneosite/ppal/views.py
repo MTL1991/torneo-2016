@@ -393,8 +393,8 @@ def view_all_match(request):
         user = request.user
     except User.DoesNotExist:
         raise Http404()
-    match_list1 = Match.objects.filter(years=1,group__gt=0).order_by('hora','minutes','place')
-    match_list2 = Match.objects.filter(years=2,group__gt=0).order_by('hora','minutes','place')
+    match_list1 = Match.objects.filter(years=1,).order_by('hora','minutes','place')
+    match_list2 = Match.objects.filter(years=2,).order_by('hora','minutes','place')
     if request.user.is_anonymous():
         return render(request, 'match_all_view.html', {
         'match_list1': match_list1,
