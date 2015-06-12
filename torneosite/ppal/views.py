@@ -449,36 +449,36 @@ class ResultUpdate(LoginRequiredMixin, UpdateView):
             post_mutable = request.POST.copy()
         # Now you can change values:
             if(post_mutable['team2Score'] > post_mutable['team1Score']):
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(matchs=Team.objects.get(id=post_mutable['local']).matchs+1)
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(lose=Team.objects.get(id=post_mutable['local']).lose+1)
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(goalc=Team.objects.get(id=post_mutable['local']).goalc+int(post_mutable['team2Score']))
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(goalf=Team.objects.get(id=post_mutable['local']).goalf+int(post_mutable['team1Score']))
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(matchs=Team.objects.get(id=post_mutable['away']).matchs+1)
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(wins=Team.objects.get(id=post_mutable['away']).wins+1)
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(point=Team.objects.get(id=post_mutable['away']).point+3)
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(goalc=Team.objects.get(id=post_mutable['away']).goalc+int(post_mutable['team1Score']))
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(goalf=Team.objects.get(id=post_mutable['away']).goalf+int(post_mutable['team2Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(matchs=Team.objects.get(id=post_mutable['local']).matchs+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(lose=Team.objects.get(id=post_mutable['local']).lose+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(goalc=Team.objects.get(id=post_mutable['local']).goalc+int(post_mutable['team2Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(goalf=Team.objects.get(id=post_mutable['local']).goalf+int(post_mutable['team1Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(matchs=Team.objects.get(id=post_mutable['away']).matchs+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(wins=Team.objects.get(id=post_mutable['away']).wins+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(point=Team.objects.get(id=post_mutable['away']).point+3)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(goalc=Team.objects.get(id=post_mutable['away']).goalc+int(post_mutable['team1Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(goalf=Team.objects.get(id=post_mutable['away']).goalf+int(post_mutable['team2Score']))
             elif(post_mutable['team1Score'] > post_mutable['team2Score']):
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(matchs=Team.objects.get(id=post_mutable['away']).matchs+1)
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(lose=Team.objects.get(id=post_mutable['away']).lose+1)
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(goalc=Team.objects.get(id=post_mutable['away']).goalc+int(post_mutable['team2Score']))
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(goalf=Team.objects.get(id=post_mutable['away']).goalf+int(post_mutable['team1Score']))
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(matchs=Team.objects.get(id=post_mutable['local']).matchs+1)
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(wins=Team.objects.get(id=post_mutable['local']).wins+1)
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(point=Team.objects.get(id=post_mutable['local']).point+3)
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(goalc=Team.objects.get(id=post_mutable['local']).goalc+int(post_mutable['team1Score']))
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(goalf=Team.objects.get(id=post_mutable['local']).goalf+int(post_mutable['team2Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(matchs=Team.objects.get(id=post_mutable['away']).matchs+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(lose=Team.objects.get(id=post_mutable['away']).lose+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(goalc=Team.objects.get(id=post_mutable['away']).goalc+int(post_mutable['team2Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(goalf=Team.objects.get(id=post_mutable['away']).goalf+int(post_mutable['team1Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(matchs=Team.objects.get(id=post_mutable['local']).matchs+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(wins=Team.objects.get(id=post_mutable['local']).wins+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(point=Team.objects.get(id=post_mutable['local']).point+3)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(goalc=Team.objects.get(id=post_mutable['local']).goalc+int(post_mutable['team1Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(goalf=Team.objects.get(id=post_mutable['local']).goalf+int(post_mutable['team2Score']))
             else:
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(matchs=Team.objects.get(id=post_mutable['away']).matchs+1)
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(draw=Team.objects.get(id=post_mutable['away']).draw+1)
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(point=Team.objects.get(id=post_mutable['away']).point+1)
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(goalc=Team.objects.get(id=post_mutable['away']).goalc+int(post_mutable['team2Score']))
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(goalf=Team.objects.get(id=post_mutable['away']).goalf+int(post_mutable['team1Score']))
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(matchs=Team.objects.get(id=post_mutable['local']).matchs+1)
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(draw=Team.objects.get(id=post_mutable['local']).draw+1)
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(point=Team.objects.get(id=post_mutable['local']).point+1)
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(goalc=Team.objects.get(id=post_mutable['local']).goalc+int(post_mutable['team1Score']))
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(goalf=Team.objects.get(id=post_mutable['local']).goalf+int(post_mutable['team2Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(matchs=Team.objects.get(id=post_mutable['away']).matchs+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(draw=Team.objects.get(id=post_mutable['away']).draw+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(point=Team.objects.get(id=post_mutable['away']).point+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(goalc=Team.objects.get(id=post_mutable['away']).goalc+int(post_mutable['team2Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(goalf=Team.objects.get(id=post_mutable['away']).goalf+int(post_mutable['team1Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(matchs=Team.objects.get(id=post_mutable['local']).matchs+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(draw=Team.objects.get(id=post_mutable['local']).draw+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(point=Team.objects.get(id=post_mutable['local']).point+1)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(goalc=Team.objects.get(id=post_mutable['local']).goalc+int(post_mutable['team1Score']))
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(goalf=Team.objects.get(id=post_mutable['local']).goalf+int(post_mutable['team2Score']))
             #return HttpResponseRedirect(reverse(index))
             return super(ResultUpdate, self).post(post_mutable, *args, **kwargs)
 
@@ -502,22 +502,22 @@ class OctavosUpdate(LoginRequiredMixin, UpdateView):
         # Now you can change values:
             if(post_mutable['team2Score'] > post_mutable['team1Score']):
                 if post_mutable['octavos']>6:
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(cuartos=4)
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(cuartos=4)
                 elif post_mutable['octavos']>4:
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(cuartos=3)
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(cuartos=3)
                 elif post_mutable['octavos']>2:
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(cuartos=2)
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(cuartos=2)
                 else:
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(cuartos=1)                    
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(cuartos=1)                    
             elif(post_mutable['team1Score'] > post_mutable['team2Score']):
                 if post_mutable['octavos']>6:
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(cuartos=4)
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(cuartos=4)
                 elif post_mutable['octavos']>4:
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(cuartos=3)
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(cuartos=3)
                 elif post_mutable['octavos']>2:
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(cuartos=2)
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(cuartos=2)
                 else:
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(cuartos=1)
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(cuartos=1)
 
             #return HttpResponseRedirect(reverse(index))
             return super(OctavosUpdate, self).post(post_mutable, *args, **kwargs)
@@ -544,17 +544,17 @@ class CuartosUpdate(LoginRequiredMixin, UpdateView):
                 if post_mutable['cuartos']>2:
                     print("S1  ")
                     print(post_mutable['cuartos'])
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(semis=1)
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(semis=1)
                 else:
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(semis=2)
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(semis=2)
                     print("S2  ")
                     print(post_mutable['cuartos'])
 
             elif(post_mutable['team1Score'] > post_mutable['team2Score']):
                 if(post_mutable['cuartos']>2):
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(semis=1)
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(semis=1)
                 else:
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(semis=2)
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(semis=2)
 
             #return HttpResponseRedirect(reverse(index))
             return super(CuartosUpdate, self).post(post_mutable, *args, **kwargs)
@@ -579,15 +579,15 @@ class FinalUpdate(LoginRequiredMixin, UpdateView):
         # Now you can change values:
             if(post_mutable['team2Score'] > post_mutable['team1Score']):
                 if post_mutable['semis']>2:
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(final=1)
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(final=1)
                 else:
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(final=2)
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(final=2)
 
             elif(post_mutable['team1Score'] > post_mutable['team2Score']):
                 if(post_mutable['semis']>2):
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(final=1)
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(final=1)
                 else:
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(final=2)
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(final=2)
 
             #return HttpResponseRedirect(reverse(index))
             return super(FinalUpdate, self).post(post_mutable, *args, **kwargs)
@@ -623,9 +623,9 @@ class EliminatoriaUpdate(LoginRequiredMixin, UpdateView):
             post_mutable = request.POST.copy()
         # Now you can change values:
             if(post_mutable['team2Score'] > post_mutable['team1Score']):
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name).update(cuartos=2)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(cuartos=2)
             else:
-                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name).update(cuartos=2)
+                team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(cuartos=2)
             #return HttpResponseRedirect(reverse(index))
             return super(ResultUpdate, self).post(post_mutable, *args, **kwargs)
 
