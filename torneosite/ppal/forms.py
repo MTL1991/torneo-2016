@@ -14,7 +14,7 @@ class TeamForm(ModelForm):
 class TeamForm(ModelForm):
     class Meta:
         model = Team
-        exclude = ['school','name','playersnumber', 'matchs','wins','draw','lose','goalf','goalc','point'] 
+        exclude = ['school','name','playersnumber', 'matchs','wins','draw','lose','point'] 
     def __init__(self, *args, **kwargs):
         super(TeamForm, self).__init__(*args, **kwargs)
         self.fields['years'].label = "Categoria"
