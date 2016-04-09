@@ -337,7 +337,9 @@ def create_player(request, pk):
                 return HttpResponseRedirect(reverse('add_player', kwargs={'pk':pk}))
         else:
             form = PlayerEditForm()
-        return render(request, 'player_form.html', {'form': form})
+        team = Team.objects.get(id=pk)
+        player_list = Player.objects.filter(team= team,)    
+        return render(request, 'player_form.html', {'form': form, 'player_list':player_list})
     else:
         raise Http404
 

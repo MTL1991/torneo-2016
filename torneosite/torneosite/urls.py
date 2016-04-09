@@ -14,7 +14,7 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('',
-    url(r'^$', select_years, name='choose_years'),
+    url(r'^$', index, name='index'),
     url(r'^teams/', index, name='index'),
     url(r'^sub9/groups$', group_view1_all, name='group_view1_all'),
     url(r'^sub9/group/(?P<pk>\d+)/$', group_view1, name='group_view_sub9'),
