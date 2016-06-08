@@ -1,0 +1,75 @@
+{% extends "_base.html" %}
+
+{% block title %}{{ team.title }}{% endblock %}
+
+{% block content %}
+
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">PARTIDO DE CATEGORIA SUB 9 {% if  school.superuser %}<a id="create_match_btn" class="btn btn-primary" href="{% url 'add_match' %}">Agregar partido</a>{% endif %}</div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+    <tr>
+        <th>Partido</th>
+        <th>Campo</th>
+        <th>Hora</th>
+        <th>Resultado</th>
+    </tr>
+    </thead>
+
+    {% for object in match_list1 %}
+        {% if forloop.first %}
+            <tbody><tr>
+        {% else %}
+           <tr>
+        {% endif %}
+         <th>{% if  school.superuser %}<a href="{% url 'update_result' pk=object.id%}">{% endif %}{% if  not school.superuser %}<a href="{% url 'match_view' pk=object.id%}">{% endif %}{%if object.local %} {{ object}}{% endif %}</th>
+        <th><a href="{% url 'plano_view' %}">{{ object.place}}</th>
+        <th>{{ object.hora}} : {% if  object.minutes < 10%} 0{{ object.minutes}}{% endif %}{% if  not object.minutes < 10 %} {{ object.minutes}}{% endif %}</a></th>
+        <th>{% if  object.team1Score > -1 %}{{ object.team1Score}} - {{ object.team2Score}}{% endif %}</th>
+            </tr>
+    {% endfor %}
+        </tbody>
+  </table>
+</div>
+        
+
+
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">PARTIDO DE CATEGORIA SUB 12{%if school.superuser %}<a id="create_match_btn" class="btn btn-primary" href="{% url 'add_match' %}">Agregar partido</a>{% endif %}</div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+    <tr>
+        <th>Partido</th>
+        <th>Campo</th>
+        <th>Hora</th>
+        <th>Resultado</th>
+    </tr>
+    </thead>
+
+    {% for object in match_list2 %}
+        {% if forloop.first %}
+            <tbody><tr>
+        {% else %}
+           <tr>
+        {% endif %}
+        <th>{% if  school.superuser %}<a href="{% url 'update_result' pk=object.id%}">{% endif %}{% if  not school.superuser %}<a href="{% url 'match_view' pk=object.id%}">{% endif %}{%if object.local %} {{ object}}{% endif %}</th>
+        <th><a href="{% url 'plano_view' %}">{{ object.place}}</th>
+        <th>{{ object.hora}} : {% if  object.minutes < 10%} 0{{ object.minutes}}{% endif %}{% if  not object.minutes < 10 %} {{ object.minutes}}{% endif %}</a></th>
+        <th>{% if  object.team1Score > -1 %}{{ object.team1Score}} - {{ object.team2Score}}{% endif %}</th>
+            </tr>
+
+    {% endfor %}
+        </tbody>
+  </table>
+</div>
+
+
+{% endblock %}
