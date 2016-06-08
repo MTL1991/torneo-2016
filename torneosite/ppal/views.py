@@ -410,6 +410,66 @@ def view_all_match(request):
 
     })
 
+def view_pabellon_match(request):
+    try:
+        user = request.user
+    except User.DoesNotExist:
+        raise Http404()
+    match_list1 = Match.objects.filter(place=1,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=2,years=1,).order_by('hora','minutes','place')||Match.objects.filter(place=3,years=1,).order_by('hora','minutes','place')
+    match_list2 = Match.objects.filter(place=1,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=2,years=2,).order_by('hora','minutes','place')||Match.objects.filter(place=3,years=2,).order_by('hora','minutes','place')
+    if request.user.is_anonymous():
+        return render(request, 'match_all_view.html', {
+        'match_list1': match_list1,
+        'match_list2': match_list2,
+
+    })
+    return render(request, 'match_all_view.html', {
+        'school':user.school,
+        'match_list1': match_list1,
+        'match_list2': match_list2,
+
+    })
+
+def view_baloncesto_match(request):
+    try:
+        user = request.user
+    except User.DoesNotExist:
+        raise Http404()
+    match_list1 = Match.objects.filter(place=4,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=5,years=1,).order_by('hora','minutes','place')||Match.objects.filter(place=6,years=1,).order_by('hora','minutes','place')
+    match_list2 = Match.objects.filter(place=4,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=5,years=2,).order_by('hora','minutes','place')||Match.objects.filter(place=6,years=2,).order_by('hora','minutes','place')
+    if request.user.is_anonymous():
+        return render(request, 'match_all_view.html', {
+        'match_list1': match_list1,
+        'match_list2': match_list2,
+
+    })
+    return render(request, 'match_all_view.html', {
+        'school':user.school,
+        'match_list1': match_list1,
+        'match_list2': match_list2,
+
+    })
+
+def view_sala_match(request):
+    try:
+        user = request.user
+    except User.DoesNotExist:
+        raise Http404()
+    match_list1 = Match.objects.filter(place=7,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=8,years=1,).order_by('hora','minutes','place')
+    match_list2 = Match.objects.filter(place=7,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=8,years=2,).order_by('hora','minutes','place')
+    if request.user.is_anonymous():
+        return render(request, 'match_all_view.html', {
+        'match_list1': match_list1,
+        'match_list2': match_list2,
+
+    })
+    return render(request, 'match_all_view.html', {
+        'school':user.school,
+        'match_list1': match_list1,
+        'match_list2': match_list2,
+
+    })
+
 def match_view(request, pk):
     match = Match.objects.get(id=pk)
     return render(request, 'match_view.html', {
