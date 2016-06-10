@@ -1,0 +1,8 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<p> <a id="view_pabellon" style="width: 400px" class="btn btn-primary" href="{% url 'view_pabellon_match'  %}">PABELLON</a></p>
+<p> <a id="view_baloncesto" style="width: 400px" class="btn btn-primary" href="{% url 'view_baloncesto_match' %}">BALONCESTO</a></p>
+<p> <a id="view_sala" style="width: 400px" class="btn btn-primary" href="{% url 'view_sala_match' %}">FUTBOL SALA</a></p>
+
+{% endblock %}
