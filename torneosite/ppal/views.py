@@ -117,6 +117,16 @@ def some_view(request, pk):
     p.save()
     return response
 
+def index(request):
+
+    school_list1 = Team.objects.filter(years=1).order_by('-last_editing_date')[:5]
+    school_list2 = Team.objects.filter(years=2).order_by('-last_editing_date')[:5]
+    return render(request, 'index.html', {
+        'school_list_p': school_list1,
+        'school_list_m': school_list2,
+
+    })
+
 def teams(request):
 
     school_list1 = Team.objects.filter(years=1).order_by('-last_editing_date')[:5]
@@ -127,8 +137,8 @@ def teams(request):
 
     })
 
-def index(request):
-    return render(request, 'index_referee.html', )
+# def index(request):
+#     return render(request, 'index_referee.html', )
 
 def plano_view(request):
     return render(request, 'plano_view.html', {

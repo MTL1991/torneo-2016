@@ -6,18 +6,18 @@ from ppal.models import *
 class TeamForm(ModelForm):
     class Meta:
         model = Team
-        exclude = ['school','name','playersnumber', 'octavos','cuartos','semis','final','matchs','wins','draw','lose','goalf','goalc','point'] 
+        exclude = ['school','name','playersnumber','group', 'octavos','cuartos','semis','final','matchs','wins','draw','lose','goalf','goalc','point'] 
     def __init__(self, *args, **kwargs):
         super(TeamForm, self).__init__(*args, **kwargs)
         self.fields['years'].label = "Categoria"
 
-class TeamForm(ModelForm):
-    class Meta:
-        model = Team
-        exclude = ['school','name','playersnumber', 'matchs','wins','draw','lose','point'] 
-    def __init__(self, *args, **kwargs):
-        super(TeamForm, self).__init__(*args, **kwargs)
-        self.fields['years'].label = "Categoria"
+# class TeamForm(ModelForm):
+#     class Meta:
+#         model = Team
+#         exclude = ['school','name','playersnumber', 'matchs','wins','draw','lose','point'] 
+#     def __init__(self, *args, **kwargs):
+#         super(TeamForm, self).__init__(*args, **kwargs)
+#         self.fields['years'].label = "Categoria"
 
 class SchoolForm(ModelForm):
     password = CharField(widget=PasswordInput())
