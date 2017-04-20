@@ -19,6 +19,5 @@ pytz==2014.7
 reportlab==3.1.44
 selenium==2.42.1
 simplejson==3.6.3
-six==1.7.3
 static3==0.5.1
 wsgiref==0.1.2
