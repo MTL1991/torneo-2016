@@ -54,7 +54,7 @@ def some_view(request, pk):
     #team headboards
     p.setFillColorRGB(0,0,0.77)
     p.grid([uancho,9*uancho],[9.5*ulargo,9.25*ulargo])
-    p.drawString(2.5*uancho ,9.25*ulargo+nameOffsetY,"II TORNEO INTERCOLEGIOS CIUDAD DE LEGANES")
+    p.drawString(2.5*uancho ,9.25*ulargo+nameOffsetY,"IV TORNEO INTERCOLEGIOS CIUDAD DE LEGANES")
     p.drawString(3.5*uancho ,9*ulargo+nameOffsetY,"Nombre del equipo")
     p.drawString(7.6*uancho ,9*ulargo+nameOffsetY,"Categoria")
     #teams' name
