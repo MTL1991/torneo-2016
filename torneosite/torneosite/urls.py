@@ -57,5 +57,5 @@ urlpatterns += patterns('',
     url(r'^group/sub12/(?P<pk>\d+)/$', group_view2, name='group_view_sub12'),
     url(r'^eliminatoria/sub9', eliminatoria_view1, name='eliminatoria_view_sub9'),
     url(r'^eliminatoria/sub12', eliminatoria_view2, name='eliminatoria_view_sub12'),
-    url(r'^group/add$', create_group, name='create_group'),
+    #url(r'^group/add$', create_group, name='create_group'),
 )
