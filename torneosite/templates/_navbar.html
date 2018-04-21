@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/">Página de inicio</a>
-      <a class="navbar-brand" href="{% url 'view_all_match' %}">Calendario</a>
+<!--       <a class="navbar-brand" href="{% url 'view_all_match' %}">Calendario</a> -->
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -29,8 +29,8 @@
         </ul>
       {% else %}
         <p class="navbar-text navbar-right">
-<!--           <a class="navbar-link" href="{% url 'add_school' %}" id="register">Registrarse</a> 
- -->          <a class="navbar-link" href="{% url 'login_school' %}?next={{request.get_full_path|urlencode}}">Entrar</a>
+          <a class="navbar-link" href="{% url 'add_school' %}" id="register">Registrarse</a> 
+          <a class="navbar-link" href="{% url 'login_school' %}?next={{request.get_full_path|urlencode}}">Entrar</a>
         </p>
       {% endif %}
       <p class="navbar-text navbar-right">
