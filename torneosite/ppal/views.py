@@ -117,15 +117,24 @@ def some_view(request, pk):
     p.save()
     return response
 
-# def index(request):
+def select_years(request):
+    school_list1 = Team.objects.filter(years=1).order_by('-last_editing_date')[:5]
+    school_list2 = Team.objects.filter(years=2).order_by('-last_editing_date')[:5]
+    return render(request, 'index.html', {
+        'school_list_p': school_list1,
+        'school_list_m': school_list2,
 
-#     school_list1 = Team.objects.filter(years=1).order_by('-last_editing_date')[:5]
-#     school_list2 = Team.objects.filter(years=2).order_by('-last_editing_date')[:5]
-#     return render(request, 'index.html', {
-#         'school_list_p': school_list1,
-#         'school_list_m': school_list2,
+    })
 
-#     })
+def index(request):
+
+    school_list1 = Team.objects.filter(years=1).order_by('-last_editing_date')[:5]
+    school_list2 = Team.objects.filter(years=2).order_by('-last_editing_date')[:5]
+    return render(request, 'index.html', {
+        'school_list_p': school_list1,
+        'school_list_m': school_list2,
+
+    })
 
 def teams(request):
 
@@ -742,8 +751,7 @@ def group_view2_all(request):
 
     })
 
-def select_years(request):
-    return render(request, 'choose_years.html', )
+
 
 
 def group_view2(request, pk):
