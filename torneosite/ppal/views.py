@@ -768,6 +768,8 @@ def group_view2(request, pk):
         })
 
 def eliminatoria_view1(request):
+    team_octavos = Team.objects.filter(years=1).order_by('octavos','point','group')
+    team_octavos_filter = filter(lambda x: x.octavos > 0, team_octavos)
     team_cuartos = Team.objects.filter(years=1).order_by('cuartos','group')
     team_cuartos_filter = filter(lambda x: x.cuartos > 0, team_cuartos)
     team_semis = Team.objects.filter(years=1).order_by('semis','cuartos')
@@ -775,6 +777,8 @@ def eliminatoria_view1(request):
     team_final = Team.objects.filter(years=1).order_by('semis')
     team_final_filter = filter(lambda x: x.final > 0, team_final)
 
+    match_octavos = Match.objects.filter(years=1).order_by('hora','minutes','octavos')
+    match_octavos_filter = filter(lambda x: x.octavos > 0, match_octavos)
     match_cuartos = Match.objects.filter(years=1).order_by('hora','minutes','cuartos')
     match_cuartos_filter = filter(lambda x: x.cuartos > 0, match_cuartos)
     match_semis = Match.objects.filter(years=1).order_by('hora','minutes','semis')
@@ -787,6 +791,7 @@ def eliminatoria_view1(request):
         raise Http404()
     if request.user.is_anonymous():
         return render(request, 'eliminatoria_view_sub9.html', {
+            'octavos': team_octavos_filter,
             'cuartos': team_cuartos_filter,
             'semis': team_semis_filter,
             'final': team_final_filter,
@@ -797,6 +802,7 @@ def eliminatoria_view1(request):
             })
     return render(request, 'eliminatoria_view_sub9.html', {
             'school': user.school,
+            'octavos': team_octavos_filter,
             'cuartos': team_cuartos_filter,
             'semis': team_semis_filter,
             'final': team_final_filter,
