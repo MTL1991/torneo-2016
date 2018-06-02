@@ -27,7 +27,7 @@ urlpatterns += patterns('',
     url(r'^login/$', school_login, name='login_school'),
     url(r'^accounts/login/$', school_login, name='login_school'),
     url(r'^logout/$', school_logout, name='logout_school'),
-    #url(r'^school/create/$', create_school, name='add_school'),    
+    url(r'^school/create/$', create_school, name='add_school'),    
     url(r'^school/profile/(\d+)/$', school_view, name='profile_school'),
 )
 urlpatterns += patterns('',
