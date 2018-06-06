@@ -452,8 +452,8 @@ def view_baloncesto_match(request):
         user = request.user
     except User.DoesNotExist:
         raise Http404()
-    match_list1 = Match.objects.filter(place=4,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=5,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=6,years=1,).order_by('hora','minutes','place')
-    match_list2 = Match.objects.filter(place=4,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=5,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=6,years=2,).order_by('hora','minutes','place')
+    match_list1 = Match.objects.filter(place=7,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=8,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=9,years=1,).order_by('hora','minutes','place')
+    match_list2 = Match.objects.filter(place=7,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=8,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=9,years=2,).order_by('hora','minutes','place')
     if request.user.is_anonymous():
         return render(request, 'match_place_view.html', {
         'match_list1': match_list1,
@@ -472,8 +472,8 @@ def view_sala_match(request):
         user = request.user
     except User.DoesNotExist:
         raise Http404()
-    match_list1 = Match.objects.filter(place=7,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=8,years=1,).order_by('hora','minutes','place')
-    match_list2 = Match.objects.filter(place=7,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=8,years=2,).order_by('hora','minutes','place')
+    match_list1 = Match.objects.filter(place=4,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=5,years=1,).order_by('hora','minutes','place')
+    match_list2 = Match.objects.filter(place=4,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=5,years=2,).order_by('hora','minutes','place')
     if request.user.is_anonymous():
         return render(request, 'match_place_view.html', {
         'match_list1': match_list1,
