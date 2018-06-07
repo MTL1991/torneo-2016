@@ -32,7 +32,7 @@ from reportlab.lib.pagesizes import letter, A4
 from reportlab.pdfgen import canvas
 
 ABC = ['A','B','C','D','E','F','G','H','I','J','K']
-is_raining = False
+is_raining = True
 
 def some_view(request, pk):
     # Create the HttpResponse object with the appropriate PDF headers.
