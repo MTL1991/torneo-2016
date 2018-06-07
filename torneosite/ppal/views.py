@@ -32,7 +32,7 @@ from reportlab.lib.pagesizes import letter, A4
 from reportlab.pdfgen import canvas
 
 ABC = ['A','B','C','D','E','F','G','H','I','J','K']
-
+is_raining = False
 
 def some_view(request, pk):
     # Create the HttpResponse object with the appropriate PDF headers.
@@ -414,7 +414,6 @@ def view_all_match(request):
         raise Http404()
     match_list1 = Match.objects.filter(years=1,).order_by('hora','minutes','place')
     match_list2 = Match.objects.filter(years=2,).order_by('hora','minutes','place')
-    is_raining = True
     if request.user.is_anonymous():
         return render(request, 'match_all_view.html', {
         'match_list1': match_list1,
@@ -719,7 +718,6 @@ def group_view1(request, pk):
     team_group = Team.objects.filter(group=pk,years=1).order_by('-point','-goalf','goalc')
     group_matchs = Match.objects.filter(group=pk,years=1).order_by('hora','minutes','place')
     user_admin = User.objects.get(id=1)
-    is_raining = False
     try:
         user = request.user
     except User.DoesNotExist:
@@ -748,7 +746,6 @@ def group_view_all_1(request):
         user = request.user
     except User.DoesNotExist:
         raise Http404()
-    is_raining = True
     if request.user.is_anonymous():
         return render(request, 'group_view.html', {
             'group': team_group,
@@ -805,7 +802,6 @@ def group_view2_all(request):
 def group_view2(request, pk):
     team_group = Team.objects.filter(group=pk,years=2).order_by('-point','-goalf','goalc')
     group_matchs = Match.objects.filter(group=pk,years=2).order_by('hora','minutes','place')
-    is_raining = True
     try:
         user = request.user
     except User.DoesNotExist:
