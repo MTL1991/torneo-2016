@@ -4,7 +4,9 @@
 
 {% block content %}
 
-
+{% if is_raining %}
+ATENCION!!!! DEBIDO A LA LLUVIA LOS CALENDARIO
+{% else %}
 
 
 <div class="panel panel-default">
@@ -79,6 +81,6 @@
   </table>
 </div>
         
-
+{% endif %}
 
 {% endblock %}
