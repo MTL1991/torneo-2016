@@ -722,8 +722,6 @@ def group_view1(request, pk):
         user = request.user
     except User.DoesNotExist:
         raise Http404()
-    if user_admin.school.numberp == 100:
-        is_raining = True
     if request.user.is_anonymous():
         return render(request, 'group_view.html', {
             'group': team_group,
