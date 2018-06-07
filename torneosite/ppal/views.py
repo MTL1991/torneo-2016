@@ -810,7 +810,7 @@ def group_view2(request, pk):
             'group': team_group,
             'group_matchs': group_matchs,
             'group_name': ABC[int(pk)-1],
-            'is_raining': is_raining,
+            'is_raining': True,
             })
     return render(request, 'group_view.html', {
         'school': user.school,
