@@ -4,7 +4,9 @@
 
 {% block content %}
 
-
+{% if is_raining %}
+ATENCION!!!! DEBIDO A LA LLUVIA LOS CALENDARIO AHORA MISMO NO TIENEN VALIDEZ. MAS INFORMACIÓN EN LA MESA DE LA ENTRADA
+{% else %}
 <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading">PARTIDO DE CATEGORIA SUB 9 {% if  school.superuser %}<a id="create_match_btn" class="btn btn-primary" href="{% url 'add_match' %}">Agregar partido</a>{% endif %}</div>
@@ -70,6 +72,6 @@
         </tbody>
   </table>
 </div>
-
+{% endif %}
 
 {% endblock %}
