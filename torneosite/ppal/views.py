@@ -717,7 +717,7 @@ def group_view1(request, pk):
     team_group = Team.objects.filter(group=pk,years=1).order_by('-point','-goalf','goalc')
     group_matchs = Match.objects.filter(group=pk,years=1).order_by('hora','minutes','place')
     user_admin = User.objects.get(id=1)
-    is_raining = False
+    is_raining = True
     try:
         user = request.user
     except User.DoesNotExist:
@@ -800,7 +800,7 @@ def group_view2_all(request):
 def group_view2(request, pk):
     team_group = Team.objects.filter(group=pk,years=2).order_by('-point','-goalf','goalc')
     group_matchs = Match.objects.filter(group=pk,years=2).order_by('hora','minutes','place')
-    is_raining = False
+    is_raining = True
     try:
         user = request.user
     except User.DoesNotExist:
