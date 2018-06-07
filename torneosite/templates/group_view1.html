@@ -3,7 +3,9 @@
 {% block title %}{{ group.id }}{% endblock %}
 
 {% block content %}
-
+{% if is_raining %}
+ATENCION!!!! DEBIDO A LA LLUVIA LOS CALENDARIO NO TENDRÁN EFECTO. MAS INFORMACIÓN EN LA MESA DE ATENCIÓN A LA ENTRADA DEL PABELLON
+{% else %}
 
 <div class="panel panel-default">
   <!-- Default panel contents -->
@@ -59,6 +61,6 @@
   </table>
 </div>
         
-
+{% endif %}
 
 {% endblock %}

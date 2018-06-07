@@ -716,6 +716,8 @@ class EliminatoriaUpdate(LoginRequiredMixin, UpdateView):
 def group_view1(request, pk):
     team_group = Team.objects.filter(group=pk,years=1).order_by('-point','-goalf','goalc')
     group_matchs = Match.objects.filter(group=pk,years=1).order_by('hora','minutes','place')
+    user_admin = User.objects.get(id=1)
+    is_raining = user_admin.name == 'llueve'
     try:
         user = request.user
     except User.DoesNotExist:
@@ -725,6 +727,7 @@ def group_view1(request, pk):
             'group': team_group,
             'group_matchs': group_matchs,
             'group_name': ABC[int(pk)-1],
+            'is_raining': is_raining,
 
             })
     return render(request, 'group_view.html', {
@@ -732,8 +735,54 @@ def group_view1(request, pk):
         'group': team_group,
         'group_matchs': group_matchs,
         'group_name': ABC[int(pk)-1],
+        'is_raining': False,
 
         })
+
+def group_view_all_1(request, pk):
+    team_group = Team.objects.filter(years=1).order_by('-point','-goalf','goalc')
+    group_matchs = Match.objects.filter(years=1).order_by('hora','minutes','place')
+    try:
+        user = request.user
+    except User.DoesNotExist:
+        raise Http404()
+    if request.user.is_anonymous():
+        return render(request, 'group_view.html', {
+            'group': team_group,
+            'group_matchs': group_matchs,
+            'group_name': 'todos',
+
+            })
+    return render(request, 'group_view.html', {
+        'school': user.school,
+        'group': team_group,
+        'group_matchs': group_matchs,
+        'group_name': 'todos',
+
+        })
+
+def group_view_all_2(request, pk):
+    team_group = Team.objects.filter(years=2).order_by('-point','-goalf','goalc')
+    group_matchs = Match.objects.filter(years=2).order_by('hora','minutes','place')
+    try:
+        user = request.user
+    except User.DoesNotExist:
+        raise Http404()
+    if request.user.is_anonymous():
+        return render(request, 'group_view.html', {
+            'group': team_group,
+            'group_matchs': group_matchs,
+            'group_name': 'todos',
+
+            })
+    return render(request, 'group_view.html', {
+        'school': user.school,
+        'group': team_group,
+        'group_matchs': group_matchs,
+        'group_name': 'todos',
+
+        })
+
 
 def group_view1_all(request):
     return render(request, 'choose_group_sub9.html', {
@@ -751,6 +800,7 @@ def group_view2_all(request):
 def group_view2(request, pk):
     team_group = Team.objects.filter(group=pk,years=2).order_by('-point','-goalf','goalc')
     group_matchs = Match.objects.filter(group=pk,years=2).order_by('hora','minutes','place')
+    is_raining = user_admin.name == 'llueve'
     try:
         user = request.user
     except User.DoesNotExist:
@@ -760,13 +810,14 @@ def group_view2(request, pk):
             'group': team_group,
             'group_matchs': group_matchs,
             'group_name': ABC[int(pk)-1],
-
+            'is_raining': is_raining,
             })
     return render(request, 'group_view.html', {
         'school': user.school,
         'group': team_group,
         'group_matchs': group_matchs,
         'group_name': ABC[int(pk)-1],
+        'is_raining': False,
         })
 
 def eliminatoria_view1(request):
