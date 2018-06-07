@@ -717,7 +717,7 @@ class EliminatoriaUpdate(LoginRequiredMixin, UpdateView):
 def group_view1(request, pk):
     team_group = Team.objects.filter(group=pk,years=1).order_by('-point','-goalf','goalc')
     group_matchs = Match.objects.filter(group=pk,years=1).order_by('hora','minutes','place')
-    user_admin = User.objects.get(id=1)
+    user_admin = User.objects.get(id=46)
     try:
         user = request.user
     except User.DoesNotExist:
