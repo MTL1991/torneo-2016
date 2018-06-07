@@ -414,17 +414,19 @@ def view_all_match(request):
         raise Http404()
     match_list1 = Match.objects.filter(years=1,).order_by('hora','minutes','place')
     match_list2 = Match.objects.filter(years=2,).order_by('hora','minutes','place')
+    is_raining = True
     if request.user.is_anonymous():
         return render(request, 'match_all_view.html', {
         'match_list1': match_list1,
         'match_list2': match_list2,
+        'is_raining': is_raining,
 
     })
     return render(request, 'match_all_view.html', {
         'school':user.school,
         'match_list1': match_list1,
         'match_list2': match_list2,
-
+        'is_raining': False,
     })
 
 def view_pabellon_match(request):
@@ -746,11 +748,13 @@ def group_view_all_1(request, pk):
         user = request.user
     except User.DoesNotExist:
         raise Http404()
+    is_raining = True
     if request.user.is_anonymous():
         return render(request, 'group_view.html', {
             'group': team_group,
             'group_matchs': group_matchs,
             'group_name': 'todos',
+            'is_raining': is_raining,
 
             })
     return render(request, 'group_view.html', {
@@ -758,6 +762,7 @@ def group_view_all_1(request, pk):
         'group': team_group,
         'group_matchs': group_matchs,
         'group_name': 'todos',
+        'is_raining': False,
 
         })
 
