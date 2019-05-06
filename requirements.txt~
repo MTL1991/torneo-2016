@@ -6,7 +6,6 @@ dj-static==0.0.6
 django-bootstrap-form==3.1
 django-bootstrap3-datetimepicker==2.2.3
 django-braces==1.4.0
-https://bitbucket.org/dbinit/django-gmapi/get/231642b84d5a.zip
 django-messages==0.5.1
 django-simple-captcha==0.4.2
 django-simple-email-confirmation==0.11
