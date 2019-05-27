@@ -814,9 +814,6 @@ def give_next_round(request):
         team.octavos = 1
         team.save()
 
-    for team in clasificados:
-        print team
-
 
 
 def eliminatoria_view1(request):
