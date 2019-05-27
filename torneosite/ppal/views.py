@@ -21,7 +21,7 @@ from django.dispatch import receiver
 from ppal.models import *
 from ppal.forms import *
 
-import simplejson as json
+import json as simplejson
 
 import urllib
 
@@ -766,6 +766,58 @@ def group_view2(request, pk):
         'group_matchs': group_matchs,
         'group_name': ABC[int(pk)-1],
         })
+
+def give_next_round(request):
+    team1 = Team.objects.filter(years=1,group=1).order_by('-point','-goalf','goalc')[0]
+    team1.octavos = 1
+    team1.save()
+    team2 = Team.objects.filter(years=1,group=2).order_by('-point','-goalf','goalc')[0]
+    team2.octavos = 2
+    team2.save()
+    # team3 = Team.objects.filter(years=1,group=3).order_by('point','goalf','-goalc')[:1]
+    # team4 = Team.objects.filter(years=1,group=4).order_by('point','goalf','-goalc')[:1]
+    # team5 = Team.objects.filter(years=1,group=5).order_by('point','goalf','-goalc')[:1]
+    # team6 = Team.objects.filter(years=1,group=6).order_by('point','goalf','-goalc')[:1]
+    # team7 = Team.objects.filter(years=1,group=7).order_by('point','goalf','-goalc')[:1]
+    # team8 = Team.objects.filter(years=1,group=8).order_by('point','goalf','-goalc')[:1]
+    # team9 = Team.objects.filter(years=1,group=9).order_by('point','goalf','-goalc')[:1]
+    # team10 = Team.objects.filter(years=1,group=10).order_by('point','goalf','-goalc')[:1]
+    # team11 = Team.objects.filter(years=1,group=11).order_by('point','goalf','-goalc')[:1]
+    # team12 = Team.objects.filter(years=1,group=12).order_by('point','goalf','-goalc')[:1]
+    # team13 = Team.objects.filter(years=1,group=13).order_by('point','goalf','-goalc')[:1]
+
+    primeros = list()
+
+    primeros.append(team1)
+    primeros.append(team2)
+    # primeros.append(team3)
+    # primeros.append(team4)
+    # primeros.append(team5)
+    # primeros.append(team6)
+    # primeros.append(team7)
+    # primeros.append(team8)
+    # primeros.append(team9)
+    # primeros.append(team10)
+    # primeros.append(team11)
+    # primeros.append(team12)
+    # primeros.append(team13)
+
+    listToExclude = list()
+
+    for temp in primeros:
+        listToExclude.append(temp.id)
+
+
+    segundos = Team.objects.filter(years=1).exclude(id__in=listToExclude).order_by('-point','-goalf','goalc')[:1]
+
+    for team in segundos:
+        team.octavos = 1
+        team.save()
+
+    for team in clasificados:
+        print team
+
+
 
 def eliminatoria_view1(request):
     team_cuartos = Team.objects.filter(years=1).order_by('cuartos','group')

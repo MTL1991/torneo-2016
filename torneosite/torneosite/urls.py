@@ -50,6 +50,7 @@ urlpatterns += patterns('',
     url(r'^match/(?P<pk>\d+)/octavos$', OctavosUpdate.as_view(), name='update_octavos'),
     url(r'^match/(?P<pk>\d+)/cuartos$', CuartosUpdate.as_view(), name='update_cuartos'),
     url(r'^match/(?P<pk>\d+)/semis$', FinalUpdate.as_view(), name='update_semis'),
+    url(r'^update/sub9/groups/$', give_next_round, name='give_next_round'),
 )
 urlpatterns += patterns('',
     url(r'^group/sub9/(?P<pk>\d+)/$', group_view1, name='group_view_sub9'),
