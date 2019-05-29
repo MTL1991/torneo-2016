@@ -5,4 +5,10 @@
 {% block content %}
 <h2> PLANO DE LAS PISTAS DEL TORNEO</h2>
             <img alt="" src="{{STATIC_URL}}images/plano.png" width="100%" style="max-width:600px;" class="plano_img">
+
+   <form enctype="multipart/form-data" action="{% url 'read_matchs_csv' %}" method="post"> 
+  {% csrf_token %}
+    <input type="file"  name="my_uploaded_file"/> 
+    <input type="submit" value="Submit" />
+</form>
 {% endblock %}

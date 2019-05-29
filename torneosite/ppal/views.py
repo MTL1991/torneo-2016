@@ -31,7 +31,7 @@ from django.db.models import Q
 from reportlab.lib.pagesizes import letter, A4
 from reportlab.pdfgen import canvas
 
-ABC = ['A','B','C','D','E','F','G','H','I','J','K']
+ABC = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N']
 
 
 def some_view(request, pk):
@@ -774,33 +774,55 @@ def give_next_round(request):
     team2 = Team.objects.filter(years=1,group=2).order_by('-point','-goalf','goalc')[0]
     team2.octavos = 2
     team2.save()
-    # team3 = Team.objects.filter(years=1,group=3).order_by('point','goalf','-goalc')[:1]
-    # team4 = Team.objects.filter(years=1,group=4).order_by('point','goalf','-goalc')[:1]
-    # team5 = Team.objects.filter(years=1,group=5).order_by('point','goalf','-goalc')[:1]
-    # team6 = Team.objects.filter(years=1,group=6).order_by('point','goalf','-goalc')[:1]
-    # team7 = Team.objects.filter(years=1,group=7).order_by('point','goalf','-goalc')[:1]
-    # team8 = Team.objects.filter(years=1,group=8).order_by('point','goalf','-goalc')[:1]
-    # team9 = Team.objects.filter(years=1,group=9).order_by('point','goalf','-goalc')[:1]
-    # team10 = Team.objects.filter(years=1,group=10).order_by('point','goalf','-goalc')[:1]
-    # team11 = Team.objects.filter(years=1,group=11).order_by('point','goalf','-goalc')[:1]
-    # team12 = Team.objects.filter(years=1,group=12).order_by('point','goalf','-goalc')[:1]
-    # team13 = Team.objects.filter(years=1,group=13).order_by('point','goalf','-goalc')[:1]
+    team3 = Team.objects.filter(years=1,group=3).order_by('point','goalf','-goalc')[:1]
+    team3.octavos = 3
+    team3.save()
+    team4 = Team.objects.filter(years=1,group=4).order_by('point','goalf','-goalc')[:1]
+    team4.octavos = 4
+    team4.save()
+    team5 = Team.objects.filter(years=1,group=5).order_by('point','goalf','-goalc')[:1]
+    team5.octavos = 5
+    team5.save()
+    team6 = Team.objects.filter(years=1,group=6).order_by('point','goalf','-goalc')[:1]
+    team6.octavos = 6
+    team6.save()
+    team7 = Team.objects.filter(years=1,group=7).order_by('point','goalf','-goalc')[:1]
+    team7.octavos = 7
+    team7.save()
+    team8 = Team.objects.filter(years=1,group=8).order_by('point','goalf','-goalc')[:1]
+    team8.octavos = 8
+    team8.save()
+    team9 = Team.objects.filter(years=1,group=9).order_by('point','goalf','-goalc')[:1]
+    team9.octavos = 2
+    team9.save()
+    team10 = Team.objects.filter(years=1,group=10).order_by('point','goalf','-goalc')[:1]
+    team10.octavos = 4
+    team10.save()
+    team11 = Team.objects.filter(years=1,group=11).order_by('point','goalf','-goalc')[:1]
+    team11.octavos = 6
+    team11.save()
+    team12 = Team.objects.filter(years=1,group=12).order_by('point','goalf','-goalc')[:1]
+    team12.octavos = 7
+    team12.save()
+    team13 = Team.objects.filter(years=1,group=13).order_by('point','goalf','-goalc')[:1]
+    team13.octavos = 8
+    team13.save()
 
     primeros = list()
 
     primeros.append(team1)
     primeros.append(team2)
-    # primeros.append(team3)
-    # primeros.append(team4)
-    # primeros.append(team5)
-    # primeros.append(team6)
-    # primeros.append(team7)
-    # primeros.append(team8)
-    # primeros.append(team9)
-    # primeros.append(team10)
-    # primeros.append(team11)
-    # primeros.append(team12)
-    # primeros.append(team13)
+    primeros.append(team3)
+    primeros.append(team4)
+    primeros.append(team5)
+    primeros.append(team6)
+    primeros.append(team7)
+    primeros.append(team8)
+    primeros.append(team9)
+    primeros.append(team10)
+    primeros.append(team11)
+    primeros.append(team12)
+    primeros.append(team13)
 
     listToExclude = list()
 
@@ -808,12 +830,29 @@ def give_next_round(request):
         listToExclude.append(temp.id)
 
 
-    segundos = Team.objects.filter(years=1).exclude(id__in=listToExclude).order_by('-point','-goalf','goalc')[:1]
+    segundos = Team.objects.filter(years=1).exclude(id__in=listToExclude).order_by('-point','-goalf','goalc')[:3]
+    team14 = segundos[0]
+    team14.octavos = 1
+    team14.save()
+    team15 = segundos[1]
+    team15.octavos = 3
+    team15.save()
+    team16 = segundos[2]
+    team16.octavos = 5
+    team16.save()
+def read_matchs_csv(request):
+   if request.method == "POST":
+    print "POST"
+    read_matchs_csv2(request)
 
-    for team in segundos:
-        team.octavos = 1
-        team.save()
 
+def read_matchs_csv2(request):
+    my_uploaded_file = request.FILES['my_uploaded_file'].read() # get the uploaded file
+    rows = my_uploaded_file.split('\n')
+    for row in rows:
+        values = row.split(',')
+        Match.objects.create(years=1,local=Team.objects.get(name=values[4]),away=Team.objects.get(name=values[5]),
+            group=values[0],place=values[1],hora=values[2],minutes=values[3])
 
 
 def eliminatoria_view1(request):
