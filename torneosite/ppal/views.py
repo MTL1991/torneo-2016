@@ -840,13 +840,14 @@ def give_next_round(request):
     team16 = segundos[2]
     team16.octavos = 5
     team16.save()
-def read_matchs_csv(request):
+
+def read_matchs_sub9_csv(request):
    if request.method == "POST":
     print "POST"
-    read_matchs_csv2(request)
+    read_matchs_sub9_csv2(request)
 
 
-def read_matchs_csv2(request):
+def read_matchs_sub9_csv2(request):
     my_uploaded_file = request.FILES['my_uploaded_file'].read() # get the uploaded file
     rows = my_uploaded_file.split('\n')
     for row in rows:
@@ -854,6 +855,19 @@ def read_matchs_csv2(request):
         Match.objects.create(years=1,local=Team.objects.get(name=values[4]),away=Team.objects.get(name=values[5]),
             group=values[0],place=values[1],hora=values[2],minutes=values[3])
 
+def read_matchs_sub12_csv(request):
+   if request.method == "POST":
+    print "POST"
+    read_matchs_sub9_csv2(request)
+
+
+def read_matchs_sub12_csv2(request):
+    my_uploaded_file = request.FILES['my_uploaded_file'].read() # get the uploaded file
+    rows = my_uploaded_file.split('\n')
+    for row in rows:
+        values = row.split(',')
+        Match.objects.create(years=2,local=Team.objects.get(name=values[4]),away=Team.objects.get(name=values[5]),
+            group=values[0],place=values[1],hora=values[2],minutes=values[3])
 
 def eliminatoria_view1(request):
     team_cuartos = Team.objects.filter(years=1).order_by('cuartos','group')
