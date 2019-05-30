@@ -34,9 +34,91 @@ from reportlab.pdfgen import canvas
 ABC = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N']
 
 
-def some_view(request, pk):
+def some_view1(request, pk):
     # Create the HttpResponse object with the appropriate PDF headers.
     team = Team.objects.get(id=pk)
+    player_list = Player.objects.filter(team= team,)
+
+    response = HttpResponse(content_type='application/pdf')
+    equipo = "Hoja_de_inscripcion"
+    response['Content-Disposition'] = 'attachment; filename="Hoja_de_inscripcion.pdf"'
+    ulargo = 841.89/10
+    uancho = 595.27/10
+    nameOffsetY = 0.07*ulargo
+
+    # Create the PDF object, using the response object as its "file."
+    p = canvas.Canvas(response, pagesize=A4)
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    # See the ReportLab documentation for the full list of functionality.
+
+    #team headboards
+    p.setFillColorRGB(0,0,0.77)
+    p.grid([uancho,9*uancho],[9.5*ulargo,9.25*ulargo])
+    p.drawString(2.5*uancho ,9.25*ulargo+nameOffsetY,"VI TORNEO INTERCOLEGIOS CIUDAD DE LEGANES")
+    p.drawString(3.5*uancho ,9*ulargo+nameOffsetY,"Nombre del equipo")
+    p.drawString(7.6*uancho ,9*ulargo+nameOffsetY,"Categoria")
+    #teams' name
+    xlist = [uancho,7.5*uancho,9*uancho]
+    ylist = [9.25*ulargo,9*ulargo, 8.75*ulargo]
+    p.drawString(1.1*uancho ,8.75*ulargo+nameOffsetY, to_unicode_or_bust(player_list[0].team.name))
+    if player_list[0].team.years == 1:
+        categoria = "sub-9"
+    else:
+        categoria = "sub-12"
+
+    p.drawString(7.6*uancho ,8.75*ulargo+nameOffsetY, categoria)
+    # tablerow = tablerow-1*ulargo
+    # for object in player_list:
+    #     if object.member == 2:
+    #         tablerow = tablerow-0.25*ulargo
+    #         ylist.append(tablerow)
+    #         p.drawString(1.1*uancho ,tablerow+nameOffsetY, to_unicode_or_bust(object.surname1)+" "+to_unicode_or_bust(object.surname2)+", "+to_unicode_or_bust(object.name))
+    #         p.drawString(5.1*uancho ,tablerow+nameOffsetY, to_unicode_or_bust(object.birthday))
+
+    p.grid(xlist,ylist)
+
+    #players headboards
+    p.setFillColorRGB(0,0,0.77)
+    p.grid([uancho,9*uancho],[8.5*ulargo,8.25*ulargo])
+    p.drawString(4.5*uancho ,8.25*ulargo+nameOffsetY,"JUGADORAS")
+    p.drawString(1.1*uancho ,8*ulargo+nameOffsetY,"Apellidos, Nombre")
+    p.drawString(5.1*uancho ,8*ulargo+nameOffsetY,"Fecha de nacimiento")
+    #players' names
+    xlist = [uancho,5*uancho,9*uancho]
+    ylist = [8.25*ulargo,8*ulargo]
+    tablerow = 8*ulargo  
+    for object in player_list:
+        if object.member == 1:
+            tablerow = tablerow-0.25*ulargo
+            ylist.append(tablerow)
+            p.drawString(1.1*uancho ,tablerow+nameOffsetY, to_unicode_or_bust(object.surname1)+" "+to_unicode_or_bust(object.surname2)+", "+to_unicode_or_bust(object.name))
+            p.drawString(5.1*uancho ,tablerow+nameOffsetY, str(object.birthday))
+    p.grid(xlist,ylist)
+
+    #delegado headboards
+    p.grid([uancho,9*uancho],[tablerow-0.5*ulargo,tablerow-0.75*ulargo])
+    p.drawString(4.5*uancho ,tablerow-0.75*ulargo+nameOffsetY,"DELEGADO")
+    p.drawString(1.1*uancho ,tablerow-1*ulargo+nameOffsetY,"Apellidos, Nombre")
+    p.drawString(5.1*uancho ,tablerow-1*ulargo+nameOffsetY,"Fecha de nacimiento")
+    #delegado's name
+    xlist = [uancho,5*uancho,9*uancho]
+    ylist = [tablerow-0.75*ulargo,tablerow-1*ulargo]
+    tablerow = tablerow-1*ulargo
+    for object in player_list:
+        if object.member == 2:
+            tablerow = tablerow-0.25*ulargo
+            ylist.append(tablerow)
+            p.drawString(1.1*uancho ,tablerow+nameOffsetY, to_unicode_or_bust(object.surname1)+" "+to_unicode_or_bust(object.surname2)+", "+to_unicode_or_bust(object.name))
+            p.drawString(5.1*uancho ,tablerow+nameOffsetY, str(object.birthday))
+
+    p.grid(xlist,ylist)
+    # Close the PDF object cleanly, and we're done.
+    p.showPage()
+    p.save()
+    return response
+
+def some_view(request):
+    # Create the HttpResponse object with the appropriate PDF headers.
     
 
     response = HttpResponse(content_type='application/pdf')

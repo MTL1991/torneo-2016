@@ -9,7 +9,7 @@ from ppal.views import *
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^pdf/', some_view, name='pdf'),
+    url(r'^pdf/', some_view, name='pdfall'),
     url(r'^plano/',plano_view, name='plano_view'),
 )
 
@@ -39,7 +39,7 @@ urlpatterns += patterns('',
     url(r'^team/(?P<pk>\d+)/delete/$', TeamDelete.as_view(), name='delete_team'),
     url(r'^team/(?P<pk>\d+)/add/$', create_player, name='add_player'),
     url(r'^team/(?P<pk>\d+)/edit/$', TeamUpdate.as_view(), name='update_team'),
-    url(r'^team/(?P<pk>\d+)/pdf$', some_view, name='pdf'),
+    url(r'^team/(?P<pk>\d+)/pdf$', some_view1, name='pdf'),
     url(r'^player/(?P<pk>\d+)/delete$', PlayerDelete.as_view(), name='delete_player'),     
     url(r'^player/(?P<pk>\d+)', player_view, name='view_player'),  
     url(r'^match/add/$', create_match, name='add_match'),
