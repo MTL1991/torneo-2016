@@ -37,7 +37,7 @@ ABC = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N']
 def some_view(request, pk):
     # Create the HttpResponse object with the appropriate PDF headers.
     team = Team.objects.get(id=pk)
-    player_list = Player.objects.filter(team= team,)
+    
 
     response = HttpResponse(content_type='application/pdf')
     equipo = "Hoja_de_inscripcion"
@@ -52,6 +52,7 @@ def some_view(request, pk):
     # See the ReportLab documentation for the full list of functionality.
 
     for team in Team.objects.all().order_by('school'):
+        player_list = Player.objects.filter(team= team,)
 
         #team headboards
         p.setFillColorRGB(0,0,0.77)
