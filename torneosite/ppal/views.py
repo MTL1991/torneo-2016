@@ -198,6 +198,15 @@ def school_view(request, num):
             'player_list': player_list,
             })
 
+def deactivateusers(request):
+    listofusers = User.objects.all()
+    for user in listofusers:
+        if not user.is_staff:
+            user.is_active = False
+            user.save()
+
+    return HttpResponseRedirect(reverse(index))
+
 def to_unicode_or_bust(
     obj, encoding='utf-8'):
     if isinstance(obj, basestring):

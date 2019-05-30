@@ -15,7 +15,7 @@
     {% else %}
         <li>
     {% endif %}
-    <!-- <a href="{% url 'view_team' pk=object.id%}">  -->{{ object.name }}<!-- </a> -->
+    <a href="{% url 'view_team' pk=object.id%}"> {{ object.name }}</a>
     </li>
 {% endfor %}
 <a href="{% url 'index_all' %}"> ver todos</a>
@@ -30,7 +30,7 @@
     {% else %}
         <li>
     {% endif %}
-    <!-- <a href="{% url 'view_team' pk=object.id%}"> --> {{ object.name }}<!-- </a> -->
+    <a href="{% url 'view_team' pk=object.id%}"> {{ object.name }}</a>
     </li>
 {% endfor %}
 <a href="{% url 'index_all' %}"> ver todos</a>
