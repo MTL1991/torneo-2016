@@ -14,8 +14,8 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('',
-    url(r'^$', index, name='index'),
-    url(r'^teams/', index, name='index'),
+    url(r'^$', select_years, name='select_years'),
+    url(r'^teams/', select_years, name='index'),
     url(r'^sub9/groups$', group_view1_all, name='group_view1_all'),
     url(r'^sub9/group/(?P<pk>\d+)/$', group_view1, name='group_view_sub9'),
     url(r'^sub9/eliminatoria/', eliminatoria_view1, name='eliminatoria_view_sub9'),
@@ -31,7 +31,9 @@ urlpatterns += patterns('',
     url(r'^school/create/$', create_school, name='add_school'),    
     url(r'^school/profile/(\d+)/$', school_view, name='profile_school'),
     url(r'^upload/sub9/matchs/$',read_matchs_sub9_csv2, name='read_matchs_sub9_csv2'),
-    url(r'^upload/sub12/matchs/$',read_matchs_sub12_csv, name='read_matchs_sub12_csv')
+    url(r'^upload/sub12/matchs/$',read_matchs_sub12_csv, name='read_matchs_sub12_csv'),
+    url(r'^reset/', reset_teams, name='reset_teams'),
+    
 )
 urlpatterns += patterns('',
     url(r'^team/add/$', create_team, name='add_team'),
@@ -53,7 +55,8 @@ urlpatterns += patterns('',
     url(r'^match/(?P<pk>\d+)/octavos$', OctavosUpdate.as_view(), name='update_octavos'),
     url(r'^match/(?P<pk>\d+)/cuartos$', CuartosUpdate.as_view(), name='update_cuartos'),
     url(r'^match/(?P<pk>\d+)/semis$', FinalUpdate.as_view(), name='update_semis'),
-    url(r'^update/sub9/groups/$', give_next_round, name='give_next_round'),
+    url(r'^update/sub9/groups/$', give_next_round_sub9, name='give_next_round_sub9'),
+    url(r'^update/sub12/groups/$', give_next_round_sub12, name='give_next_round_sub12'),
 )
 urlpatterns += patterns('',
     url(r'^group/sub9/(?P<pk>\d+)/$', group_view1, name='group_view_sub9'),

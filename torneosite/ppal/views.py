@@ -523,8 +523,8 @@ def view_pabellon_match(request):
         user = request.user
     except User.DoesNotExist:
         raise Http404()
-    match_list1 = Match.objects.filter(place=1,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=2,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=3,years=1,).order_by('hora','minutes','place')
-    match_list2 = Match.objects.filter(place=1,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=2,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=3,years=2,).order_by('hora','minutes','place')
+    match_list1 = Match.objects.filter(place=1,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=2,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=3,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=4,years=1,).order_by('hora','minutes','place')
+    match_list2 = Match.objects.filter(place=1,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=2,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=3,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=4,years=2,).order_by('hora','minutes','place')
     if request.user.is_anonymous():
         return render(request, 'match_place_view.html', {
         'match_list1': match_list1,
@@ -543,8 +543,8 @@ def view_baloncesto_match(request):
         user = request.user
     except User.DoesNotExist:
         raise Http404()
-    match_list1 = Match.objects.filter(place=4,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=5,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=6,years=1,).order_by('hora','minutes','place')
-    match_list2 = Match.objects.filter(place=4,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=5,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=6,years=2,).order_by('hora','minutes','place')
+    match_list1 = Match.objects.filter(place=5,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=6,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=7,years=1,).order_by('hora','minutes','place')
+    match_list2 = Match.objects.filter(place=5,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=6,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=7,years=2,).order_by('hora','minutes','place')
     if request.user.is_anonymous():
         return render(request, 'match_place_view.html', {
         'match_list1': match_list1,
@@ -563,8 +563,8 @@ def view_sala_match(request):
         user = request.user
     except User.DoesNotExist:
         raise Http404()
-    match_list1 = Match.objects.filter(place=7,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=8,years=1,).order_by('hora','minutes','place')
-    match_list2 = Match.objects.filter(place=7,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=8,years=2,).order_by('hora','minutes','place')
+    match_list1 = Match.objects.filter(place=9,years=1,).order_by('hora','minutes','place')|Match.objects.filter(place=8,years=1,).order_by('hora','minutes','place')
+    match_list2 = Match.objects.filter(place=9,years=2,).order_by('hora','minutes','place')|Match.objects.filter(place=8,years=2,).order_by('hora','minutes','place')
     if request.user.is_anonymous():
         return render(request, 'match_place_view.html', {
         'match_list1': match_list1,
@@ -671,23 +671,72 @@ class OctavosUpdate(LoginRequiredMixin, UpdateView):
             post_mutable = request.POST.copy()
         # Now you can change values:
             if(post_mutable['team2Score'] > post_mutable['team1Score']):
-                if post_mutable['octavos']>6:
+                if int(post_mutable['octavos'])>6:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(cuartos=4)
-                elif post_mutable['octavos']>4:
+                    match = Match.objects.get(cuartos=4,years=Team.objects.get(id=post_mutable['away']).years)
+                    if int(post_mutable['octavos']) ==7:
+                        match.local = Team.objects.get(id=post_mutable['away'])
+                    elif int(post_mutable['octavos']) ==8:
+                        match.away = Team.objects.get(id=post_mutable['away'])
+                    match.save()
+                elif int(post_mutable['octavos'])>4:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(cuartos=3)
-                elif post_mutable['octavos']>2:
+                    match = Match.objects.get(cuartos=3,years=Team.objects.get(id=post_mutable['away']).years)
+                    if int(post_mutable['octavos']) ==5:
+                        match.local = Team.objects.get(id=post_mutable['away'])
+                    elif int(post_mutable['octavos']) ==6:
+                        match.away = Team.objects.get(id=post_mutable['away'])
+                    match.save()
+                elif int(post_mutable['octavos'])>2:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(cuartos=2)
+                    match = Match.objects.get(cuartos=2,years=Team.objects.get(id=post_mutable['away']).years)
+                    if int(post_mutable['octavos']) ==3:
+                        match.local = Team.objects.get(id=post_mutable['away'])
+                    elif int(post_mutable['octavos']) ==4:
+                        match.away = Team.objects.get(id=post_mutable['away'])
+                    match.save()
                 else:
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(cuartos=1)                    
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(cuartos=1)
+                    match = Match.objects.get(cuartos=1,years=Team.objects.get(id=post_mutable['away']).years)
+                    if int(post_mutable['octavos']) ==1:
+                        match.local = Team.objects.get(id=post_mutable['away'])
+                    elif int(post_mutable['octavos']) ==2:
+                        match.away = Team.objects.get(id=post_mutable['away'])
+                    match.save()                    
             elif(post_mutable['team1Score'] > post_mutable['team2Score']):
-                if post_mutable['octavos']>6:
+                if int(post_mutable['octavos'])>6:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(cuartos=4)
-                elif post_mutable['octavos']>4:
+                    match = Match.objects.get(cuartos=4,years=Team.objects.get(id=post_mutable['local']).years)
+                    if int(post_mutable['octavos']) ==7:
+                        match.local = Team.objects.get(id=post_mutable['local'])
+                    elif int(post_mutable['octavos']) ==8:
+                        match.away = Team.objects.get(id=post_mutable['local'])
+                    match.save()
+                elif int(post_mutable['octavos'])>4:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(cuartos=3)
-                elif post_mutable['octavos']>2:
+                    match = Match.objects.get(cuartos=3,years=Team.objects.get(id=post_mutable['local']).years)
+                    print post_mutable['octavos']
+                    if int(post_mutable['octavos']) ==5:
+                        match.local = Team.objects.get(id=post_mutable['local'])
+                    elif int(post_mutable['octavos']) ==6:
+                        match.away = Team.objects.get(id=post_mutable['local'])
+                    match.save()
+                elif int(post_mutable['octavos'])>2:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(cuartos=2)
+                    match = Match.objects.get(cuartos=2,years=Team.objects.get(id=post_mutable['local']).years)
+                    if int(post_mutable['octavos']) ==3:
+                        match.local = Team.objects.get(id=post_mutable['local'])
+                    elif int(post_mutable['octavos']) ==4:
+                        match.away = Team.objects.get(id=post_mutable['local'])
+                    match.save()
                 else:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(cuartos=1)
+                    match = Match.objects.get(cuartos=1,years=Team.objects.get(id=post_mutable['local']).years)
+                    if int(post_mutable['octavos']) ==1:
+                        match.local = Team.objects.get(id=post_mutable['local'])
+                    elif int(post_mutable['octavos']) ==2:
+                        match.away = Team.objects.get(id=post_mutable['local'])
+                    match.save() 
 
             #return HttpResponseRedirect(reverse(index))
             return super(OctavosUpdate, self).post(post_mutable, *args, **kwargs)
@@ -711,20 +760,44 @@ class CuartosUpdate(LoginRequiredMixin, UpdateView):
             post_mutable = request.POST.copy()
         # Now you can change values:
             if(post_mutable['team2Score'] > post_mutable['team1Score']):
-                if post_mutable['cuartos']>2:
+                if int(post_mutable['cuartos'])>2:
                     print("S1  ")
-                    print(post_mutable['cuartos'])
+                    print(int(post_mutable['cuartos']))
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(semis=1)
+                    match = Match.objects.get(semis=2,years=Team.objects.get(id=post_mutable['away']).years)
+                    if int(post_mutable['cuartos']) ==3:
+                        match.local = Team.objects.get(id=post_mutable['away'])
+                    elif int(post_mutable['cuartos']) ==4:
+                        match.away = Team.objects.get(id=post_mutable['away'])
+                    match.save()
                 else:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(semis=2)
-                    print("S2  ")
-                    print(post_mutable['cuartos'])
+                    match = Match.objects.get(semis=1,years=Team.objects.get(id=post_mutable['away']).years)
+                    if int(post_mutable['cuartos']) ==1:
+                        match.local = Team.objects.get(id=post_mutable['away'])
+                    elif int(post_mutable['cuartos']) ==2:
+                        match.away = Team.objects.get(id=post_mutable['away'])
+                    match.save()
 
             elif(post_mutable['team1Score'] > post_mutable['team2Score']):
-                if(post_mutable['cuartos']>2):
+                if(int(post_mutable['cuartos'])>2):
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(semis=1)
+                    match = Match.objects.get(semis=2,years=Team.objects.get(id=post_mutable['local']).years)
+                    if int(post_mutable['cuartos']) ==3:
+                        match.local = Team.objects.get(id=post_mutable['local'])
+                    elif int(post_mutable['cuartos']) ==4:
+                        match.away = Team.objects.get(id=post_mutable['local'])
+                    match.save()
                 else:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(semis=2)
+                    match = Match.objects.get(semis=1,years=Team.objects.get(id=post_mutable['local']).years)
+                    if int(post_mutable['cuartos']) ==1:
+                        match.local = Team.objects.get(id=post_mutable['local'])
+                    elif int(post_mutable['cuartos']) ==2:
+                        match.away = Team.objects.get(id=post_mutable['local'])
+                    match.save()
+                    print("S2  ")
+                    print(int(post_mutable['cuartos']))
 
             #return HttpResponseRedirect(reverse(index))
             return super(CuartosUpdate, self).post(post_mutable, *args, **kwargs)
@@ -748,16 +821,28 @@ class FinalUpdate(LoginRequiredMixin, UpdateView):
             post_mutable = request.POST.copy()
         # Now you can change values:
             if(post_mutable['team2Score'] > post_mutable['team1Score']):
-                if post_mutable['semis']>2:
+                if int(post_mutable['semis'])>1:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(final=1)
+                    match = Match.objects.get(final=1,years=Team.objects.get(id=post_mutable['away']).years)
+                    match.away = Team.objects.get(id=post_mutable['away'])
+                    match.save()
                 else:
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(final=2)
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(final=1)
+                    match = Match.objects.get(final=1,years=Team.objects.get(id=post_mutable['away']).years)
+                    match.local = Team.objects.get(id=post_mutable['away'])
+                    match.save()
 
             elif(post_mutable['team1Score'] > post_mutable['team2Score']):
-                if(post_mutable['semis']>2):
+                if(int(post_mutable['semis'])>1):
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(final=1)
+                    match = Match.objects.get(final=1,years=Team.objects.get(id=post_mutable['local']).years)
+                    match.away = Team.objects.get(id=post_mutable['local'])
+                    match.save()
                 else:
-                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(final=2)
+                    team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(final=1)
+                    match = Match.objects.get(final=1,years=Team.objects.get(id=post_mutable['local']).years)
+                    match.local = Team.objects.get(id=post_mutable['local'])
+                    match.save()
 
             #return HttpResponseRedirect(reverse(index))
             return super(FinalUpdate, self).post(post_mutable, *args, **kwargs)
@@ -839,6 +924,22 @@ def group_view2_all(request):
 def select_years(request):
     return render(request, 'choose_years.html', )
 
+def reset_teams(request):
+    for match in Match.objects.filter(years=1):
+        match.team1Score = None
+        match.team2Score = None
+        match.save()
+    for team in Team.objects.filter(years=1):
+        team.wins = 0
+        team.draw = 0
+        team.lose = 0
+        team.goalf = 0
+        team.goalc = 0
+        team.point = 0
+        team.matchs = 0
+        team.save()
+
+    return render(request, 'choose_years.html', )
 
 def group_view2(request, pk):
     team_group = Team.objects.filter(group=pk,years=2).order_by('-point','-goalf','goalc')
@@ -861,45 +962,138 @@ def group_view2(request, pk):
         'group_name': ABC[int(pk)-1],
         })
 
-def give_next_round(request):
+def give_next_round_sub9(request):
     team1 = Team.objects.filter(years=1,group=1).order_by('-point','-goalf','goalc')[0]
     team1.octavos = 1
     team1.save()
     team2 = Team.objects.filter(years=1,group=2).order_by('-point','-goalf','goalc')[0]
     team2.octavos = 2
     team2.save()
-    team3 = Team.objects.filter(years=1,group=3).order_by('point','goalf','-goalc')[:1]
+    team3 = Team.objects.filter(years=1,group=3).order_by('-point','-goalf','goalc')[0]
     team3.octavos = 3
     team3.save()
-    team4 = Team.objects.filter(years=1,group=4).order_by('point','goalf','-goalc')[:1]
+    team4 = Team.objects.filter(years=1,group=4).order_by('-point','-goalf','goalc')[0]
     team4.octavos = 4
     team4.save()
-    team5 = Team.objects.filter(years=1,group=5).order_by('point','goalf','-goalc')[:1]
+    team5 = Team.objects.filter(years=1,group=5).order_by('-point','-goalf','goalc')[0]
     team5.octavos = 5
     team5.save()
-    team6 = Team.objects.filter(years=1,group=6).order_by('point','goalf','-goalc')[:1]
+    team6 = Team.objects.filter(years=1,group=6).order_by('-point','-goalf','goalc')[0]
     team6.octavos = 6
     team6.save()
-    team7 = Team.objects.filter(years=1,group=7).order_by('point','goalf','-goalc')[:1]
+    team7 = Team.objects.filter(years=1,group=7).order_by('-point','-goalf','goalc')[0]
     team7.octavos = 7
     team7.save()
-    team8 = Team.objects.filter(years=1,group=8).order_by('point','goalf','-goalc')[:1]
+    team8 = Team.objects.filter(years=1,group=8).order_by('-point','-goalf','goalc')[0]
     team8.octavos = 8
     team8.save()
-    team9 = Team.objects.filter(years=1,group=9).order_by('point','goalf','-goalc')[:1]
-    team9.octavos = 2
+    team9 = Team.objects.filter(years=1,group=9).order_by('-point','-goalf','goalc')[0]
+    team9.octavos = 1
     team9.save()
-    team10 = Team.objects.filter(years=1,group=10).order_by('point','goalf','-goalc')[:1]
-    team10.octavos = 4
+    team10 = Team.objects.filter(years=1,group=10).order_by('-point','-goalf','goalc')[0]
+    team10.octavos = 2
     team10.save()
-    team11 = Team.objects.filter(years=1,group=11).order_by('point','goalf','-goalc')[:1]
-    team11.octavos = 6
+    team11 = Team.objects.filter(years=1,group=11).order_by('-point','-goalf','goalc')[0]
+    team11.octavos = 3
     team11.save()
-    team12 = Team.objects.filter(years=1,group=12).order_by('point','goalf','-goalc')[:1]
-    team12.octavos = 7
+
+    primeros = list()
+
+    primeros.append(team1)
+    primeros.append(team2)
+    primeros.append(team3)
+    primeros.append(team4)
+    primeros.append(team5)
+    primeros.append(team6)
+    primeros.append(team7)
+    primeros.append(team8)
+    primeros.append(team9)
+    primeros.append(team10)
+    primeros.append(team11)
+
+
+    listToExclude = list()
+
+    for temp in primeros:
+        listToExclude.append(temp.id)
+
+
+    segundos = Team.objects.filter(years=1).exclude(id__in=listToExclude).order_by('-point','-goalf','goalc')[:5]
+    team12 = segundos[0]
+    team12.octavos = 4
     team12.save()
-    team13 = Team.objects.filter(years=1,group=13).order_by('point','goalf','-goalc')[:1]
-    team13.octavos = 8
+    team13 = segundos[1]
+    team13.octavos = 5
+    team13.save()    
+    team14 = segundos[2]
+    team14.octavos = 6
+    team14.save()
+    team15 = segundos[3]
+    team15.octavos = 7
+    team15.save()
+    team16 = segundos[4]
+    team16.octavos = 8
+    team16.save()
+
+
+    Match.objects.create(years=1,local=team1,away=team9,
+            octavos=1,place=1,hora=19,minutes=0)
+    Match.objects.create(years=1,local=team2,away=team10,
+            octavos=2,place=2,hora=19,minutes=0)
+    Match.objects.create(years=1,local=team3,away=team11,
+            octavos=3,place=3,hora=19,minutes=0)
+    Match.objects.create(years=1,local=team4,away=team12,
+            octavos=4,place=4,hora=19,minutes=0)
+    Match.objects.create(years=1,local=team5,away=team13,
+            octavos=5,place=1,hora=19,minutes=15)
+    Match.objects.create(years=1,local=team6,away=team14,
+            octavos=6,place=2,hora=19,minutes=15)
+    Match.objects.create(years=1,local=team7,away=team15,
+            octavos=7,place=3,hora=19,minutes=15)
+    Match.objects.create(years=1,local=team8,away=team16,
+            octavos=8,place=4,hora=19,minutes=15)
+
+    return HttpResponseRedirect(reverse(index))
+
+def give_next_round_sub12(request):
+    team1 = Team.objects.filter(years=2,group=1).order_by('-point','-goalf','goalc')[0]
+    team1.octavos = 1
+    team1.save()
+    team2 = Team.objects.filter(years=2,group=2).order_by('-point','-goalf','goalc')[0]
+    team2.octavos = 2
+    team2.save()
+    team3 = Team.objects.filter(years=2,group=3).order_by('-point','-goalf','goalc')[0]
+    team3.octavos = 3
+    team3.save()
+    team4 = Team.objects.filter(years=2,group=4).order_by('-point','-goalf','goalc')[0]
+    team4.octavos = 4
+    team4.save()
+    team5 = Team.objects.filter(years=2,group=5).order_by('-point','-goalf','goalc')[0]
+    team5.octavos = 5
+    team5.save()
+    team6 = Team.objects.filter(years=2,group=6).order_by('-point','-goalf','goalc')[0]
+    team6.octavos = 6
+    team6.save()
+    team7 = Team.objects.filter(years=2,group=7).order_by('-point','-goalf','goalc')[0]
+    team7.octavos = 7
+    team7.save()
+    team8 = Team.objects.filter(years=2,group=8).order_by('-point','-goalf','goalc')[0]
+    team8.octavos = 8
+    team8.save()
+    team9 = Team.objects.filter(years=2,group=9).order_by('-point','-goalf','goalc')[0]
+    team9.octavos = 1
+    team9.save()
+    team10 = Team.objects.filter(years=2,group=10).order_by('-point','-goalf','goalc')[0]
+    team10.octavos = 2
+    team10.save()
+    team11 = Team.objects.filter(years=2,group=11).order_by('-point','-goalf','goalc')[0]
+    team11.octavos = 3
+    team11.save()
+    team12 = Team.objects.filter(years=2,group=12).order_by('-point','-goalf','goalc')[0]
+    team12.octavos = 4
+    team12.save()
+    team13 = Team.objects.filter(years=2,group=13).order_by('-point','-goalf','goalc')[0]
+    team13.octavos = 5
     team13.save()
 
     primeros = list()
@@ -924,15 +1118,15 @@ def give_next_round(request):
         listToExclude.append(temp.id)
 
 
-    segundos = Team.objects.filter(years=1).exclude(id__in=listToExclude).order_by('-point','-goalf','goalc')[:3]
+    segundos = Team.objects.filter(years=2).exclude(id__in=listToExclude).order_by('-point','-goalf','goalc')[:3]
     team14 = segundos[0]
-    team14.octavos = 1
+    team14.octavos = 6
     team14.save()
     team15 = segundos[1]
-    team15.octavos = 3
+    team15.octavos = 7
     team15.save()
     team16 = segundos[2]
-    team16.octavos = 5
+    team16.octavos = 8
     team16.save()
 
 def read_matchs_sub9_csv(request):
@@ -946,13 +1140,22 @@ def read_matchs_sub9_csv2(request):
     rows = my_uploaded_file.split('\n')
     for row in rows:
         values = row.split(',')
-        Match.objects.create(years=1,local=Team.objects.get(name=values[4]),away=Team.objects.get(name=values[5]),
+        local = Team.objects.get(name=values[4],years=1)
+        away = Team.objects.get(name=values[5],years=1)
+        if local.group==0:
+            local.group = values[0]
+            local.save()
+        if away.group==0:
+            away.group = values[0]
+            away.save()
+
+        Match.objects.create(years=1,local=local,away=away,
             group=values[0],place=values[1],hora=values[2],minutes=values[3])
 
 def read_matchs_sub12_csv(request):
    if request.method == "POST":
     print "POST"
-    read_matchs_sub9_csv2(request)
+    read_matchs_sub12_csv2(request)
 
 
 def read_matchs_sub12_csv2(request):
@@ -960,32 +1163,57 @@ def read_matchs_sub12_csv2(request):
     rows = my_uploaded_file.split('\n')
     for row in rows:
         values = row.split(',')
-        Match.objects.create(years=2,local=Team.objects.get(name=values[4]),away=Team.objects.get(name=values[5]),
+        Match.objects.create(years=2,local=Team.objects.get(name=values[4],years=2),away=Team.objects.get(name=values[5],years=2),
             group=values[0],place=values[1],hora=values[2],minutes=values[3])
 
 def eliminatoria_view1(request):
-    team_cuartos = Team.objects.filter(years=1).order_by('cuartos','group')
+    team_octavos = Team.objects.filter(years=1).order_by('octavos','point','group')
+    team_octavos_filter = filter(lambda x: x.octavos > 0, team_octavos)
+    team_cuartos = Team.objects.filter(years=1).order_by('cuartos','octavos')
     team_cuartos_filter = filter(lambda x: x.cuartos > 0, team_cuartos)
     team_semis = Team.objects.filter(years=1).order_by('semis','cuartos')
     team_semis_filter = filter(lambda x: x.semis > 0, team_semis)
     team_final = Team.objects.filter(years=1).order_by('semis')
     team_final_filter = filter(lambda x: x.final > 0, team_final)
 
-    match_cuartos = Match.objects.filter(years=1).order_by('hora','minutes','cuartos')
+    team_octavos_filter = list()
+    match_octavos = Match.objects.filter(years=1).order_by('octavos')
+    match_octavos_filter = filter(lambda x: x.octavos > 0, match_octavos)
+    for match_temp in match_octavos_filter:
+        team_octavos_filter.append(match_temp.local)
+        team_octavos_filter.append(match_temp.away)
+
+    team_cuartos_filter = list()
+    match_cuartos = Match.objects.filter(years=1).order_by('cuartos')
     match_cuartos_filter = filter(lambda x: x.cuartos > 0, match_cuartos)
-    match_semis = Match.objects.filter(years=1).order_by('hora','minutes','semis')
+    for match_temp in match_cuartos_filter:
+        team_cuartos_filter.append(match_temp.local)
+        team_cuartos_filter.append(match_temp.away)
+
+    team_semis_filter = list()
+    match_semis = Match.objects.filter(years=1).order_by('semis')
     match_semis_filter = filter(lambda x: x.semis > 0, match_semis)
-    match_final = Match.objects.filter(years=1).order_by('hora','minutes')
-    match_final_filter = filter(lambda x: x.final > 0, match_final)    
+    for match_temp in match_semis_filter:
+        team_semis_filter.append(match_temp.local)
+        team_semis_filter.append(match_temp.away)
+
+    team_final_filter = list()
+    match_final = Match.objects.filter(years=1).order_by('minutes')
+    match_final_filter = filter(lambda x: x.final > 0, match_final)
+    for match_temp in match_final_filter:
+        team_final_filter.append(match_temp.local)
+        team_final_filter.append(match_temp.away)    
     try:
         user = request.user
     except User.DoesNotExist:
         raise Http404()
     if request.user.is_anonymous():
         return render(request, 'eliminatoria_view_sub9.html', {
+            'octavos': team_octavos_filter,
             'cuartos': team_cuartos_filter,
             'semis': team_semis_filter,
             'final': team_final_filter,
+            'match_octavos' : match_octavos_filter,
             'match_cuartos' : match_cuartos_filter,
             'match_semis' : match_semis_filter,
             'match_final' : match_final_filter,
@@ -993,9 +1221,11 @@ def eliminatoria_view1(request):
             })
     return render(request, 'eliminatoria_view_sub9.html', {
             'school': user.school,
+            'octavos': team_octavos_filter,
             'cuartos': team_cuartos_filter,
             'semis': team_semis_filter,
             'final': team_final_filter,
+            'match_octavos' : match_octavos_filter,
             'match_cuartos' : match_cuartos_filter,
             'match_semis' : match_semis_filter,
             'match_final' : match_final_filter,
