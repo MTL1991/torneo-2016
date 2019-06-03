@@ -1129,6 +1129,25 @@ def give_next_round_sub12(request):
     team16.octavos = 8
     team16.save()
 
+    Match.objects.create(years=2,local=team1,away=team9,
+            octavos=1,place=5,hora=19,minutes=0)
+    Match.objects.create(years=2,local=team2,away=team10,
+            octavos=2,place=6,hora=19,minutes=0)
+    Match.objects.create(years=2,local=team3,away=team11,
+            octavos=3,place=7,hora=19,minutes=0)
+    Match.objects.create(years=2,local=team4,away=team12,
+            octavos=4,place=8,hora=19,minutes=0)
+    Match.objects.create(years=2,local=team5,away=team13,
+            octavos=5,place=5,hora=19,minutes=15)
+    Match.objects.create(years=2,local=team6,away=team14,
+            octavos=6,place=6,hora=19,minutes=15)
+    Match.objects.create(years=2,local=team7,away=team15,
+            octavos=7,place=7,hora=19,minutes=15)
+    Match.objects.create(years=2,local=team8,away=team16,
+            octavos=8,place=8,hora=19,minutes=15)
+
+    return HttpResponseRedirect(reverse(index))
+
 def read_matchs_sub9_csv(request):
    if request.method == "POST":
     print "POST"
@@ -1163,7 +1182,16 @@ def read_matchs_sub12_csv2(request):
     rows = my_uploaded_file.split('\n')
     for row in rows:
         values = row.split(',')
-        Match.objects.create(years=2,local=Team.objects.get(name=values[4],years=2),away=Team.objects.get(name=values[5],years=2),
+        local = Team.objects.get(name=values[4],years=2)
+        away = Team.objects.get(name=values[5],years=2)
+        if local.group==0:
+            local.group = values[0]
+            local.save()
+        if away.group==0:
+            away.group = values[0]
+            away.save()
+
+        Match.objects.create(years=2,local=local,away=away,
             group=values[0],place=values[1],hora=values[2],minutes=values[3])
 
 def eliminatoria_view1(request):
@@ -1242,37 +1270,58 @@ def eliminatoria_view2(request):
     team_final = Team.objects.filter(years=2).order_by('semis')
     team_final_filter = filter(lambda x: x.final > 0, team_final)
 
-    match_octavos = Match.objects.filter(years=2).order_by('hora','minutes','octavos')
+    team_octavos_filter = list()
+    match_octavos = Match.objects.filter(years=2).order_by('octavos')
     match_octavos_filter = filter(lambda x: x.octavos > 0, match_octavos)
-    match_cuartos = Match.objects.filter(years=2).order_by('hora','minutes','cuartos')
+    for match_temp in match_octavos_filter:
+        team_octavos_filter.append(match_temp.local)
+        team_octavos_filter.append(match_temp.away)
+
+    team_cuartos_filter = list()
+    match_cuartos = Match.objects.filter(years=2).order_by('cuartos')
     match_cuartos_filter = filter(lambda x: x.cuartos > 0, match_cuartos)
-    match_semis = Match.objects.filter(years=2).order_by('hora','minutes','semis')
+    for match_temp in match_cuartos_filter:
+        team_cuartos_filter.append(match_temp.local)
+        team_cuartos_filter.append(match_temp.away)
+
+    team_semis_filter = list()
+    match_semis = Match.objects.filter(years=2).order_by('semis')
     match_semis_filter = filter(lambda x: x.semis > 0, match_semis)
-    match_final = Match.objects.filter(years=2).order_by('hora','minutes',)
-    match_final_filter = filter(lambda x: x.final > 0, match_final)    
+    for match_temp in match_semis_filter:
+        team_semis_filter.append(match_temp.local)
+        team_semis_filter.append(match_temp.away)
+
+    team_final_filter = list()
+    match_final = Match.objects.filter(years=2).order_by('minutes')
+    match_final_filter = filter(lambda x: x.final > 0, match_final)
+    for match_temp in match_final_filter:
+        team_final_filter.append(match_temp.local)
+        team_final_filter.append(match_temp.away)    
     try:
         user = request.user
     except User.DoesNotExist:
         raise Http404()
     if request.user.is_anonymous():
         return render(request, 'eliminatoria_sub12_view.html', {
-        'octavos': team_octavos_filter,
-        'cuartos': team_cuartos_filter,
-        'semis': team_semis_filter,
-        'final': team_final_filter,
-        'match_octavos' : match_octavos_filter,
-        'match_cuartos' : match_cuartos_filter,
-        'match_semis' : match_semis_filter,
-        'match_final' : match_final_filter,
-        })
+            'octavos': team_octavos_filter,
+            'cuartos': team_cuartos_filter,
+            'semis': team_semis_filter,
+            'final': team_final_filter,
+            'match_octavos' : match_octavos_filter,
+            'match_cuartos' : match_cuartos_filter,
+            'match_semis' : match_semis_filter,
+            'match_final' : match_final_filter,
+
+            })
     return render(request, 'eliminatoria_sub12_view.html', {
-        'school': user.school,
-        'octavos': team_octavos_filter,
-        'cuartos': team_cuartos_filter,
-        'semis': team_semis_filter,
-        'final': team_final_filter,
-        'match_octavos' : match_octavos_filter,
-        'match_cuartos' : match_cuartos_filter,
-        'match_semis' : match_semis_filter,
-        'match_final' : match_final_filter,
-        })
+            'school': user.school,
+            'octavos': team_octavos_filter,
+            'cuartos': team_cuartos_filter,
+            'semis': team_semis_filter,
+            'final': team_final_filter,
+            'match_octavos' : match_octavos_filter,
+            'match_cuartos' : match_cuartos_filter,
+            'match_semis' : match_semis_filter,
+            'match_final' : match_final_filter,
+
+            })
