@@ -1161,12 +1161,10 @@ def read_matchs_sub9_csv2(request):
         values = row.split(',')
         local = Team.objects.get(name=values[4],years=1)
         away = Team.objects.get(name=values[5],years=1)
-        if local.group==0:
-            local.group = values[0]
-            local.save()
-        if away.group==0:
-            away.group = values[0]
-            away.save()
+        local.group = values[0]
+        local.save()
+        away.group = values[0]
+        away.save()
 
         Match.objects.create(years=1,local=local,away=away,
             group=values[0],place=values[1],hora=values[2],minutes=values[3])
@@ -1184,12 +1182,10 @@ def read_matchs_sub12_csv2(request):
         values = row.split(',')
         local = Team.objects.get(name=values[4],years=2)
         away = Team.objects.get(name=values[5],years=2)
-        if local.group==0:
-            local.group = values[0]
-            local.save()
-        if away.group==0:
-            away.group = values[0]
-            away.save()
+        local.group = values[0]
+        ocal.save()
+        away.group = values[0]
+        away.save()
 
         Match.objects.create(years=2,local=local,away=away,
             group=values[0],place=values[1],hora=values[2],minutes=values[3])
