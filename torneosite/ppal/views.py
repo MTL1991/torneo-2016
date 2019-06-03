@@ -1183,7 +1183,7 @@ def read_matchs_sub12_csv2(request):
         local = Team.objects.get(name=values[4],years=2)
         away = Team.objects.get(name=values[5],years=2)
         local.group = values[0]
-        ocal.save()
+        local.save()
         away.group = values[0]
         away.save()
 
