@@ -31,7 +31,7 @@ urlpatterns += patterns('',
     url(r'^school/create/$', create_school, name='add_school'),    
     url(r'^school/profile/(\d+)/$', school_view, name='profile_school'),
     url(r'^upload/sub9/matchs/$',read_matchs_sub9_csv2, name='read_matchs_sub9_csv2'),
-    url(r'^upload/sub12/matchs/$',read_matchs_sub12_csv, name='read_matchs_sub12_csv'),
+    url(r'^upload/sub12/matchs/$',read_matchs_sub12_csv2, name='read_matchs_sub12_csv2'),
     url(r'^reset/', reset_teams, name='reset_teams'),
     
 )
