@@ -673,70 +673,206 @@ class OctavosUpdate(LoginRequiredMixin, UpdateView):
             if(post_mutable['team2Score'] > post_mutable['team1Score']):
                 if int(post_mutable['octavos'])>6:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(cuartos=4)
-                    match = Match.objects.get(cuartos=4,years=Team.objects.get(id=post_mutable['away']).years)
-                    if int(post_mutable['octavos']) ==7:
-                        match.local = Team.objects.get(id=post_mutable['away'])
-                    elif int(post_mutable['octavos']) ==8:
-                        match.away = Team.objects.get(id=post_mutable['away'])
-                    match.save()
+                    try:    
+                        match = Match.objects.get(cuartos=4,years=Team.objects.get(id=post_mutable['away']).years)
+                        if int(post_mutable['octavos']) ==7:
+                            match.local = Team.objects.get(id=post_mutable['away'])
+                        elif int(post_mutable['octavos']) ==8:
+                            match.away = Team.objects.get(id=post_mutable['away'])
+                        match.save()
+                    except Match.DoesNotExist:
+                        if Team.objects.get(id=post_mutable['away']).years == 1:
+                            if int(post_mutable['octavos']) ==7:
+                                Match.objects.create(cuartos=4,years=1,place=4,hora=19,minutes=30
+                                    local=Team.objects.get(id=post_mutable['away']))
+                            elif int(post_mutable['octavos']) ==8:
+                                Match.objects.create(cuartos=4,years=1,place=4,hora=19,minutes=30
+                                    away=Team.objects.get(id=post_mutable['away']))
+                        if Team.objects.get(id=post_mutable['away']).years == 2:
+                            if int(post_mutable['octavos']) ==7:
+                                Match.objects.create(cuartos=4,years=2,place=8,hora=19,minutes=30
+                                    local=Team.objects.get(id=post_mutable['away']))
+                            elif int(post_mutable['octavos']) ==8:
+                                Match.objects.create(cuartos=4,years=2,place=8,hora=19,minutes=30
+                                    away=Team.objects.get(id=post_mutable['away']))
+
+                    
                 elif int(post_mutable['octavos'])>4:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(cuartos=3)
-                    match = Match.objects.get(cuartos=3,years=Team.objects.get(id=post_mutable['away']).years)
-                    if int(post_mutable['octavos']) ==5:
-                        match.local = Team.objects.get(id=post_mutable['away'])
-                    elif int(post_mutable['octavos']) ==6:
-                        match.away = Team.objects.get(id=post_mutable['away'])
-                    match.save()
+                    try:
+                        match = Match.objects.get(cuartos=3,years=Team.objects.get(id=post_mutable['away']).years)
+                        if int(post_mutable['octavos']) ==5:
+                            match.local = Team.objects.get(id=post_mutable['away'])
+                        elif int(post_mutable['octavos']) ==6:
+                            match.away = Team.objects.get(id=post_mutable['away'])
+                        match.save()
+                    except Match.DoesNotExist:
+                        if Team.objects.get(id=post_mutable['away']).years == 1:
+                            if int(post_mutable['octavos']) ==5:
+                                Match.objects.create(cuartos=3,years=1,place=3,hora=19,minutes=30
+                                    local=Team.objects.get(id=post_mutable['away']))
+                            elif int(post_mutable['octavos']) ==6:
+                                Match.objects.create(cuartos=3,years=1,place=3,hora=19,minutes=30
+                                    away=Team.objects.get(id=post_mutable['away']))
+                        if Team.objects.get(id=post_mutable['away']).years == 2:
+                            if int(post_mutable['octavos']) ==5:
+                                Match.objects.create(cuartos=3,years=2,place=7,hora=19,minutes=30
+                                    local=Team.objects.get(id=post_mutable['away']))
+                            elif int(post_mutable['octavos']) ==6:
+                                Match.objects.create(cuartos=3,years=2,place=7,hora=19,minutes=30
+                                    away=Team.objects.get(id=post_mutable['away']))
+
+                    
                 elif int(post_mutable['octavos'])>2:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(cuartos=2)
-                    match = Match.objects.get(cuartos=2,years=Team.objects.get(id=post_mutable['away']).years)
-                    if int(post_mutable['octavos']) ==3:
-                        match.local = Team.objects.get(id=post_mutable['away'])
-                    elif int(post_mutable['octavos']) ==4:
-                        match.away = Team.objects.get(id=post_mutable['away'])
-                    match.save()
+                    try:
+                        match = Match.objects.get(cuartos=2,years=Team.objects.get(id=post_mutable['away']).years)
+                        if int(post_mutable['octavos']) ==3:
+                            match.local = Team.objects.get(id=post_mutable['away'])
+                        elif int(post_mutable['octavos']) ==4:
+                            match.away = Team.objects.get(id=post_mutable['away'])
+                        match.save()
+                    except Match.DoesNotExist:
+                        if Team.objects.get(id=post_mutable['away']).years == 1:
+                            if int(post_mutable['octavos']) ==3:
+                                Match.objects.create(cuartos=2,years=1,place=2,hora=19,minutes=30
+                                    local=Team.objects.get(id=post_mutable['away']))
+                            elif int(post_mutable['octavos']) ==4:
+                                Match.objects.create(cuartos=2,years=1,place=2,hora=19,minutes=30
+                                    away=Team.objects.get(id=post_mutable['away']))
+                        if Team.objects.get(id=post_mutable['away']).years == 2:
+                            if int(post_mutable['octavos']) ==3:
+                                Match.objects.create(cuartos=2,years=2,place=6,hora=19,minutes=30
+                                    local=Team.objects.get(id=post_mutable['away']))
+                            elif int(post_mutable['octavos']) ==4:
+                                Match.objects.create(cuartos=2,years=2,place=6,hora=19,minutes=30
+                                    away=Team.objects.get(id=post_mutable['away']))
+                    
                 else:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(cuartos=1)
-                    match = Match.objects.get(cuartos=1,years=Team.objects.get(id=post_mutable['away']).years)
-                    if int(post_mutable['octavos']) ==1:
-                        match.local = Team.objects.get(id=post_mutable['away'])
-                    elif int(post_mutable['octavos']) ==2:
-                        match.away = Team.objects.get(id=post_mutable['away'])
-                    match.save()                    
+                    try:
+                        match = Match.objects.get(cuartos=1,years=Team.objects.get(id=post_mutable['away']).years)
+                        if int(post_mutable['octavos']) ==1:
+                            match.local = Team.objects.get(id=post_mutable['away'])
+                        elif int(post_mutable['octavos']) ==2:
+                            match.away = Team.objects.get(id=post_mutable['away'])
+                        match.save()  
+                    except Match.DoesNotExist:
+                        if Team.objects.get(id=post_mutable['away']).years == 1:
+                            if int(post_mutable['octavos']) ==1:
+                                Match.objects.create(cuartos=1,years=1,place=1,hora=19,minutes=30
+                                    local=Team.objects.get(id=post_mutable['away']))
+                            elif int(post_mutable['octavos']) ==2:
+                                Match.objects.create(cuartos=1,years=1,place=1,hora=19,minutes=30
+                                    away=Team.objects.get(id=post_mutable['away']))
+                        if Team.objects.get(id=post_mutable['away']).years == 2:
+                            if int(post_mutable['octavos']) ==1:
+                                Match.objects.create(cuartos=1,years=2,place=5,hora=19,minutes=30
+                                    local=Team.objects.get(id=post_mutable['away']))
+                            elif int(post_mutable['octavos']) ==2:
+                                Match.objects.create(cuartos=1,years=2,place=5,hora=19,minutes=30
+                                    away=Team.objects.get(id=post_mutable['away']))
+                                      
             elif(post_mutable['team1Score'] > post_mutable['team2Score']):
                 if int(post_mutable['octavos'])>6:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(cuartos=4)
-                    match = Match.objects.get(cuartos=4,years=Team.objects.get(id=post_mutable['local']).years)
-                    if int(post_mutable['octavos']) ==7:
-                        match.local = Team.objects.get(id=post_mutable['local'])
-                    elif int(post_mutable['octavos']) ==8:
-                        match.away = Team.objects.get(id=post_mutable['local'])
-                    match.save()
+                    try:    
+                        match = Match.objects.get(cuartos=4,years=Team.objects.get(id=post_mutable['local']).years)
+                        if int(post_mutable['octavos']) ==7:
+                            match.local = Team.objects.get(id=post_mutable['local'])
+                        elif int(post_mutable['octavos']) ==8:
+                            match.away = Team.objects.get(id=post_mutable['local'])
+                        match.save()
+                    except Match.DoesNotExist:
+                        if Team.objects.get(id=post_mutable['local']).years == 1:
+                            if int(post_mutable['octavos']) ==7:
+                                Match.objects.create(cuartos=4,years=1,place=4,hora=19,minutes=30
+                                    local=Team.objects.get(id=post_mutable['local']))
+                            elif int(post_mutable['octavos']) ==8:
+                                Match.objects.create(cuartos=4,years=1,place=4,hora=19,minutes=30
+                                    away=Team.objects.get(id=post_mutable['local']))
+                        if Team.objects.get(id=post_mutable['local']).years == 2:
+                            if int(post_mutable['octavos']) ==7:
+                                Match.objects.create(cuartos=4,years=2,place=8,hora=19,minutes=30
+                                    local=Team.objects.get(id=post_mutable['local']))
+                            elif int(post_mutable['octavos']) ==8:
+                                Match.objects.create(cuartos=4,years=2,place=8,hora=19,minutes=30
+                                    away=Team.objects.get(id=post_mutable['local']))
+                    
                 elif int(post_mutable['octavos'])>4:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(cuartos=3)
-                    match = Match.objects.get(cuartos=3,years=Team.objects.get(id=post_mutable['local']).years)
-                    print post_mutable['octavos']
-                    if int(post_mutable['octavos']) ==5:
-                        match.local = Team.objects.get(id=post_mutable['local'])
-                    elif int(post_mutable['octavos']) ==6:
-                        match.away = Team.objects.get(id=post_mutable['local'])
-                    match.save()
+                    try:
+                        match = Match.objects.get(cuartos=3,years=Team.objects.get(id=post_mutable['local']).years)
+                        if int(post_mutable['octavos']) ==5:
+                            match.local = Team.objects.get(id=post_mutable['local'])
+                        elif int(post_mutable['octavos']) ==6:
+                            match.away = Team.objects.get(id=post_mutable['local'])
+                        match.save()
+                    except Match.DoesNotExist:
+                        if Team.objects.get(id=post_mutable['local']).years == 1:
+                            if int(post_mutable['octavos']) ==5:
+                                Match.objects.create(cuartos=3,years=1,place=3,hora=19,minutes=30
+                                    local=Team.objects.get(id=post_mutable['local']))
+                            elif int(post_mutable['octavos']) ==6:
+                                Match.objects.create(cuartos=3,years=1,place=3,hora=19,minutes=30
+                                    away=Team.objects.get(id=post_mutable['local']))
+                        if Team.objects.get(id=post_mutable['local']).years == 2:
+                            if int(post_mutable['octavos']) ==5:
+                                Match.objects.create(cuartos=3,years=2,place=7,hora=19,minutes=30
+                                    local=Team.objects.get(id=post_mutable['local']))
+                            elif int(post_mutable['octavos']) ==6:
+                                Match.objects.create(cuartos=3,years=2,place=7,hora=19,minutes=30
+                                    away=Team.objects.get(id=post_mutable['local']))
+                    
                 elif int(post_mutable['octavos'])>2:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(cuartos=2)
-                    match = Match.objects.get(cuartos=2,years=Team.objects.get(id=post_mutable['local']).years)
-                    if int(post_mutable['octavos']) ==3:
-                        match.local = Team.objects.get(id=post_mutable['local'])
-                    elif int(post_mutable['octavos']) ==4:
-                        match.away = Team.objects.get(id=post_mutable['local'])
-                    match.save()
+                    try:
+                        match = Match.objects.get(cuartos=2,years=Team.objects.get(id=post_mutable['local']).years)
+                        if int(post_mutable['octavos']) ==3:
+                            match.local = Team.objects.get(id=post_mutable['local'])
+                        elif int(post_mutable['octavos']) ==4:
+                            match.away = Team.objects.get(id=post_mutable['local'])
+                        match.save()
+                    except Match.DoesNotExist:
+                        if Team.objects.get(id=post_mutable['local']).years == 1:
+                            if int(post_mutable['octavos']) ==3:
+                                Match.objects.create(cuartos=2,years=1,place=2,hora=19,minutes=30
+                                    local=Team.objects.get(id=post_mutable['local']))
+                            elif int(post_mutable['octavos']) ==4:
+                                Match.objects.create(cuartos=2,years=1,place=2,hora=19,minutes=30
+                                    away=Team.objects.get(id=post_mutable['local']))
+                        if Team.objects.get(id=post_mutable['away']).years == 2:
+                            if int(post_mutable['octavos']) ==3:
+                                Match.objects.create(cuartos=2,years=2,place=6,hora=19,minutes=30
+                                    local=Team.objects.get(id=post_mutable['local']))
+                            elif int(post_mutable['octavos']) ==4:
+                                Match.objects.create(cuartos=2,years=2,place=6,hora=19,minutes=30
+                                    away=Team.objects.get(id=post_mutable['local']))
                 else:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(cuartos=1)
-                    match = Match.objects.get(cuartos=1,years=Team.objects.get(id=post_mutable['local']).years)
-                    if int(post_mutable['octavos']) ==1:
-                        match.local = Team.objects.get(id=post_mutable['local'])
-                    elif int(post_mutable['octavos']) ==2:
-                        match.away = Team.objects.get(id=post_mutable['local'])
-                    match.save() 
+                    try:
+                        match = Match.objects.get(cuartos=1,years=Team.objects.get(id=post_mutable['local']).years)
+                        if int(post_mutable['octavos']) ==1:
+                            match.local = Team.objects.get(id=post_mutable['local'])
+                        elif int(post_mutable['octavos']) ==2:
+                            match.away = Team.objects.get(id=post_mutable['local'])
+                        match.save()
+                    except Match.DoesNotExist:
+                        if Team.objects.get(id=post_mutable['local']).years == 1:
+                            if int(post_mutable['octavos']) ==1:
+                                Match.objects.create(cuartos=1,years=1,place=1,hora=19,minutes=30
+                                    local=Team.objects.get(id=post_mutable['local']))
+                            elif int(post_mutable['octavos']) ==2:
+                                Match.objects.create(cuartos=1,years=1,place=1,hora=19,minutes=30
+                                    away=Team.objects.get(id=post_mutable['local']))
+                        if Team.objects.get(id=post_mutable['local']).years == 2:
+                            if int(post_mutable['octavos']) ==1:
+                                Match.objects.create(cuartos=1,years=2,place=5,hora=19,minutes=30
+                                    local=Team.objects.get(id=post_mutable['local']))
+                            elif int(post_mutable['octavos']) ==2:
+                                Match.objects.create(cuartos=1,years=2,place=5,hora=19,minutes=30
+                                    away=Team.objects.get(id=post_mutable['local']))
+                     
 
             #return HttpResponseRedirect(reverse(index))
             return super(OctavosUpdate, self).post(post_mutable, *args, **kwargs)
@@ -764,40 +900,107 @@ class CuartosUpdate(LoginRequiredMixin, UpdateView):
                     print("S1  ")
                     print(int(post_mutable['cuartos']))
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(semis=1)
-                    match = Match.objects.get(semis=2,years=Team.objects.get(id=post_mutable['away']).years)
-                    if int(post_mutable['cuartos']) ==3:
-                        match.local = Team.objects.get(id=post_mutable['away'])
-                    elif int(post_mutable['cuartos']) ==4:
-                        match.away = Team.objects.get(id=post_mutable['away'])
-                    match.save()
+                    try:
+                        match = Match.objects.get(semis=2,years=Team.objects.get(id=post_mutable['away']).years)
+                        if int(post_mutable['cuartos']) ==3:
+                            match.local = Team.objects.get(id=post_mutable['away'])
+                        elif int(post_mutable['cuartos']) ==4:
+                            match.away = Team.objects.get(id=post_mutable['away'])
+                        match.save()
+                    except Match.DoesNotExist:
+                        if Team.objects.get(id=post_mutable['away']).years == 1:
+                            if int(post_mutable['octavos']) ==3:
+                                Match.objects.create(semis=2,years=1,place=2,hora=19,minutes=45
+                                    local=Team.objects.get(id=post_mutable['away']))
+                            elif int(post_mutable['octavos']) ==4:
+                                Match.objects.create(semis=2,years=1,place=2,hora=19,minutes=45
+                                    away=Team.objects.get(id=post_mutable['away']))
+                        if Team.objects.get(id=post_mutable['away']).years == 2:
+                            if int(post_mutable['octavos']) ==3:
+                                Match.objects.create(semis=2,years=2,place=8,hora=19,minutes=45
+                                    local=Team.objects.get(id=post_mutable['away']))
+                            elif int(post_mutable['octavos']) ==4:
+                                Match.objects.create(semis=2,years=2,place=8,hora=19,minutes=45
+                                    away=Team.objects.get(id=post_mutable['away']))
+                    
                 else:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(semis=2)
-                    match = Match.objects.get(semis=1,years=Team.objects.get(id=post_mutable['away']).years)
-                    if int(post_mutable['cuartos']) ==1:
-                        match.local = Team.objects.get(id=post_mutable['away'])
-                    elif int(post_mutable['cuartos']) ==2:
-                        match.away = Team.objects.get(id=post_mutable['away'])
-                    match.save()
+                    try:
+                        match = Match.objects.get(semis=1,years=Team.objects.get(id=post_mutable['away']).years)
+                        if int(post_mutable['cuartos']) ==1:
+                            match.local = Team.objects.get(id=post_mutable['away'])
+                        elif int(post_mutable['cuartos']) ==2:
+                            match.away = Team.objects.get(id=post_mutable['away'])
+                        match.save()
+                    except Match.DoesNotExist:
+                        if Team.objects.get(id=post_mutable['local']).years == 1:
+                            if int(post_mutable['octavos']) ==3:
+                                Match.objects.create(semis=1,years=1,place=1,hora=19,minutes=45
+                                    local=Team.objects.get(id=post_mutable['away']))
+                            elif int(post_mutable['octavos']) ==4:
+                                Match.objects.create(semis=1,years=1,place=1,hora=19,minutes=45
+                                    away=Team.objects.get(id=post_mutable['away']))
+                        if Team.objects.get(id=post_mutable['local']).years == 2:
+                            if int(post_mutable['octavos']) ==3:
+                                Match.objects.create(semis=1,years=2,place=5,hora=19,minutes=45
+                                    local=Team.objects.get(id=post_mutable['away']))
+                            elif int(post_mutable['octavos']) ==4:
+                                Match.objects.create(semis=1,years=2,place=5,hora=19,minutes=45
+                                    away=Team.objects.get(id=post_mutable['away']))
+                    
 
             elif(post_mutable['team1Score'] > post_mutable['team2Score']):
                 if(int(post_mutable['cuartos'])>2):
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(semis=1)
-                    match = Match.objects.get(semis=2,years=Team.objects.get(id=post_mutable['local']).years)
-                    if int(post_mutable['cuartos']) ==3:
-                        match.local = Team.objects.get(id=post_mutable['local'])
-                    elif int(post_mutable['cuartos']) ==4:
-                        match.away = Team.objects.get(id=post_mutable['local'])
-                    match.save()
+                    try:
+                        match = Match.objects.get(semis=2,years=Team.objects.get(id=post_mutable['away']).years)
+                        if int(post_mutable['cuartos']) ==3:
+                            match.local = Team.objects.get(id=post_mutable['local'])
+                        elif int(post_mutable['cuartos']) ==4:
+                            match.away = Team.objects.get(id=post_mutable['local'])
+                        match.save()
+                    except Match.DoesNotExist:
+                        if Team.objects.get(id=post_mutable['local']).years == 1:
+                            if int(post_mutable['octavos']) ==3:
+                                Match.objects.create(semis=2,years=1,place=2,hora=19,minutes=45
+                                    local=Team.objects.get(id=post_mutable['local']))
+                            elif int(post_mutable['octavos']) ==4:
+                                Match.objects.create(semis=2,years=1,place=2,hora=19,minutes=45
+                                    away=Team.objects.get(id=post_mutable['local']))
+                        if Team.objects.get(id=post_mutable['local']).years == 2:
+                            if int(post_mutable['octavos']) ==3:
+                                Match.objects.create(semis=2,years=2,place=8,hora=19,minutes=45
+                                    local=Team.objects.get(id=post_mutable['local']))
+                            elif int(post_mutable['octavos']) ==4:
+                                Match.objects.create(semis=2,years=2,place=8,hora=19,minutes=45
+                                    away=Team.objects.get(id=post_mutable['local']))
                 else:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(semis=2)
-                    match = Match.objects.get(semis=1,years=Team.objects.get(id=post_mutable['local']).years)
-                    if int(post_mutable['cuartos']) ==1:
-                        match.local = Team.objects.get(id=post_mutable['local'])
-                    elif int(post_mutable['cuartos']) ==2:
-                        match.away = Team.objects.get(id=post_mutable['local'])
-                    match.save()
-                    print("S2  ")
-                    print(int(post_mutable['cuartos']))
+                    try:
+                        match = Match.objects.get(semis=1,years=Team.objects.get(id=post_mutable['local']).years)
+                        if int(post_mutable['cuartos']) ==1:
+                            match.local = Team.objects.get(id=post_mutable['local'])
+                        elif int(post_mutable['cuartos']) ==2:
+                            match.away = Team.objects.get(id=post_mutable['local'])
+                        match.save()
+                    except Match.DoesNotExist:
+                        if Team.objects.get(id=post_mutable['local']).years == 1:
+                            if int(post_mutable['octavos']) ==3:
+                                Match.objects.create(semis=1,years=1,place=1,hora=19,minutes=45
+                                    local=Team.objects.get(id=post_mutable['local']))
+                            elif int(post_mutable['octavos']) ==4:
+                                Match.objects.create(semis=1,years=1,place=1,hora=19,minutes=45
+                                    away=Team.objects.get(id=post_mutable['local']))
+                        if Team.objects.get(id=post_mutable['local']).years == 2:
+                            if int(post_mutable['octavos']) ==3:
+                                Match.objects.create(semis=1,years=2,place=5,hora=19,minutes=45
+                                    local=Team.objects.get(id=post_mutable['local']))
+                            elif int(post_mutable['octavos']) ==4:
+                                Match.objects.create(semis=1,years=2,place=5,hora=19,minutes=45
+                                    away=Team.objects.get(id=post_mutable['local']))
+                    
+                    
+
 
             #return HttpResponseRedirect(reverse(index))
             return super(CuartosUpdate, self).post(post_mutable, *args, **kwargs)
@@ -890,27 +1093,26 @@ class EliminatoriaUpdate(LoginRequiredMixin, UpdateView):
         return obj
 
 def group_view1(request, pk):
-    return render(request, 'us.html')
-    # team_group = Team.objects.filter(group=pk,years=1).order_by('-point','-goalf','goalc')
-    # group_matchs = Match.objects.filter(group=pk,years=1).order_by('hora','minutes','place')
-    # try:
-    #     user = request.user
-    # except User.DoesNotExist:
-    #     raise Http404()
-    # if request.user.is_anonymous():
-    #     return render(request, 'group_view.html', {
-    #         'group': team_group,
-    #         'group_matchs': group_matchs,
-    #         'group_name': ABC[int(pk)-1],
+    team_group = Team.objects.filter(group=pk,years=1).order_by('-point','-goalf','goalc')
+    group_matchs = Match.objects.filter(group=pk,years=1).order_by('hora','minutes','place')
+    try:
+        user = request.user
+    except User.DoesNotExist:
+        raise Http404()
+    if request.user.is_anonymous():
+        return render(request, 'group_view.html', {
+            'group': team_group,
+            'group_matchs': group_matchs,
+            'group_name': ABC[int(pk)-1],
 
-    #         })
-    # return render(request, 'group_view.html', {
-    #     'school': user.school,
-    #     'group': team_group,
-    #     'group_matchs': group_matchs,
-    #     'group_name': ABC[int(pk)-1],
+            })
+    return render(request, 'group_view.html', {
+        'school': user.school,
+        'group': team_group,
+        'group_matchs': group_matchs,
+        'group_name': ABC[int(pk)-1],
 
-    #     })
+        })
 
 def group_view1_all(request):
     return render(request, 'choose_group_sub9.html', {
