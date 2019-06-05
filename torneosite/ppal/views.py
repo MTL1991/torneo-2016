@@ -1024,26 +1024,42 @@ class FinalUpdate(LoginRequiredMixin, UpdateView):
             if(post_mutable['team2Score'] > post_mutable['team1Score']):
                 if int(post_mutable['semis'])>1:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(final=1)
-                    match = Match.objects.get(final=1,years=Team.objects.get(id=post_mutable['away']).years)
-                    match.away = Team.objects.get(id=post_mutable['away'])
-                    match.save()
+                    try:
+                        match = Match.objects.get(final=1,years=Team.objects.get(id=post_mutable['away']).years)
+                        match.away = Team.objects.get(id=post_mutable['away'])
+                        match.save()
+                    except Match.DoesNotExist:
+                        Match.objects.create(final=1,years=Team.objects.get(id=post_mutable['away']).years,place=1,hora=20,minutes=00,
+                                    away=Team.objects.get(id=post_mutable['away']))
                 else:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(final=1)
-                    match = Match.objects.get(final=1,years=Team.objects.get(id=post_mutable['away']).years)
-                    match.local = Team.objects.get(id=post_mutable['away'])
-                    match.save()
+                    try:    
+                        match = Match.objects.get(final=1,years=Team.objects.get(id=post_mutable['away']).years)
+                        match.local = Team.objects.get(id=post_mutable['away'])
+                        match.save()
+                    except Match.DoesNotExist:
+                        Match.objects.create(final=1,years=Team.objects.get(id=post_mutable['away']).years,place=1,hora=20,minutes=00,
+                                    local=Team.objects.get(id=post_mutable['away']))
 
             elif(post_mutable['team1Score'] > post_mutable['team2Score']):
                 if(int(post_mutable['semis'])>1):
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(final=1)
-                    match = Match.objects.get(final=1,years=Team.objects.get(id=post_mutable['local']).years)
-                    match.away = Team.objects.get(id=post_mutable['local'])
-                    match.save()
+                    try:
+                        match = Match.objects.get(final=1,years=Team.objects.get(id=post_mutable['local']).years)
+                        match.away = Team.objects.get(id=post_mutable['local'])
+                        match.save()
+                    except Match.DoesNotExist:
+                        Match.objects.create(final=1,years=Team.objects.get(id=post_mutable['local']).years,place=1,hora=20,minutes=00,
+                                    away=Team.objects.get(id=post_mutable['local']))
                 else:
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(final=1)
-                    match = Match.objects.get(final=1,years=Team.objects.get(id=post_mutable['local']).years)
-                    match.local = Team.objects.get(id=post_mutable['local'])
-                    match.save()
+                    try:
+                        match = Match.objects.get(final=1,years=Team.objects.get(id=post_mutable['local']).years)
+                        match.local = Team.objects.get(id=post_mutable['local'])
+                        match.save()
+                    except Match.DoesNotExist:
+                        Match.objects.create(final=1,years=Team.objects.get(id=post_mutable['local']).years,place=1,hora=20,minutes=00,
+                                    local=Team.objects.get(id=post_mutable['local']))
 
             #return HttpResponseRedirect(reverse(index))
             return super(FinalUpdate, self).post(post_mutable, *args, **kwargs)
