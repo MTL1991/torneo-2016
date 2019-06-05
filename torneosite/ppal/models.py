@@ -192,13 +192,12 @@ class Match(models.Model):
 
 
     def __unicode__(self):
-        nombreLocal = ""
-        if self.local.name is not None:
+        nombreLocal = "PENDIENTE"
+        if self.local is not None:
             nombreLocal = self.local.name
-        nombreVisitante = ""
-        if self.away.name is not None:
+        nombreVisitante = "PENDIENTE"
+        if self.away is not None:
             nombreVisitante = self.away.name
-
 
         return u'%s vs  %s '   % (nombreLocal, nombreVisitante,)
 
