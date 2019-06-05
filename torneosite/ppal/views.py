@@ -897,8 +897,6 @@ class CuartosUpdate(LoginRequiredMixin, UpdateView):
         # Now you can change values:
             if(post_mutable['team2Score'] > post_mutable['team1Score']):
                 if int(post_mutable['cuartos'])>2:
-                    print("S1  ")
-                    print(int(post_mutable['cuartos']))
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['away']).name,years=Team.objects.get(id=post_mutable['away']).years).update(semis=1)
                     try:
                         match = Match.objects.get(semis=2,years=Team.objects.get(id=post_mutable['away']).years)
@@ -909,17 +907,17 @@ class CuartosUpdate(LoginRequiredMixin, UpdateView):
                         match.save()
                     except Match.DoesNotExist:
                         if Team.objects.get(id=post_mutable['away']).years == 1:
-                            if int(post_mutable['octavos']) ==3:
+                            if int(post_mutable['cuartos']) ==3:
                                 Match.objects.create(semis=2,years=1,place=2,hora=19,minutes=45,
                                     local=Team.objects.get(id=post_mutable['away']))
-                            elif int(post_mutable['octavos']) ==4:
+                            elif int(post_mutable['cuartos']) ==4:
                                 Match.objects.create(semis=2,years=1,place=2,hora=19,minutes=45,
                                     away=Team.objects.get(id=post_mutable['away']))
                         if Team.objects.get(id=post_mutable['away']).years == 2:
-                            if int(post_mutable['octavos']) ==3:
+                            if int(post_mutable['cuartos']) ==3:
                                 Match.objects.create(semis=2,years=2,place=8,hora=19,minutes=45,
                                     local=Team.objects.get(id=post_mutable['away']))
-                            elif int(post_mutable['octavos']) ==4:
+                            elif int(post_mutable['cuartos']) ==4:
                                 Match.objects.create(semis=2,years=2,place=8,hora=19,minutes=45,
                                     away=Team.objects.get(id=post_mutable['away']))
                     
@@ -933,18 +931,18 @@ class CuartosUpdate(LoginRequiredMixin, UpdateView):
                             match.away = Team.objects.get(id=post_mutable['away'])
                         match.save()
                     except Match.DoesNotExist:
-                        if Team.objects.get(id=post_mutable['local']).years == 1:
-                            if int(post_mutable['octavos']) ==3:
+                        if Team.objects.get(id=post_mutable['away']).years == 1:
+                            if int(post_mutable['cuartos']) ==3:
                                 Match.objects.create(semis=1,years=1,place=1,hora=19,minutes=45,
                                     local=Team.objects.get(id=post_mutable['away']))
-                            elif int(post_mutable['octavos']) ==4:
+                            elif int(post_mutable['cuartos']) ==4:
                                 Match.objects.create(semis=1,years=1,place=1,hora=19,minutes=45,
                                     away=Team.objects.get(id=post_mutable['away']))
                         if Team.objects.get(id=post_mutable['local']).years == 2:
-                            if int(post_mutable['octavos']) ==3:
+                            if int(post_mutable['cuartos']) ==3:
                                 Match.objects.create(semis=1,years=2,place=5,hora=19,minutes=45,
                                     local=Team.objects.get(id=post_mutable['away']))
-                            elif int(post_mutable['octavos']) ==4:
+                            elif int(post_mutable['cuartos']) ==4:
                                 Match.objects.create(semis=1,years=2,place=5,hora=19,minutes=45,
                                     away=Team.objects.get(id=post_mutable['away']))
                     
@@ -953,7 +951,7 @@ class CuartosUpdate(LoginRequiredMixin, UpdateView):
                 if(int(post_mutable['cuartos'])>2):
                     team = Team.objects.filter(name=Team.objects.get(id=post_mutable['local']).name,years=Team.objects.get(id=post_mutable['local']).years).update(semis=1)
                     try:
-                        match = Match.objects.get(semis=2,years=Team.objects.get(id=post_mutable['away']).years)
+                        match = Match.objects.get(semis=2,years=Team.objects.get(id=post_mutable['local']).years)
                         if int(post_mutable['cuartos']) ==3:
                             match.local = Team.objects.get(id=post_mutable['local'])
                         elif int(post_mutable['cuartos']) ==4:
@@ -961,17 +959,17 @@ class CuartosUpdate(LoginRequiredMixin, UpdateView):
                         match.save()
                     except Match.DoesNotExist:
                         if Team.objects.get(id=post_mutable['local']).years == 1:
-                            if int(post_mutable['octavos']) ==3:
+                            if int(post_mutable['cuartos']) ==3:
                                 Match.objects.create(semis=2,years=1,place=2,hora=19,minutes=45,
                                     local=Team.objects.get(id=post_mutable['local']))
-                            elif int(post_mutable['octavos']) ==4:
+                            elif int(post_mutable['cuartos']) ==4:
                                 Match.objects.create(semis=2,years=1,place=2,hora=19,minutes=45,
                                     away=Team.objects.get(id=post_mutable['local']))
                         if Team.objects.get(id=post_mutable['local']).years == 2:
-                            if int(post_mutable['octavos']) ==3:
+                            if int(post_mutable['cuartos']) ==3:
                                 Match.objects.create(semis=2,years=2,place=8,hora=19,minutes=45,
                                     local=Team.objects.get(id=post_mutable['local']))
-                            elif int(post_mutable['octavos']) ==4:
+                            elif int(post_mutable['cuartos']) ==4:
                                 Match.objects.create(semis=2,years=2,place=8,hora=19,minutes=45,
                                     away=Team.objects.get(id=post_mutable['local']))
                 else:
@@ -985,17 +983,17 @@ class CuartosUpdate(LoginRequiredMixin, UpdateView):
                         match.save()
                     except Match.DoesNotExist:
                         if Team.objects.get(id=post_mutable['local']).years == 1:
-                            if int(post_mutable['octavos']) ==3:
+                            if int(post_mutable['cuartos']) ==3:
                                 Match.objects.create(semis=1,years=1,place=1,hora=19,minutes=45,
                                     local=Team.objects.get(id=post_mutable['local']))
-                            elif int(post_mutable['octavos']) ==4:
+                            elif int(post_mutable['cuartos']) ==4:
                                 Match.objects.create(semis=1,years=1,place=1,hora=19,minutes=45,
                                     away=Team.objects.get(id=post_mutable['local']))
                         if Team.objects.get(id=post_mutable['local']).years == 2:
-                            if int(post_mutable['octavos']) ==3:
+                            if int(post_mutable['cuartos']) ==3:
                                 Match.objects.create(semis=1,years=2,place=5,hora=19,minutes=45,
                                     local=Team.objects.get(id=post_mutable['local']))
-                            elif int(post_mutable['octavos']) ==4:
+                            elif int(post_mutable['cuartos']) ==4:
                                 Match.objects.create(semis=1,years=2,place=5,hora=19,minutes=45,
                                     away=Team.objects.get(id=post_mutable['local']))
                     
