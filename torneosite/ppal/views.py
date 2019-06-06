@@ -31,6 +31,8 @@ from django.db.models import Q
 from reportlab.lib.pagesizes import letter, A4
 from reportlab.pdfgen import canvas
 
+import datetime
+
 ABC = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N']
 
 
@@ -1134,12 +1136,20 @@ def group_view1(request, pk):
     except User.DoesNotExist:
         raise Http404()
     if request.user.is_anonymous():
-        return render(request, 'group_view.html', {
-            'group': team_group,
-            'group_matchs': group_matchs,
-            'group_name': ABC[int(pk)-1],
+        if datetime.datetime.now().hour>12 and datetime.datetime.now().hour<22:
+            return render(request, 'group_view.html', {
+                'group': team_group,
+                'group_matchs': group_matchs,
+                'group_name': ABC[int(pk)-1],
 
-            })
+                })
+        else:
+            return render(request, 'group_view.html', {
+                'group': team_group,
+                'group_matchs': list(),
+                'group_name': ABC[int(pk)-1],
+
+                })
     return render(request, 'group_view.html', {
         'school': user.school,
         'group': team_group,
@@ -1159,10 +1169,7 @@ def group_view2_all(request):
     })
 
 def select_years(request):
-    if request.user.is_anonymous():
-        return render(request, 'us.html')
-    else:
-        return render(request, 'choose_years.html', )
+    return render(request, 'choose_years.html', )
 
 def reset_teams(request):
     for match in Match.objects.filter(years=1):
@@ -1189,12 +1196,20 @@ def group_view2(request, pk):
     except User.DoesNotExist:
         raise Http404()
     if request.user.is_anonymous():
-        return render(request, 'group_view.html', {
-            'group': team_group,
-            'group_matchs': group_matchs,
-            'group_name': ABC[int(pk)-1],
+        if datetime.datetime.now().hour>12 and datetime.datetime.now().hour<22 :
+            return render(request, 'group_view.html', {
+                'group': team_group,
+                'group_matchs': group_matchs,
+                'group_name': ABC[int(pk)-1],
 
-            })
+                })
+        else:
+            return render(request, 'group_view.html', {
+                'group': team_group,
+                'group_matchs': list(),
+                'group_name': ABC[int(pk)-1],
+
+                })
     return render(request, 'group_view.html', {
         'school': user.school,
         'group': team_group,
