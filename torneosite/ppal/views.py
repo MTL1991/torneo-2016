@@ -1172,11 +1172,11 @@ def select_years(request):
     return render(request, 'choose_years.html', )
 
 def reset_teams(request):
-    for match in Match.objects.filter(years=1):
+    for match in Match.objects.all():
         match.team1Score = None
         match.team2Score = None
         match.save()
-    for team in Team.objects.filter(years=1):
+    for team in Team.objects.all():
         team.wins = 0
         team.draw = 0
         team.lose = 0
