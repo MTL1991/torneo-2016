@@ -1159,7 +1159,10 @@ def group_view2_all(request):
     })
 
 def select_years(request):
-    return render(request, 'choose_years.html', )
+    if request.user.is_anonymous():
+        return render(request, 'us.html')
+    else:
+        return render(request, 'choose_years.html', )
 
 def reset_teams(request):
     for match in Match.objects.filter(years=1):
