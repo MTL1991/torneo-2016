@@ -538,6 +538,26 @@ def view_pabellon_match(request):
 
     })
 
+def view_pista_match(request,pk):
+    try:
+        user = request.user
+    except User.DoesNotExist:
+        raise Http404()
+    match_list1 = Match.objects.filter(place=pk,years=1,).order_by('hora','minutes','place')
+    match_list2 = Match.objects.filter(place=pk,years=2,).order_by('hora','minutes','place')
+    if request.user.is_anonymous():
+        return render(request, 'match_place_view.html', {
+        'match_list1': match_list1,
+        'match_list2': match_list2,
+
+    })
+    return render(request, 'match_place_view.html', {
+        'school':user.school,
+        'match_list1': match_list1,
+        'match_list2': match_list2,
+
+    })
+
 def view_baloncesto_match(request):
     try:
         user = request.user
