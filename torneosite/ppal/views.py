@@ -1188,6 +1188,16 @@ def reset_teams(request):
 
     return render(request, 'choose_years.html', )
 
+def reset_teams(request):
+    for team in Team.objects.all():
+        team.octavos = 0
+        team.cuartos = 0
+        team.semis = 0
+        team.final = 0
+        team.save()
+
+    return render(request, 'choose_years.html', )
+
 def group_view2(request, pk):
     team_group = Team.objects.filter(group=pk,years=2).order_by('-point','-goalf','goalc')
     group_matchs = Match.objects.filter(group=pk,years=2).order_by('hora','minutes','place')
