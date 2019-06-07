@@ -1188,7 +1188,8 @@ def reset_teams(request):
 
     return render(request, 'choose_years.html', )
 
-def reset_teams(request):
+def reset_teams_eliminatoria(request):
+    print "reset_teams_eliminatoria"
     for team in Team.objects.all():
         team.octavos = 0
         team.cuartos = 0
